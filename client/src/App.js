@@ -10,12 +10,17 @@ import Profile from './components/Profile'
 
 
 class App extends Component {
+  state = {
+    user: null,
+    employeer: false
+  }
+
   render() {
     return (
       <>
       <Router>
         <div>
-            <Navbar />
+            <Navbar user={this.state.user} employeer={this.state.employeer} />
             <Route exact path='/' component={() => <Home />} />
             <Route path='/login' component={() => <Login />} />
             <Route path='/profile' component={() => <Profile />} />
