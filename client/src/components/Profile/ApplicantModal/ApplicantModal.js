@@ -109,10 +109,15 @@ const styles = theme => ({
     state = {
       open: false,
       selectedOption: null,
+      selectedStates: null,
     }
   handleChange = (selectedOption) => {
       this.setState({ selectedOption });
       console.log(`Option selected:`, selectedOption);
+    }
+  handleChangeState = (selectedStates) => {
+      this.setState({ selectedStates });
+      console.log(`Option selected:`, selectedStates);
     }
   handleClickOpen = () => {
       this.setState({ open: true });
@@ -124,6 +129,7 @@ handleClose = () => {
 
 render() {
   const { selectedOption } = this.state;
+  const { selectedStates } = this.state;
 
   return (
     <div>
@@ -192,8 +198,8 @@ render() {
           />
           <Select
             placeholder='State'
-            value={selectedOption}
-            onChange={this.handleChange}
+            value={selectedStates}
+            onChange={this.handleChangeState}
             options={states}
           />
         </DialogContent>
