@@ -80,7 +80,7 @@ class Footer extends React.Component {
                       <p>Adam Openbrier : <a href="mailto:aopenbrier@gmail.com">aopenbrier@gmail.com</a></p>
                       <p>Garrett Fermo : <a href="mailto:garrettcfermo@gmail.com">garrettcfermo@gmail.com</a></p>
                       <p>Jean Chung : <a href="mailto:jeannchung@gmail.com">jeannchung@gmail.com</a></p>
-                      <p>Joleen Tsai : <a href="mailto:joleenjtsai@gmail.com">joleenjtsai@gmail.com</a></p>
+                      <p>Joleen J. Tsai : <a href="mailto:joleenjtsai@gmail.com">joleenjtsai@gmail.com</a></p>
                       <p>Radley Eakle : <a href="mailto:radley.eakle@gmail.com ">radley.eakle@gmail.com </a></p>
                     </div>
                   )
