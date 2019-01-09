@@ -14,7 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import firebase from 'firebase'
 
 const styles = {
   card: {
@@ -35,6 +35,10 @@ const styles = {
 };
 
 class Profile extends Component {
+  //user is logged in
+  componentDidMount = () => {
+    firebase.auth().onAuthStateChanged(user => this.setState({ user: !!user }))
+  }
   // have this handle opening the applicant modal when the "get started" on the applicant side is clicked
   handleApplicantClick = () => {
 
