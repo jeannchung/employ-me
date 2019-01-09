@@ -14,6 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
 
 const styles = {
   card: {
@@ -31,9 +32,23 @@ const styles = {
   pos: {
     marginBottom: 12,
   },
+  btnleft: {
+    marginLeft: 80,
+  }
 };
 
 class Login extends Component {
+  state = {
+    name: '',
+    age: '',
+    multiline: 'Controlled',
+  };
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
 
   render() {
     const { classes } = this.props;
@@ -41,15 +56,53 @@ class Login extends Component {
     return (
             <Card className={classes.card}>
               <CardContent>
-                <Typography variant="h5" component="h2">
+                <form className={classes.container} noValidate autoComplete="off">
+                      <Grid container spacing={24}>
+                        <Grid item xs={6}>
+                          <TextField
+                            id="standard-name"
+                            label="Username"
+                            className={classes.textField}
+                            value={this.state.name}
+                            onChange={this.handleChange('name')}
+                            margin="normal"
+                          />
+                          </Grid>
+                        <Grid item xs={6}>
+                          <TextField
+                            id="standard-name"
+                            label="Password"
+                            className={classes.textField}
+                            value={this.state.name}
+                            onChange={this.handleChange('name')}
+                            margin="normal"
+                          />
+                          </Grid>
+                      </Grid>
+                      <Grid container spacing={24}>
+                          <Grid item xs={6}>
+                            <Button variant="outlined" className={classes.button, classes.btnleft}>Register</Button>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Button variant="outlined" className={classes.button}>Login</Button>
+                          </Grid> 
+                      </Grid>
+                  </form>
+                {/* <Typography variant="h5" component="h2">
                   Login
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
+                  Button/Input Field
+                </Typography>
+                <Typography variant="h5" component="h2">
                   Register
                 </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  Button/Input Field
+                </Typography> */}
               </CardContent>
             </Card>
-            
+
           )
     }
 }
