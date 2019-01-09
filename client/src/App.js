@@ -42,7 +42,7 @@ class App extends Component {
             <Navbar user={this.state.user} employer={this.state.employer} />
             <Route exact path='/' component={() => <Home />} />
             <Route path='/login' component={() => <Login />} />
-            <Route path='/profile' component={() => <Profile />} />
+            <Route path='/profile' component={() => <Profile employer={this.state.employer} />} />
             <Route path='/jobpost' component={() => <JobPost />} />
             <Route path='/applied' component={() => <Applied />} />
             <Footer />

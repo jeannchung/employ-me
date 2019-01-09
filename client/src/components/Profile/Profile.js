@@ -39,14 +39,6 @@ class Profile extends Component {
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => this.setState({ user: !!user }))
   }
-  // have this handle opening the applicant modal when the "get started" on the applicant side is clicked
-  handleApplicantClick = () => {
-
-  }
-  // have this handle opening the employer modal when the "get started" on the employer side is clicked
-  handleEmployerClick = () => {
-
-  }
 
   render() {
     const { classes } = this.props;
@@ -72,7 +64,7 @@ class Profile extends Component {
             {bull} Find the perfect position today
         </Typography>
           <CardActions>
-            <Button size="large" onClick={this.handleApplicantClick}>Get Started</Button>
+           <ApplicantModal />
           </CardActions>
         </CardContent>
         <CardContent>
@@ -92,7 +84,7 @@ class Profile extends Component {
             {bull} Exposure across the the employ.me network
         </Typography>
           <CardActions>
-            <Button size="large" onClick={this.handleEmployerClick}>Get Started</Button>
+            <EmployerModal />
           </CardActions>
         </CardContent>
       </Card>
