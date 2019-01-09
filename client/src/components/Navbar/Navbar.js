@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
 
 const styles = theme => ({
   root: {
@@ -66,45 +67,33 @@ class Navbar extends Component {
         onClose={this.handleMenuClose}
       >
 
-        {
-          this.props.user === null ? (
-            <div>
-              <Link to='/login' className={classes.link}>
-                <MenuItem onClick={this.handleMenuClose}>Login/SignUp</MenuItem>
+        <div>
+          <Link to='/profile' className={classes.link}>
+            <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+          </Link>
+
+          <Link to='/' className={classes.link}>
+            <MenuItem onClick={this.handleMenuClose}>Home</MenuItem>
+          </Link>
+
+          {
+            this.props.employer ? (
+
+              <Link to='/jobpost' className={classes.link}>
+                <MenuItem onClick={this.handleMenuClose}>Jobs Posted</MenuItem>
               </Link>
-            </div>
-          )
-            :
-            (
-              <div>
-                <Link to='/profile' className={classes.link}>
-                  <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-                </Link>
-
-                <Link to='/' className={classes.link}>
-                  <MenuItem onClick={this.handleMenuClose}>Home</MenuItem>
-                </Link>
-
-                {
-                  this.props.employeer ? (
-
-                    <Link to='/jobpost' className={classes.link}>
-                      <MenuItem onClick={this.handleMenuClose}>Jobs Posted</MenuItem>
-                    </Link>
-                  )
-                    :
-                    (
-                      <Link to='/applied' className={classes.link}>
-                        <MenuItem onClick={this.handleMenuClose}>Jobs Applied</MenuItem>
-                      </Link>
-                    )
-                }
-                <Link to='/' className={classes.link}>
-                  <MenuItem onClick={this.handleMenuClose}>Log Out</MenuItem>
-                </Link>
-              </div>
             )
-        }
+              :
+              (
+                <Link to='/applied' className={classes.link}>
+                  <MenuItem onClick={this.handleMenuClose}>Jobs Applied</MenuItem>
+                </Link>
+              )
+          }
+          <Link to='/' className={classes.link}>
+            <MenuItem onClick={this.handleMenuClose}>Log Out</MenuItem>
+          </Link>
+        </div>
       </Menu>
     )
 
@@ -117,11 +106,9 @@ class Navbar extends Component {
                 Employ.Me
             </Typography>
             </Link>
-
             <div className={classes.grow} />
-
             {
-              this.props.employeer ? (
+              this.props.employer ? (
                 <Link to='/jobpost' style={{ color: 'white' }}>
                   <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
@@ -131,15 +118,24 @@ class Navbar extends Component {
                 </Link>
               ) : ''
             }
-
-            <IconButton
-              aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-              aria-haspopup="true"
-              onClick={this.handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            {this.props.user === null ?
+              <Link to='/login' style={{ color: 'white' }}>
+                <Button variant="outline" style={{ color: 'white', border: '1px solid white' }} className={classes.button}>
+                  Login/Sign Up
+                </Button>
+              </Link>
+              :
+              (
+                <IconButton
+                  aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                  aria-haspopup="true"
+                  onClick={this.handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              )
+            }
           </Toolbar>
         </AppBar>
         {renderMenu}

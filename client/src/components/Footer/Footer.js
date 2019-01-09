@@ -97,7 +97,7 @@ class Footer extends React.Component {
                         <p>Garrett Fermo : <a href="mailto:garrettcfermo@gmail.com">garrettcfermo@gmail.com</a></p>
                         <p>Jean Chung : <a href="mailto:jeannchung@gmail.com">jeannchung@gmail.com</a></p>
                         <p>Joleen Tsai : <a href="mailto:joleenjtsai@gmail.com">joleenjtsai@gmail.com</a></p>
-                        <p>Radley Eakale : <a href="mailto:radley.eakle@gmail.com ">radley.eakle@gmail.com </a></p>
+                        <p>Radley Eakle : <a href="mailto:radley.eakle@gmail.com ">radley.eakle@gmail.com </a></p>
                       </div>
                     )
                   } else if (this.state.value === 'Terms of Use') {
