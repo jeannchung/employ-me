@@ -31,7 +31,7 @@ firebase.initializeApp(config);
 class App extends Component {
   state = {
     user: null,
-    employer: false
+    employer: null
   }
 
   render() {
