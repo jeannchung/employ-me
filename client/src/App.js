@@ -31,7 +31,7 @@ firebase.initializeApp(config);
 class App extends Component {
   state = {
     user: null,
-    employeer: false
+    employer: null
   }
 
   render() {
@@ -39,7 +39,7 @@ class App extends Component {
       <>
       <Router>
         <div>
-            <Navbar user={this.state.user} employeer={this.state.employeer} />
+            <Navbar user={this.state.user} employer={this.state.employer} />
             <Route exact path='/' component={() => <Home />} />
             <Route path='/login' component={() => <Login />} />
             <Route path='/profile' component={() => <Profile />} />

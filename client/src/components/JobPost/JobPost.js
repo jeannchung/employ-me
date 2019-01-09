@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CreatePostModal from './jobpostcomponents/CreatePostModal'
 import JobPosted from './jobpostcomponents/JobPosted'
+import firebase from 'firebase'
 
 class JobPost extends Component {
   // example post
@@ -20,6 +21,10 @@ class JobPost extends Component {
    }
   ]
  }
+  //user is logged in
+  componentDidMount = () => {
+    firebase.auth().onAuthStateChanged(user => this.setState({ user: !!user }))
+  }
   render() {
     return (
       <>
