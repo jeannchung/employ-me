@@ -60,6 +60,34 @@ class CreatePostModal extends Component {
             />
             <TextField
               margin="dense"
+              id="jobRequirements"
+              label="Requirements"
+              type="text"
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              id="jobQualifications"
+              label="Qualifications"
+              type="text"
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              id="jobEmployerName"
+              label="Employer"
+              type="text"
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              id="jobCity"
+              label="City"
+              type="text"
+              fullWidth
+            />
+            <TextField
+              margin="dense"
               id="jobContactName"
               label="Contact Name"
               type="text"
