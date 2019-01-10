@@ -125,15 +125,19 @@ function CenteredGrid(props) {
             </Typography>
           </Paper>
         </Grid>
-        <Grid>
-          <Icon className={classes.paper} fontSize="large" color="primary">
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <Icon className={classes.paper} fontSize="large" color="primary">
               navigate_before
           </Icon>
-          <Icon className={classes.paper} fontSize="large" color="primary" >
+            <Icon className={classes.paper} fontSize="large" color="primary" >
               navigate_next
           </Icon>
+          </Paper>
         </Grid>
+
       </Grid>
+
       
     </div>
   );
