@@ -7,7 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from 'react-select';
-import Typography from '@material-ui/core/Typography';
 
 const options = [
   { label: 'Not Specified' },
@@ -130,32 +129,10 @@ const states = [
   { label: 'Wyoming'},
 ]
 
-const component = {
-  Placeholder
-}
 
-function Placeholder(props) {
-  return (
-    <Typography
-      color="textSecondary"
-      className={props.selectProps.classes.placeholder}
-      {...props.innerProps}
-    >
-      {props.children}
-    </Typography>
-  );
-}
-const styles = theme => ({
-  select: {
-    marginTop: '10px',
-    fontSize: 12,
-  },
-  placeholder: {
-    position: 'absolute',
-    left: 2,
-    fontSize: 16,
-  },
-})
+
+
+
 class EmployerModal extends Component {
   state = {
     open: false,
@@ -233,10 +210,10 @@ class EmployerModal extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="#8bc34a">
+            <Button onClick={this.handleClose} >
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="#8bc34a">
+            <Button onClick={this.handleClose} >
               Submit
             </Button>
           </DialogActions>

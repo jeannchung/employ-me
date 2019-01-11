@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import JobPost from './components/JobPost'
 import Login from './components/Login'
 import Profile from './components/Profile'
+import axios from "axios";
 
 var config = {
   apiKey: "AIzaSyAJUEk-d9tisX-ZedhpItxe9n8h7aStyMU",
@@ -32,6 +33,14 @@ class App extends Component {
   state = {
     user: null,
     employer: null
+  }
+
+  componentDidMount = () => {
+    axios.get(`/api/user/5c380f6cdc8707271fe012f5`)
+      .then(r => {
+        console.log(r.data)
+      }).catch(err => { console.log(err) })
+
   }
 
   render() {

@@ -13,7 +13,7 @@ var JobsSchema = new Schema({
   contact:String,
   email: String,
   telephone: String,
-  user_applied: [{type:Schema.Types.ObjectId}],
+  user_applied: [{ type: Schema.Types.ObjectId, ref: "Users"}],
   createdAt: String,
   updatedAt: String
 })
