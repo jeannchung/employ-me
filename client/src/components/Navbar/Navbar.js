@@ -12,6 +12,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
+import axios from 'axios';
 
 const styles = theme => ({
   root: {
@@ -43,6 +44,15 @@ class Navbar extends Component {
   state = {
     anchorEl: null,
   };
+
+  // Test Routes
+  componentDidMount = () => {
+    axios.get('/api/job/')
+      .then(r => {
+        console.log(r.data)
+      }).catch(err => { console.log(err) })
+
+  }
 
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget })
