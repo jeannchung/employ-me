@@ -31,8 +31,27 @@ class App extends Component {
     user: null,
     employer: null
   }
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => this.setState({ user: !!user }))
+  componentDidMount = () => {
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user: !!user })
+    })
+    firebase.auth().onAuthStateChanged(user => {
+      firebase.database().ref(`/users/${user.uid}`).once('value')
+        .then(r => r.val())
+        .then(dbUser => {
+          this.setState({ name: user.displayName, uid: user.uid })
+          if (!dbUser) {
+            firebase.database().ref(`/users/${user.uid}`).push({
+              name: user.displayName,
+              password: user.password,
+              email: user.email,
+            })
+          }
+        })
+    })
+  }
+  componentWillUnmount() {
+    this.unregisterAuthObserver()
   }
 
   render() {
