@@ -117,23 +117,22 @@ class Navbar extends Component {
                 </Link>
               ) : ''
             }
-            {this.props.isLoggedIn === true ?
-              <IconButton
-                  aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                  aria-haspopup="true"
-                  onClick={this.handleProfileMenuOpen}
-                  color="inherit"
-               >
-                  <AccountCircle />
-                </IconButton>
-              :
-              (
-                  <Link to='/login' style={{ color: 'white' }}>
+            {this.props.isLoggedIn === false ?
+              <Link to='/login' style={{ color: 'white' }}>
                 <Button variant="outlined" style={{ color: 'white', border: '1px solid white' }} className={classes.button}>
                   Login/Sign Up
                 </Button>
               </Link>
-
+              :
+              (
+                <IconButton
+                  aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                  aria-haspopup="true"
+                  onClick={this.handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
               )
             }
           </Toolbar>
