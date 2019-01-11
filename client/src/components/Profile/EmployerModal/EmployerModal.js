@@ -227,7 +227,7 @@ class EmployerModal extends Component {
             <TextField
               margin="dense"
               id="companyInfo"
-              label="Company Information and Mission Statement "
+              label="Company Information"
               type="text"
               fullWidth
             />
