@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import firebase from 'firebase'
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import Applied from './components/Applied'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
@@ -29,6 +28,9 @@ const uiConfig = {
 class App extends Component {
   state = {
     user: null,
+    name: '',
+    uid: '',
+    isLoggedIn: false,
     employer: null
   }
   componentDidMount = () => {
@@ -43,12 +45,13 @@ class App extends Component {
           if (!dbUser) {
             firebase.database().ref(`/users/${user.uid}`).push({
               name: user.displayName,
-              password: user.password,
               email: user.email,
+              isLoggedIn: true,
             })
           }
         })
     })
+    console.log(this.state.isLoggedIn)
   }
   componentWillUnmount() {
     this.unregisterAuthObserver()
@@ -59,7 +62,7 @@ class App extends Component {
       <>
         <Router>
           <div>
-            <Navbar user={this.state.user} employer={this.state.employer} />
+            <Navbar isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} />
             <Route exact path='/' component={() => <Home />} />
             <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
             <Route path='/profile' component={() => <Profile employer={this.state.employer} />} />

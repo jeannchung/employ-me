@@ -75,7 +75,6 @@ class Navbar extends Component {
           <Link to='/' className={classes.link}>
             <MenuItem onClick={this.handleMenuClose}>Home</MenuItem>
           </Link>
-
           {
             this.props.employer ? (
 
@@ -118,7 +117,7 @@ class Navbar extends Component {
                 </Link>
               ) : ''
             }
-            {this.props.user === null ?
+            {this.props.isLoggedIn === false ?
               <Link to='/login' style={{ color: 'white' }}>
                 <Button variant="outlined" style={{ color: 'white', border: '1px solid white' }} className={classes.button}>
                   Login/Sign Up
