@@ -10,44 +10,45 @@ import JobPost from './components/JobPost'
 import Login from './components/Login'
 import Profile from './components/Profile'
 
-var config = {
+firebase.initializeApp({
   apiKey: "AIzaSyAJUEk-d9tisX-ZedhpItxe9n8h7aStyMU",
   authDomain: "employ-me-42819.firebaseapp.com",
   databaseURL: "https://employ-me-42819.firebaseio.com",
   projectId: "employ-me-42819",
   storageBucket: "employ-me-42819.appspot.com",
   messagingSenderId: "118031344911"
-};
+})
 const uiConfig = {
   signInFlow: 'popup',
   signInSuccessUrl: '/',
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-  ],
+  ]
 }
-firebase.initializeApp(config);
-
 
 class App extends Component {
   state = {
     user: null,
     employer: null
   }
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => this.setState({ user: !!user }))
+  }
 
   render() {
     return (
       <>
-      <Router>
-        <div>
+        <Router>
+          <div>
             <Navbar user={this.state.user} employer={this.state.employer} />
             <Route exact path='/' component={() => <Home />} />
-            <Route path='/login' component={() => <Login />} />
+            <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
             <Route path='/profile' component={() => <Profile employer={this.state.employer} />} />
             <Route path='/jobpost' component={() => <JobPost />} />
             <Route path='/applied' component={() => <Applied />} />
             <Footer />
-        </div>
-      </Router>
+          </div>
+        </Router>
       </>
     )
   }
