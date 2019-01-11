@@ -8,6 +8,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom'
+
 
 const styles = {
   card: {
@@ -54,10 +56,14 @@ class Login extends Component {
               <CardContent>
                 <Grid container spacing={24}>
                   <Grid item xs={6}>
+                    <Link to='/profile' className={classes.link}>
                     <Button variant="outlined" className={classes.button}>Edit Profile</Button>
+                    </Link>
                 </Grid>
                 <Grid item xs={6}>
+                    <Link to='/' className={classes.link}>
                   <Button variant="outlined" className={classes.button}>Log Out</Button>
+                  </Link>
                 </Grid> 
             </Grid>
             </CardContent>
