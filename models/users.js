@@ -17,9 +17,7 @@ var UsersSchema = new Schema({
   company_name: String,
   company_info: String,
   job_posted: [{ type: Schema.Types.ObjectId, ref: "Jobs" }],
-  job_applied: [{ type: Schema.Types.ObjectId, ref: "Jobs" }],
-  createdAt: String,
-  updatedAt: String
+  job_applied: [{ type: Schema.Types.ObjectId, ref: "Jobs" }]
 })
 
 var Users = mongoose.model("users", UsersSchema);
