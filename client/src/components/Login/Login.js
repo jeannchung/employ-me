@@ -92,15 +92,17 @@ class Login extends Component {
                         id="standard-name"
                         label="Password"
                         className={classes.textField}
-                        value={this.state.name}
-                        onChange={this.handleChange('name')}
+                        value={this.state.password}
+                        onChange={this.handleChange('password')}
                         margin="normal"
                       />
                     </Grid>
                   </Grid>
                   <Grid container spacing={24}>
                     <Grid item xs={6}>
-                      <Button variant="outlined" className={classes.button, classes.btnleft}>Register</Button>
+                      <Button variant="outlined" className={[classes.button, classes.btnleft]}>Register</Button>
+                    </Grid>
+                    <Grid item xs={6}>  
                       <Button variant="outlined" className={classes.button}>Login</Button>
                     </Grid> 
                   </Grid>
