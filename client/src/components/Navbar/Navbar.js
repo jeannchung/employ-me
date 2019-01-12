@@ -13,6 +13,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import axios from 'axios';
+import firebase from 'firebase'
+
 
 const styles = theme => ({
   root: {
@@ -100,7 +102,7 @@ class Navbar extends Component {
               )
           }
           <Link to='/' className={classes.link}>
-            <MenuItem onClick={this.handleMenuClose}>Log Out</MenuItem>
+            <MenuItem onClick={firebase.auth().signOut()}>Log Out</MenuItem>
           </Link>
         </div>
       </Menu>
