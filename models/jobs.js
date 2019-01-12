@@ -13,9 +13,7 @@ var JobsSchema = new Schema({
   contact:String,
   email: String,
   telephone: String,
-  user_applied: [{type:Schema.Types.ObjectId}],
-  createdAt: String,
-  updatedAt: String
+  user_applied: [{type:Schema.Types.ObjectId}]
 })
 
 var Jobs = mongoose.model("jobs", JobsSchema);
