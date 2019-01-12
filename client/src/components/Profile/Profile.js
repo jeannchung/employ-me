@@ -29,6 +29,23 @@ const styles = {
 
 class Profile extends Component {
 
+  state = {
+    // applicantState: {
+    //   // name: ,
+    //   // email: ,
+    //   // phoneNumber: ,
+    //   // experience: ,
+    //   // skills: ,
+    //   // education: ,
+    //   // city: ,
+    //   // state:
+    // },
+
+    // employerState: {
+
+    // }
+  }
+
   render() {
     const { classes } = this.props;
     const bull = <span className={classes.bullet}>•</span>;
