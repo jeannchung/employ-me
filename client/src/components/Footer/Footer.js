@@ -8,9 +8,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Z_FIXED } from 'zlib';
 
 const styles = theme => ({
   root: {
+    position: 'fixed',
+    bottom: '0',
     width: '100%',
     backgroundColor: '#556B2F',
     color: 'black'
@@ -77,11 +80,11 @@ class Footer extends React.Component {
                 } else if (this.state.value === 'Contact Us') {
                   return (
                     <div>
-                      <p>Adam Openbrier : <a href="mailto:aopenbrier@gmail.com">aopenbrier@gmail.com</a></p>
-                      <p>Garrett Fermo : <a href="mailto:garrettcfermo@gmail.com">garrettcfermo@gmail.com</a></p>
-                      <p>Jean Chung : <a href="mailto:jeannchung@gmail.com">jeannchung@gmail.com</a></p>
-                      <p>Joleen J. Tsai : <a href="mailto:joleenjtsai@gmail.com">joleenjtsai@gmail.com</a></p>
-                      <p>Radley Eakle : <a href="mailto:radley.eakle@gmail.com ">radley.eakle@gmail.com </a></p>
+                      <p>Adam Openbrier : <br /><a href="mailto:aopenbrier@gmail.com">aopenbrier@gmail.com</a></p>
+                      <p>Garrett Fermo : <br /><a href="mailto:garrettcfermo@gmail.com">garrettcfermo@gmail.com</a></p>
+                      <p>Jean Chung : <br /><a href="mailto:jeannchung@gmail.com">jeannchung@gmail.com</a></p>
+                      <p>Joleen J. Tsai : <br /><a href="mailto:joleenjtsai@gmail.com">joleenjtsai@gmail.com</a></p>
+                      <p>Radley Eakle : <br /><a href="mailto:radley.eakle@gmail.com ">radley.eakle@gmail.com </a></p>
                     </div>
                   )
                 } else if (this.state.value === 'Terms of Use') {
