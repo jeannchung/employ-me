@@ -61,20 +61,20 @@ class Login extends Component {
                 <Grid container spacing={24}>
                   <Grid item xs={6}>
                     <Link to='/profile' className={classes.link}>
-                    <Button variant="outlined" className={classes.button}>Edit Profile</Button>
+                      <Button variant="outlined" className={classes.button}>Edit Profile</Button>
                     </Link>
-                </Grid>
-                <Grid item xs={6}>
+                  </Grid>
+                  <Grid item xs={6}>
                     <Link to='/' className={classes.link}>
-                  <Button variant="outlined" className={classes.button}>Log Out</Button>
-                  </Link>
-                </Grid> 
-            </Grid>
-            </CardContent>
-      </Card>)
+                      <Button variant="outlined" className={classes.button}>Log Out</Button>
+                    </Link>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>)
             :
-          <Card className={classes.card}>
-            <CardContent>
+            <Card className={classes.card}>
+              <CardContent>
                 <form className={classes.container} noValidate autoComplete="off">
                   <Grid container spacing={24}>
                     <Grid item xs={6}>
@@ -92,20 +92,28 @@ class Login extends Component {
                         id="standard-name"
                         label="Password"
                         className={classes.textField}
-                        value={this.state.name}
-                        onChange={this.handleChange('name')}
+                        value={this.state.password}
+                        onChange={this.handleChange('password')}
                         margin="normal"
                       />
                     </Grid>
                   </Grid>
                   <Grid container spacing={24}>
                     <Grid item xs={6}>
+<<<<<<< HEAD
                       <Button variant="outlined" className={classes.button, classes.btnleft}>Register</Button>
+                    <Button variant="outlined" className={classes.button}>Login</Button>
+                  </Grid> 
+=======
+                      <Button variant="outlined" className={[classes.button, classes.btnleft]}>Register</Button>
+                    </Grid>
+                    <Grid item xs={6}>  
                       <Button variant="outlined" className={classes.button}>Login</Button>
                     </Grid> 
+>>>>>>> 6753089ca47977a3e1a701ffe918ab0313b85960
                   </Grid>
                 </form>
-                <StyledFirebaseAuth uiConfig={this.props.uiConfig} firebaseAuth={firebase.auth()} />
+              <StyledFirebaseAuth uiConfig={this.props.uiConfig} firebaseAuth={firebase.auth()} />
             </CardContent>
         </Card>
       }
