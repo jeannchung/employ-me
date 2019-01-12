@@ -28,10 +28,6 @@ const styles = {
 };
 
 class Profile extends Component {
-  //user is logged in
-  componentDidMount = () => {
-    firebase.auth().onAuthStateChanged(user => this.setState({ user: !!user }))
-  }
 
   render() {
     const { classes } = this.props;
@@ -39,54 +35,75 @@ class Profile extends Component {
 
 
     return (
+
+        <>
+        {
+          this.props.isUser ? (
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  `${this.props.displayName}`'s Profile
+        </Typography>
+                <Typography component="p">
+                  Email: `${this.props.email}`
+                </Typography>
+                <CardActions>
+                  <ApplicantModal />
+                </CardActions>
+              </CardContent>
+              </Card>
+              )
+              :
       <Card className={classes.card}>
-        <CardContent>
-          <Typography variant="h5" component="h2">
-            Applicant
+                <CardContent>
+                  <Typography variant="h5" component="h2">
+                    Applicant
         </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            Find a Job
+                  <Typography className={classes.pos} color="textSecondary">
+                    Find a Job
         </Typography>
-          <Typography component="p">
-            {bull} Search from millions of jobs posted daily
+                  <Typography component="p">
+                    {bull} Search from millions of jobs posted daily
         <br />
-            {bull} Specialize by industry, location, or career type
+                    {bull} Specialize by industry, location, or career type
         <br />
-            {bull} Broad distribution of your profile across different networks
+                    {bull} Broad distribution of your profile across different networks
         <br />
-            {bull} Find the perfect position today
+                    {bull} Find the perfect position today
         </Typography>
-          <CardActions>
-           <ApplicantModal />
-          </CardActions>
-        </CardContent>
-        <CardContent>
-          <Typography variant="h5" component="h2">
-            Employer
+                  <CardActions>
+                    <ApplicantModal />
+                  </CardActions>
+                </CardContent>
+                <CardContent>
+                  <Typography variant="h5" component="h2">
+                    Employer
         </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            Post Jobs {bull} Find Talent
+                  <Typography className={classes.pos} color="textSecondary">
+                    Post Jobs {bull} Find Talent
         </Typography>
-          <Typography component="p">
-            {bull} Reach millions of job seekers today
+                  <Typography component="p">
+                    {bull} Reach millions of job seekers today
         <br />
-            {bull} Post jobs for free
+                    {bull} Post jobs for free
         <br />
-            {bull} Mobile Optimized Job View
+                    {bull} Mobile Optimized Job View
         <br />
-            {bull} Exposure across the the employ.me network
+                    {bull} Exposure across the the employ.me network
         </Typography>
-          <CardActions>
-            <EmployerModal />
-          </CardActions>
-        </CardContent>
-      </Card>
-    );
-  }
-}
+                  <CardActions>
+                    <EmployerModal />
+                  </CardActions>
+                </CardContent>
+              </Card>
+              }
+        </>
+          );
+        }
+      }
 
 Profile.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
+          classes: PropTypes.object.isRequired,
+  };
+  
 export default withStyles(styles)(Profile);
