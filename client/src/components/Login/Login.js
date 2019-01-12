@@ -100,17 +100,11 @@ class Login extends Component {
                   </Grid>
                   <Grid container spacing={24}>
                     <Grid item xs={6}>
-<<<<<<< HEAD
-                      <Button variant="outlined" className={classes.button, classes.btnleft}>Register</Button>
-                    <Button variant="outlined" className={classes.button}>Login</Button>
-                  </Grid> 
-=======
                       <Button variant="outlined" className={[classes.button, classes.btnleft]}>Register</Button>
                     </Grid>
                     <Grid item xs={6}>  
                       <Button variant="outlined" className={classes.button}>Login</Button>
                     </Grid> 
->>>>>>> 6753089ca47977a3e1a701ffe918ab0313b85960
                   </Grid>
                 </form>
               <StyledFirebaseAuth uiConfig={this.props.uiConfig} firebaseAuth={firebase.auth()} />
