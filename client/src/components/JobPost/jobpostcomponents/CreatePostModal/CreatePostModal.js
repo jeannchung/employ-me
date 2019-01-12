@@ -10,13 +10,22 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 class CreatePostModal extends Component {
   state = {
     open: false,
-  };
+    input: {}
+  }
+
+  handleChange = (event) => {
+    const tempObj = this.state.input
+    const myKey = event.target.id
+    tempObj[myKey] = event.target.value
+    this.setState({input: tempObj})
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
   handleClose = () => {
+    console.log(this.state.input)
     this.setState({ open: false });
   };
 
@@ -39,9 +48,10 @@ class CreatePostModal extends Component {
             <TextField
               autoFocus
               margin="dense"
-              id="jobTitle"
+              id="title_name"
               label="Job Title"
               type="text"
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
@@ -49,6 +59,7 @@ class CreatePostModal extends Component {
               id="jobSalary"
               label="Salary"
               type="text"
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
@@ -56,6 +67,7 @@ class CreatePostModal extends Component {
               id="jobDescription"
               label="Description"
               type="text"
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
@@ -63,6 +75,7 @@ class CreatePostModal extends Component {
               id="jobRequirements"
               label="Requirements"
               type="text"
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
@@ -70,6 +83,7 @@ class CreatePostModal extends Component {
               id="jobQualifications"
               label="Qualifications"
               type="text"
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
@@ -77,6 +91,7 @@ class CreatePostModal extends Component {
               id="jobEmployerName"
               label="Employer"
               type="text"
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
@@ -84,6 +99,7 @@ class CreatePostModal extends Component {
               id="jobCity"
               label="City"
               type="text"
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
@@ -91,6 +107,7 @@ class CreatePostModal extends Component {
               id="jobContactName"
               label="Contact Name"
               type="text"
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
@@ -98,6 +115,7 @@ class CreatePostModal extends Component {
               id="jobContactEmail"
               label="Contact Email"
               type="email"
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
@@ -105,6 +123,7 @@ class CreatePostModal extends Component {
               id="jobContactNumber"
               label="Contact Number"
               type="tel"
+              onChange={this.handleChange}
               fullWidth
             />
           </DialogContent>
