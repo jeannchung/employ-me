@@ -64,6 +64,7 @@ class Navbar extends Component {
     this.setState({ anchorEl: null })
   };
 
+
   render() {
     const { anchorEl } = this.state
     const { classes } = this.props
@@ -102,7 +103,7 @@ class Navbar extends Component {
               )
           }
           <Link to='/' className={classes.link}>
-            <MenuItem onClick={firebase.auth().signOut()}>Log Out</MenuItem>
+            <MenuItem onClick={this.props.signOut}>Log Out</MenuItem>
           </Link>
         </div>
       </Menu>
