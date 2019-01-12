@@ -41,12 +41,11 @@ class App extends Component {
       firebase.database().ref(`/users/${user.uid}`).once('value')
         .then(r => r.val())
         .then(dbUser => {
-          this.setState({ name: user.displayName, uid: user.uid })
+          this.setState({ name: user.displayName, uid: user.uid, isLoggedIn: true })
           if (!dbUser) {
             firebase.database().ref(`/users/${user.uid}`).push({
               name: user.displayName,
-              email: user.email,
-              isLoggedIn: true,
+              email: user.email
             })
           }
         })
