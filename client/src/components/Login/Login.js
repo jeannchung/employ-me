@@ -8,13 +8,15 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { Typography } from '@material-ui/system';
 
 
 const styles = {
   card: {
     minWidth: 275,
-    display: "flex"
+    display: "flex",
+    justifyContent: "center",
   },
   bullet: {
     display: 'inline-block',
@@ -29,8 +31,10 @@ const styles = {
   },
   btnleft: {
     marginLeft: 80,
-  }
+  },
 };
+
+
 
 class Login extends Component {
   state = {
@@ -71,55 +75,40 @@ class Login extends Component {
             :
           <Card className={classes.card}>
             <CardContent>
-              <form className={classes.container} noValidate autoComplete="off">
-                <Grid container spacing={24}>
-                  <Grid item xs={6}>
-                    <TextField
-                      id="standard-name"
-                      label="Username"
-                      className={classes.textField}
-                      value={this.state.name}
-                      onChange={this.handleChange('name')}
-                      margin="normal"
-                    />
+                <form className={classes.container} noValidate autoComplete="off">
+                  <Grid container spacing={24}>
+                    <Grid item xs={6}>
+                      <TextField
+                        id="standard-name"
+                        label="Username"
+                        className={classes.textField}
+                        value={this.state.name}
+                        onChange={this.handleChange('name')}
+                        margin="normal"
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <TextField
+                        id="standard-name"
+                        label="Password"
+                        className={classes.textField}
+                        value={this.state.name}
+                        onChange={this.handleChange('name')}
+                        margin="normal"
+                      />
+                    </Grid>
                   </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      id="standard-name"
-                      label="Password"
-                      className={classes.textField}
-                      value={this.state.name}
-                      onChange={this.handleChange('name')}
-                      margin="normal"
-                    />
+                  <Grid container spacing={24}>
+                    <Grid item xs={6}>
+                      <Button variant="outlined" className={classes.button, classes.btnleft}>Register</Button>
+                      <Button variant="outlined" className={classes.button}>Login</Button>
+                    </Grid> 
                   </Grid>
-                </Grid>
-                <Grid container spacing={24}>
-                  <Grid item xs={6}>
-                    <Button variant="outlined" className={classes.button, classes.btnleft}>Register</Button>
-                </Grid>
-                <Grid item xs={6}>
-                  <Button variant="outlined" className={classes.button}>Login</Button>
-                </Grid> 
-                      </Grid>
-                  </form>
-            {/* <Typography variant="h5" component="h2">
-                  Login
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  Button/Input Field
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  Register
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  Button/Input Field
-                </Typography> */}
-
-            <StyledFirebaseAuth uiConfig={this.props.uiConfig} firebaseAuth={firebase.auth()} />
-              </CardContent>
+                </form>
+                <StyledFirebaseAuth uiConfig={this.props.uiConfig} firebaseAuth={firebase.auth()} />
+            </CardContent>
         </Card>
-  }
+      }
       </>
     )
   }
