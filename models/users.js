@@ -4,10 +4,8 @@ var Schema = mongoose.Schema;
 
 var UsersSchema = new Schema({
   username: String,
-  user_id: String,
   email: String,
-  password: String,
-  employer: String,
+  employer: Boolean,
   phone_number: String,
   work_exp: String,
   skills: String,
@@ -16,8 +14,10 @@ var UsersSchema = new Schema({
   address: String,
   company_name: String,
   company_info: String,
-  job_posted: [{ type: Schema.Types.ObjectId, ref: "Jobs" }],
-  job_applied: [{ type: Schema.Types.ObjectId, ref: "Jobs" }]
+  jobs_posted: [{ type: Schema.Types.ObjectId, ref: "jobs" }],
+  jobs_applied: [{ type: Schema.Types.ObjectId, ref: "jobs" }],
+  createdAt: String,
+  updatedAt: String
 })
 
 var Users = mongoose.model("users", UsersSchema);
