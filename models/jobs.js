@@ -8,12 +8,12 @@ var JobsSchema = new Schema({
   description: String,
   requirements: String,
   qualifications: String,
-  employer: String,
+  employer_id: String,
   city: String,
   contact:String,
   email: String,
   telephone: String,
-  user_applied: [{type:Schema.Types.ObjectId}],
+  users_applied: [{type: Schema.Types.ObjectId,ref: "users"}],
   createdAt: String,
   updatedAt: String
 })

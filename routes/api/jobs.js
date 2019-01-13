@@ -1,16 +1,21 @@
 const router = require("express").Router();
 const jobsController = require("../../controllers/jobcontrollers");
 
-// Matches with "/api/jobs"
+// Matches with "/api/job"
 router.route("/")
   .get(jobsController.findAll)
   .post(jobsController.create);
 
-// Matches with "/api/jobs/:id"
+// Matches with "/api/job/:id"
 router
   .route("/:id")
   .get(jobsController.findById)
   .put(jobsController.update)
   .delete(jobsController.remove);
 
+// Matches with "/api/job/apply/:id"
+router
+  .route("/apply/:id")
+  .put(jobsController.apply);
+  
 module.exports = router;

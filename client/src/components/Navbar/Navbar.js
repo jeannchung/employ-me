@@ -43,15 +43,6 @@ const styles = theme => ({
 class Navbar extends Component {
   state = {
     anchorEl: null,
-  };
-
-  // Test Routes
-  componentDidMount = () => {
-    axios.get('/api/job/')
-      .then(r => {
-        console.log(r.data)
-      }).catch(err => { console.log(err) })
-
   }
 
   handleProfileMenuOpen = event => {
@@ -66,7 +57,6 @@ class Navbar extends Component {
     const { anchorEl } = this.state
     const { classes } = this.props
     const isMenuOpen = Boolean(anchorEl)
-
 
     const renderMenu = (
       <Menu
