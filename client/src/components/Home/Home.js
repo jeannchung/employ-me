@@ -4,11 +4,14 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { Grid } from '@material-ui/core';
 
 const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -25,6 +28,9 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
+  },
+  centerThis: {
+    justifyContent: 'center',
   }
 });
 
@@ -59,19 +65,24 @@ class Home extends Component {
               id="standard-name"
               label="Keyword"
               className={classes.textField}
-              value={this.state.name}
-              onChange={this.handleChange('name')}
+              value={this.state.keyword}
+              onChange={this.handleChange('keyword')}
               margin="normal"
             />
             <TextField
               id="standard-name"
               label="Location"
               className={classes.textField}
-              value={this.state.name}
-              onChange={this.handleChange('name')}
+              value={this.state.location}
+              onChange={this.handleChange('location')}
               margin="normal"
             />
           </form>
+          <Grid container className={classes.centerThis}>
+            <Grid item>
+              <Button variant="outlined" className={classes.button}>Employ.me!</Button>
+            </Grid>
+          </Grid>    
         </Paper>
       </div>
     );
