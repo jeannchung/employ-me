@@ -12,7 +12,7 @@ import { Z_FIXED } from 'zlib';
 
 const styles = theme => ({
   root: {
-    position: 'fixed',
+    position: 'absolute',
     bottom: '0',
     width: '100%',
     backgroundColor: '#556B2F',

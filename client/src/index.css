@@ -1,6 +1,12 @@
+html {
+  height: 100%;
+}
+
 body {
+  min-height: 100%;
+  position: relative;
   margin: 0;
-  padding: 0;
+  padding: 0 0 56px 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -11,9 +17,5 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.MuiPaper-root-16 {
-  margin: 10px;
 }
 
