@@ -7,6 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
 const styles = {
+    card: {
+        marginBottom: '1em'
+    },
     noMargin: {
         margin: 0
     }

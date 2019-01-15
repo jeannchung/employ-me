@@ -68,11 +68,13 @@ class App extends Component {
         <Router>
           <div>
             <Navbar isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
+            <div style={{margin: '1rem'}}>
             <Route exact path='/' component={() => <Home />} />
             <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
             <Route path='/profile' component={() => <Profile name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} />} />
             <Route path='/jobpost' component={() => <JobPost />} />
             <Route path='/applied' component={() => <Applied />} />
+            </div>
             <Footer />
           </div>
         </Router>

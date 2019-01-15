@@ -32,7 +32,7 @@ class CreatePostModal extends Component {
   render() {
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+        <Button style={{marginBottom: '1em'}} variant="outlined" color="primary" onClick={this.handleClickOpen}>
           Create New Post
         </Button>
         <Dialog
