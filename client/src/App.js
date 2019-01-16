@@ -29,7 +29,7 @@ class App extends Component {
   state = {
     user: null,
     name: '',
-    uid: '',
+    fbfbuid: '',
     email: '',
     isLoggedIn: false,
     employer: null
@@ -39,12 +39,12 @@ class App extends Component {
       this.setState({ user: !!user })
     })
     firebase.auth().onAuthStateChanged(user => {
-      firebase.database().ref(`/users/${user.uid}`).once('value')
+      firebase.database().ref(`/users/${user.fbuid}`).once('value')
         .then(r => r.val())
         .then(dbUser => {
-          this.setState({ name: user.displayName, uid: user.uid, isLoggedIn: true, email: user.email })
+          this.setState({ name: user.displayName, fbuid: user.fbuid, isLoggedIn: true, email: user.email })
           if (!dbUser) {
-            firebase.database().ref(`/users/${user.uid}`).push({
+            firebase.database().ref(`/users/${user.fbuid}`).push({
               name: user.displayName,
               email: user.email
             })

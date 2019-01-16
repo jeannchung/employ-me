@@ -39,7 +39,6 @@ const styles = {
 class Login extends Component {
   state = {
     name: '',
-    age: '',
     multiline: 'Controlled',
     isLoggedIn:'',
   };
