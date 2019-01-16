@@ -10,6 +10,7 @@ var JobsSchema = new Schema({
   qualifications: String,
   employer_id: String,
   city: String,
+  industry: String,
   contact:String,
   email: String,
   telephone: String,

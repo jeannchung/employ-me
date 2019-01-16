@@ -12,7 +12,7 @@ module.exports = {
   },
   findById: function (req, res) {
     db.Users
-      .findById(req.params.id)
+      .find({firebase_id: req.params.id})
       .populate('jobs_applied')
       .populate('jobs_posted')
       .then(dbModel => res.json(dbModel))
@@ -34,7 +34,7 @@ module.exports = {
   },
   remove: function (req, res) {
     db.Users
-      .findById({ _id: req.params.id })
+      .find({ firebase_id: req.params.id })
       .populate('jobs_applied')
       .populate('jobs_posted')
       .then(dbModel => dbModel.remove())
