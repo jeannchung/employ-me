@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from 'react-select';
+import axios from 'axios'
 
 const options = [
   { label: 'Not Specified' },
@@ -132,27 +133,53 @@ const states = [
 class EmployerModal extends Component {
   state = {
     open: false,
-    selectedOption: null,
+    selectedIndustry: null,
     selectedStates: null,
+    input: { employer: true, },
   };
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
-  };
-  handleChangeState = (selectedStates) => {
-    this.setState({ selectedStates });
-    console.log(`Option selected:`, selectedStates);
+
+  handleChange = (event) => {
+    const tempObj = this.state.input
+    const myKey = event.target.id
+    tempObj[myKey] = event.target.value
+    this.setState({ input: tempObj })
   }
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
   handleClose = () => {
+    console.log(this.state.input)
     this.setState({ open: false });
   };
 
+  handleSubmit = () => {
+    axios.post("/api/user/", this.state.input)
+      .then(r => {
+        console.log(r.data)
+      })
+      .catch(err => { console.log(err) })
+    this.setState({ open: false });
+  };
+
+handleDropdown = (selectedIndustry) => {
+  const tempObj = this.state.input
+  tempObj.industry = 
+  selectedIndustry.label
+  this.setState({ input: tempObj, selectedIndustry })
+  console.log(`Industry selected:`, this.state.input);
+}
+handleDropdownState = (selectedStates) => {
+  const tempObj = this.state.input
+  tempObj.state = 
+  selectedStates.label
+  this.setState({ input: tempObj, selectedStates })
+  console.log(`State selected:`, this.state.input);
+}
+
   render() {
-    const { selectedOption } = this.state;
+    const { selectedIndustry } = this.state;
     const { selectedStates } = this.state;
 
     return (
@@ -173,43 +200,48 @@ class EmployerModal extends Component {
             <TextField
               autoFocus
               margin="dense"
-              id="companyName"
+              id="company_name"
               label="Company Name"
               type="text"
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
               margin="dense"
-              id="address "
+              id="address"
               label="Street Address"
               type="text"
+              onChange={this.handleChange}
               fullWidth
             />
             <Select
               placeholder='State'
+              id="state"
               value={selectedStates}
-              onChange={this.handleChangeState}
+              onChange={this.handleDropdownState}
               options={states}
             />
+              <TextField
+                margin="dense"
+                id="company_info"
+                label="Company Information"
+                type="text"
+                onChange={this.handleChange}
+                fullWidth
+              />
             <Select
               placeholder='Industry'
-              value={selectedOption}
-              onChange={this.handleChange}
+              id="industry"
+              value={selectedIndustry}
+              onChange={this.handleDropdown}
               options={options}
-            />
-            <TextField
-              margin="dense"
-              id="companyInfo"
-              label="Company Information"
-              type="text"
-              fullWidth
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="#8bc34a">
+            <Button onClick={this.handleClose}>
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="#8bc34a">
+            <Button onClick={this.handleSubmit}>
               Submit
             </Button>
           </DialogActions>

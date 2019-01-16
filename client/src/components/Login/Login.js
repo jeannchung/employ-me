@@ -39,8 +39,8 @@ const styles = {
 class Login extends Component {
   state = {
     name: '',
-    age: '',
     multiline: 'Controlled',
+    isLoggedIn:'',
   };
 
   handleChange = name => event => {
@@ -48,6 +48,7 @@ class Login extends Component {
       [name]: event.target.value,
     });
   };
+
 
   render() {
     const { classes } = this.props;
@@ -66,7 +67,7 @@ class Login extends Component {
                   </Grid>
                   <Grid item xs={6}>
                     <Link to='/' className={classes.link}>
-                      <Button variant="outlined" className={classes.button}>Log Out</Button>
+                      <Button variant="outlined" className={classes.button} onClick={this.props.signOut}>Log Out</Button>
                     </Link>
                   </Grid>
                 </Grid>
