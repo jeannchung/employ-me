@@ -30,9 +30,7 @@ const styles = {
 class Profile extends Component {
   state = {
     name: '',
-    age: '',
     multiline: 'Controlled',
-    email: '',
   // applicantState: {
   //   // name: ,
   //   // email: ,
@@ -92,7 +90,7 @@ render()
                 {bull} Find the perfect position today
         </Typography>
               <CardActions>
-                <ApplicantModal />
+                <ApplicantModal name={this.props.name} email={this.props.email} />
               </CardActions>
             </CardContent>
             <CardContent>

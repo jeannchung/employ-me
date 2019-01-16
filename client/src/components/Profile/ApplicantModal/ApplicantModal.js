@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from 'react-select';
 import axios from 'axios'
+import Typography from '@material-ui/core/Typography';
 
 const options = [
   { label: 'Not Specified' },
@@ -80,26 +81,11 @@ const states = [
 
 class ApplicantModal extends Component {
   state = {
+    name: '',
     open: false,
-    selectedOption: null,
+    selectedEducation: null,
     selectedStates: null,
-    exampleUser: {
-      username: "Example",
-      email: "example@gmail.com",
-      employer: false,
-      phone_number: '(562) 123-4567',
-      work_exp: "Something",
-      skills: "Something",
-      state: "California",
-      city: "Example",
-      address: "112 NoWhere",
-      company_name: "Example",
-      company_info: "Example",
-      jobs_posted: [],
-      jobs_applied: [],
-      createdAt: Date(),
-      updatedAt: Date()
-    }
+    input: { employer: false, },
   }
 
   handleChange = (event) => {
@@ -113,13 +99,13 @@ class ApplicantModal extends Component {
     this.setState({ open: true });
   };
 
-  handleClose = () => {
+  handleClose = () => { 
     console.log(this.state.input)
     this.setState({ open: false });
   };
 
   handleSubmit = () => {
-    axios.post("/api/user/", this.state.exampleUser)
+    axios.post("/api/user/", this.state.input)
       .then(r => {
         console.log(r.data)
       })
@@ -127,24 +113,25 @@ class ApplicantModal extends Component {
     this.setState({ open: false });
   };
 
-handleDropdown = (event) => {
+handleDropdown = (selectedEducation) => {
   const tempObj = this.state.input
-  const myKey = event.target.id
-  tempObj[myKey] = event.target.value
-  this.setState({ input: tempObj })
-  console.log(`Option selected:`, event);
+  tempObj.highest_ed = 
+  selectedEducation.label
+  this.setState({ input: tempObj, selectedEducation})
+  console.log(`Education selected:`, this.state.input);
 }
-handleDropdownState = (event) => {
+handleDropdownState = (selectedStates) => {
   const tempObj = this.state.input
-  // const myKey = selectedStates.target.id
-  // tempObj[myKey] = event.target.selectedStates
-  this.setState({ input: tempObj })
-  // console.log(`Option selected:`, selectedStates);
+  tempObj.state = 
+  selectedStates.label
+  this.setState({ input: tempObj, selectedStates })
+  console.log(`State selected:`, this.state.input);
 }
 
 render() {
-  const { selectedOption } = this.state;
+  const { selectedEducation } = this.state;
   const { selectedStates } = this.state;
+  const { classes } = this.props;
 
   return (
     <div>
@@ -159,17 +146,11 @@ render() {
         <DialogTitle id="form-dialog-title">Applicant Profile</DialogTitle>
         <DialogContent>
           <DialogContentText>
+            <Typography variant="h5">
+                {this.props.name}'s Profile
+        </Typography>
             Enter Information to create profile then click submit
             </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Name"
-            type="text"
-            onChange={this.handleChange}
-            fullWidth
-          />
           <TextField
             margin="dense"
             id="email "
@@ -180,7 +161,7 @@ render() {
           />
           <TextField
             margin="dense"
-            id="number"
+            id="phone_number"
             label="Phone Number"
             type="tel"
             onChange={this.handleChange}
@@ -188,7 +169,7 @@ render() {
           />
           <TextField
             margin="dense"
-            id="workExperience"
+            id="work_exp"
             label="Work Experience"
             type="text"
             variant="outlined"
@@ -205,7 +186,8 @@ render() {
           />
           <Select
             placeholder='Highest Education'
-            value={selectedOption}
+            id="highest_ed"
+            value={selectedEducation}
             onChange={this.handleDropdown}
             options={options}
           />
@@ -219,6 +201,7 @@ render() {
           />
           <Select
             placeholder='State'
+            id="state"
             value={selectedStates}
             onChange={this.handleDropdownState}
             options={states}
@@ -228,7 +211,7 @@ render() {
           <Button onClick={this.handleClose}>
             Cancel
             </Button>
-          <Button onClick={this.handleClose}>
+          <Button onClick={this.handleSubmit}>
             Submit
             </Button>
         </DialogActions>
