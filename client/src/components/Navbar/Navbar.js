@@ -39,6 +39,10 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
+    logoSize: {
+      width: '100px',
+      height: '100px'
+    },
   }
 })
 
@@ -105,7 +109,7 @@ class Navbar extends Component {
           <Toolbar>
             <Link to='/' className={classes.link}>
               <Typography variant="h6" color="inherit" noWrap style={{ color: 'white' }}>
-                Employ.Me
+                <img src="./eme-logo.png" alt='Employ.Me' style={{ width: '60px', height: '60px'}} ></img>
             </Typography>
             </Link>
             <div className={classes.grow} />
