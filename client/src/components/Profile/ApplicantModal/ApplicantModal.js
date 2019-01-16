@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from 'react-select';
+import axios from 'axios'
 
 const options = [
   { label: 'Not Specified' },
@@ -77,27 +78,69 @@ const states = [
   { label: 'Wyoming' },
 ]
 
-  class ApplicantModal extends Component {
-    state = {
-      open: false,
-      selectedOption: null,
-      selectedStates: null,
+class ApplicantModal extends Component {
+  state = {
+    open: false,
+    selectedOption: null,
+    selectedStates: null,
+    exampleUser: {
+      username: "Example",
+      email: "example@gmail.com",
+      employer: false,
+      phone_number: '(562) 123-4567',
+      work_exp: "Something",
+      skills: "Something",
+      state: "California",
+      city: "Example",
+      address: "112 NoWhere",
+      company_name: "Example",
+      company_info: "Example",
+      jobs_posted: [],
+      jobs_applied: [],
+      createdAt: Date(),
+      updatedAt: Date()
     }
-  handleChange = (selectedOption) => {
-      this.setState({ selectedOption });
-      console.log(`Option selected:`, selectedOption);
-    }
-  handleChangeState = (selectedStates) => {
-      this.setState({ selectedStates });
-      console.log(`Option selected:`, selectedStates);
-    }
-  handleClickOpen = () => {
-      this.setState({ open: true });
-    };
+  }
 
-handleClose = () => {
-  this.setState({ open: false });
-};
+  handleChange = (event) => {
+    const tempObj = this.state.input
+    const myKey = event.target.id
+    tempObj[myKey] = event.target.value
+    this.setState({ input: tempObj })
+  }
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    console.log(this.state.input)
+    this.setState({ open: false });
+  };
+
+  handleSubmit = () => {
+    axios.post("/api/user/", this.state.exampleUser)
+      .then(r => {
+        console.log(r.data)
+      })
+      .catch(err => { console.log(err) })
+    this.setState({ open: false });
+  };
+
+handleDropdown = (event) => {
+  const tempObj = this.state.input
+  const myKey = event.target.id
+  tempObj[myKey] = event.target.value
+  this.setState({ input: tempObj })
+  console.log(`Option selected:`, event);
+}
+handleDropdownState = (event) => {
+  const tempObj = this.state.input
+  // const myKey = selectedStates.target.id
+  // tempObj[myKey] = event.target.selectedStates
+  this.setState({ input: tempObj })
+  // console.log(`Option selected:`, selectedStates);
+}
 
 render() {
   const { selectedOption } = this.state;
@@ -124,6 +167,7 @@ render() {
             id="name"
             label="Name"
             type="text"
+            onChange={this.handleChange}
             fullWidth
           />
           <TextField
@@ -131,6 +175,7 @@ render() {
             id="email "
             label="Email"
             type="text"
+            onChange={this.handleChange}
             fullWidth
           />
           <TextField
@@ -138,6 +183,7 @@ render() {
             id="number"
             label="Phone Number"
             type="tel"
+            onChange={this.handleChange}
             fullWidth
           />
           <TextField
@@ -146,6 +192,7 @@ render() {
             label="Work Experience"
             type="text"
             variant="outlined"
+            onChange={this.handleChange}
             fullWidth
           />
           <TextField
@@ -153,12 +200,13 @@ render() {
             id="skills"
             label="Skills"
             type="text"
+            onChange={this.handleChange}
             fullWidth
           />
           <Select
             placeholder='Highest Education'
             value={selectedOption}
-            onChange={this.handleChange}
+            onChange={this.handleDropdown}
             options={options}
           />
           <TextField
@@ -166,20 +214,21 @@ render() {
             id="city"
             label="City"
             type="text"
+            onChange={this.handleChange}
             fullWidth
           />
           <Select
             placeholder='State'
             value={selectedStates}
-            onChange={this.handleChangeState}
+            onChange={this.handleDropdownState}
             options={states}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.handleClose} color="#8bc34a">
+          <Button onClick={this.handleClose}>
             Cancel
             </Button>
-          <Button onClick={this.handleClose} color="#8bc34a">
+          <Button onClick={this.handleClose}>
             Submit
             </Button>
         </DialogActions>

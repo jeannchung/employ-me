@@ -19,7 +19,7 @@ firebase.initializeApp({
 })
 const uiConfig = {
   signInFlow: 'popup',
-  signInSuccessUrl: '/',
+  signInSuccessUrl: '/profile',
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ]
@@ -42,7 +42,7 @@ class App extends Component {
       firebase.database().ref(`/users/${user.uid}`).once('value')
         .then(r => r.val())
         .then(dbUser => {
-          this.setState({ name: user.displayName, uid: user.uid, isLoggedIn: true })
+          this.setState({ name: user.displayName, uid: user.uid, isLoggedIn: true, email: user.email })
           if (!dbUser) {
             firebase.database().ref(`/users/${user.uid}`).push({
               name: user.displayName,
@@ -71,7 +71,7 @@ class App extends Component {
             <div style={{margin: '1rem'}}>
             <Route exact path='/' component={() => <Home />} />
             <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
-            <Route path='/profile' component={() => <Profile name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} />} />
+    <Route path='/profile' component={() => <Profile name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} isUser={this.state.user} />} />
             <Route path='/jobpost' component={() => <JobPost />} />
             <Route path='/applied' component={() => <Applied />} />
             </div>
