@@ -10,18 +10,14 @@ import axios from 'axios';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import red from '@material-ui/core/colors/red';
 import ApplyIcon from '@material-ui/icons/Send';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import moment from 'moment'
 
 const styles = theme => ({
   container: {
@@ -81,14 +77,14 @@ class Home extends Component {
     name: '',
     age: '',
     multiline: 'Controlled',
-    jobs:[]
+    jobs: []
   };
 
   componentDidMount = () => {
     //gets all jobs
     axios.get('/api/job/')
       .then(r => {
-        this.setState({jobs: r.data})
+        this.setState({ jobs: r.data })
       }).catch(err => { console.log(err) })
   }
 
@@ -111,10 +107,10 @@ class Home extends Component {
         {/* Search Form */}
         <Paper className={classes.root} elevation={1}>
           <Typography variant="h5" component="h3">
-           employ.me for employees
+            employ.me for employees
           </Typography>
           <Typography component="p">
-          Search for jobs, read career advice from Employ.me's job experts, and the best employees to fill your roles.
+            Search for jobs, read career advice from Employ.me's job experts, and the best employees to fill your roles.
           </Typography>
           <form className={classes.container} noValidate autoComplete="off">
             <TextField
@@ -138,51 +134,53 @@ class Home extends Component {
             <Grid item>
               <Button variant="outlined" className={classes.button}>Employ.me!</Button>
             </Grid>
-          </Grid>    
+          </Grid>
         </Paper>
-        
+
         {/* Jobs Searched */}
-        <div style={{display:'flex', flexDirection:'column',alignItems:'center', width:'auto'}}>
-        <Card className={classes.card}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="Recipe" className={classes.avatar}>
-                JT
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
+          {
+            this.state.jobs.map(job => (
+              <Card className={classes.card}>
+                <CardHeader
+                  avatar={
+                    <Avatar aria-label="Recipe" className={classes.avatar}>
+                      {job.title_name.match(/\b(\w)/g)}
             </Avatar>
-            }
-            title="Job Title"
-            subheader="Company Name"
-          />
-          <CardContent>
-            <Typography>Posted Date: "2018-01-02"</Typography>
-            <Typography component="p"> Description:</Typography>
-          </CardContent>
-          <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Add to favorites">
-                <ApplyIcon style={{ color: "#556B2F"}}/>
-            </IconButton>
-            <IconButton
-              className={classnames(classes.expand, {
-                [classes.expandOpen]: this.state.expanded,
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.expanded}
-              aria-label="Show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Typography paragraph>More Information</Typography>
-              <Typography paragraph>Requirements:</Typography>
-              <Typography paragraph>Qualifications:</Typography>
-              <Typography paragraph></Typography>
-              
-            </CardContent>
-          </Collapse>
-        </Card>
-       
+                  }
+                  title={job.title_name}
+                  subheader={job.company_name + " - " + job.city}
+                />
+                <CardContent>
+                  <Typography>Industry: {job.industry}</Typography>
+                  <Typography component="p"> Description: {job.description}</Typography>
+                  <Typography>Posted: {moment().to(moment(job.createdAt))}</Typography>
+                </CardContent>
+                <CardActions className={classes.actions} disableActionSpacing>
+                  <IconButton value="job_id" aria-label="Add to favorites">
+                    <ApplyIcon style={{ color: "#556B2F" }} />
+                  </IconButton>
+                  <IconButton
+                    className={classnames(classes.expand, {
+                      [classes.expandOpen]: this.state.expanded,
+                    })}
+                    onClick={this.handleExpandClick}
+                    aria-expanded={this.state.expanded}
+                    aria-label="Show more"
+                  >
+                    <ExpandMoreIcon />
+                  </IconButton>
+                </CardActions>
+                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                  <CardContent>
+                    <Typography paragraph>More Information</Typography>
+                    <Typography paragraph>Requirements:{job.requirements}</Typography>
+                    <Typography paragraph>Qualifications:{job.qualifications}</Typography>
+                  </CardContent>
+                </Collapse>
+              </Card>
+            ))
+          }
         </div>
       </div>
     );
