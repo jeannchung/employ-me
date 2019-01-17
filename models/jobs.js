@@ -12,6 +12,7 @@ var JobsSchema = new Schema({
   city: String,
   industry: String,
   contact:String,
+  company_name:String,
   email: String,
   telephone: String,
   users_applied: [{type: Schema.Types.ObjectId,ref: "users"}],
