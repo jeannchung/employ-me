@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { Grid } from '@material-ui/core';
-import axios from 'axios';
-import classnames from 'classnames';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import ApplyIcon from '@material-ui/icons/Send';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import moment from 'moment'
+import TextField from '@material-ui/core/TextField'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import { Grid } from '@material-ui/core'
+import axios from 'axios'
+import JobCard from './JobCardComponent/JobCard'
 
 const styles = theme => ({
   container: {
@@ -74,8 +64,6 @@ const styles = theme => ({
 
 class Home extends Component {
   state = {
-    name: '',
-    age: '',
     multiline: 'Controlled',
     jobs: []
   };
@@ -92,10 +80,6 @@ class Home extends Component {
     this.setState({
       [name]: event.target.value,
     });
-  };
-
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
   };
 
   render() {
@@ -140,49 +124,23 @@ class Home extends Component {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
           {
             this.state.jobs.map(job => (
-
-              <Card className={classes.card}>
-                <CardHeader
-                  avatar={
-                    <Avatar aria-label="Recipe" className={classes.avatar}>
-                      {job.title_name.match(/\b(\w)/g)}
-            </Avatar>
-                  }
-                  title={job.title_name}
-                  subheader={job.company_name + " - " + job.city}
-                />
-                <CardContent>
-                  <Typography>Industry: {job.industry}</Typography>
-                  <Typography component="p"> Description: {job.description}</Typography>
-                  <Typography>Posted: {moment().to(moment(job.createdAt))}</Typography>
-                </CardContent>
-                <CardActions className={classes.actions} disableActionSpacing>
-                  <IconButton value={job._id} aria-label="Add to favorites">
-                    <ApplyIcon style={{ color: "#556B2F" }} />
-                  </IconButton>
-                  <IconButton
-                    className={classnames(classes.expand, {
-                      [classes.expandOpen]: this.state.expanded,
-                    })}
-                    onClick={this.handleExpandClick}
-                    aria-expanded={this.state.expanded}
-                    aria-label="Show more"
-                  >
-                    <ExpandMoreIcon />
-                  </IconButton>
-                </CardActions>
-                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                  <CardContent>
-                    <Typography paragraph>More Information</Typography>
-                    <Typography paragraph>Requirements: {job.requirements}</Typography>
-                    <Typography paragraph>Qualifications: {job.qualifications}</Typography>
-                    <Typography paragraph>Salary Range: ${job.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
-                  </CardContent>
-                </Collapse>
-              </Card>
+              <JobCard
+                title_name={job.title_name}
+                company_name={job.company_name}
+                city={job.city}
+                industry={job.industry}
+                description={job.description}
+                _id={job._id}
+                createdAt={job.createdAt}
+                requirements={job.requirements}
+                qualifications={job.qualifications}
+                salary={job.salary}
+              />
             ))
           }
         </div>
+
+        
       </div>
     );
   }
