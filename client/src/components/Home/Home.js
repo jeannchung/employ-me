@@ -84,7 +84,7 @@ class Home extends Component {
     //gets all jobs
     axios.get('/api/job/')
       .then(r => {
-        this.setState({ jobs: r.data })
+        this.setState({ jobs: r.data} )
       }).catch(err => { console.log(err) })
   }
 
@@ -101,7 +101,6 @@ class Home extends Component {
   render() {
     const { classes } = this.props;
 
-    console.log(this.state.jobs)
     return (
       <div>
         {/* Search Form */}
@@ -141,6 +140,7 @@ class Home extends Component {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
           {
             this.state.jobs.map(job => (
+
               <Card className={classes.card}>
                 <CardHeader
                   avatar={
@@ -157,7 +157,7 @@ class Home extends Component {
                   <Typography>Posted: {moment().to(moment(job.createdAt))}</Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
-                  <IconButton value="job_id" aria-label="Add to favorites">
+                  <IconButton value={job._id} aria-label="Add to favorites">
                     <ApplyIcon style={{ color: "#556B2F" }} />
                   </IconButton>
                   <IconButton
@@ -174,8 +174,9 @@ class Home extends Component {
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                   <CardContent>
                     <Typography paragraph>More Information</Typography>
-                    <Typography paragraph>Requirements:{job.requirements}</Typography>
-                    <Typography paragraph>Qualifications:{job.qualifications}</Typography>
+                    <Typography paragraph>Requirements: {job.requirements}</Typography>
+                    <Typography paragraph>Qualifications: {job.qualifications}</Typography>
+                    <Typography paragraph>Salary Range: ${job.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                   </CardContent>
                 </Collapse>
               </Card>
