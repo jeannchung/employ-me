@@ -13,13 +13,13 @@ import Typography from '@material-ui/core/Typography';
 const options = [
   { label: 'Not Specified' },
   { label: 'None' },
-  { label: 'Some High School' },
-  { label: 'High School Diploma' },
+  { label: 'Some Highschool' },
   { label: 'GED' },
   { label: `Associate's Degree` },
   { label: `Bachelor's Degree` },
   { label: `Master's Degree` },
   { label: `Doctorate's Degree` },
+  { label: `Higher Degree` },
   { label: 'Other' },
 ]
 const states = [
@@ -79,6 +79,18 @@ const states = [
   { label: 'Wyoming' },
 ]
 
+const styles = theme => ({
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+    height: 1400,
+  },
+  dense: {
+    marginTop: 19,
+  },
+});
+
 class ApplicantModal extends Component {
   state = {
     name: '',
@@ -102,6 +114,7 @@ class ApplicantModal extends Component {
   handleClose = () => { 
     console.log(this.state.input)
     this.setState({ open: false });
+    this.props.verifyUser();
   };
 
   handleSubmit = () => {
@@ -172,8 +185,10 @@ render() {
             id="work_exp"
             label="Work Experience"
             type="text"
+            multiline
             variant="outlined"
             onChange={this.handleChange}
+            style={styles.textField}
             fullWidth
           />
           <TextField
@@ -181,6 +196,9 @@ render() {
             id="skills"
             label="Skills"
             type="text"
+            multiline
+            variant="outlined"
+            style={styles.textField}
             onChange={this.handleChange}
             fullWidth
           />

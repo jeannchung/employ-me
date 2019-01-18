@@ -60,7 +60,7 @@ class App extends Component {
 
   signOut = () => {
     firebase.auth().signOut()
-    this.setState({isLoggedIn:false})
+    this.setState({ isLoggedIn: false })
   }
 
   verifyUser = () => {
@@ -73,7 +73,7 @@ class App extends Component {
           window.location = pubUrl + '/profile'
         }
         else {
-          this.setState({user:r.data[0]})
+          this.setState({ user: r.data[0] })
         }
       })
       .catch(function (e) {
@@ -86,13 +86,13 @@ class App extends Component {
       <>
         <Router>
           <div>
-            <Navbar verifyUser={this.verifyUser} isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
-            <div style={{margin: '1rem'}}>
-            <Route exact path='/' component={() => <Home />} />
-            <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
-    <Route path='/profile' component={() => <Profile name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} isUser={this.state.user} />} />
-            <Route path='/jobpost' component={() => <JobPost />} />
-            <Route path='/applied' component={() => <Applied />} />
+            <Navbar verifyUser={this.verifyUser} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
+            <div style={{ margin: '1rem' }}>
+              <Route exact path='/' component={() => <Home />} />
+              <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
+              <Route path='/profile' component={() => <Profile name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} isUser={this.state.user} />} />
+              <Route path='/jobpost' component={() => <JobPost />} />
+              <Route path='/applied' component={() => <Applied />} />
             </div>
             <Footer />
           </div>
