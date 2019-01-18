@@ -47,7 +47,7 @@ class Profile extends Component {
 
       <>
         {
-          this.props.user ? (
+          this.props.user._id ? (
             <Card className={classes.card}>
               <CardContent>
                 <Typography variant="h5" component="h2">
