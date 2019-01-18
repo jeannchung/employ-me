@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var UsersSchema = new Schema({
-  username: String,
+  name: String,
   email: String,
   employer: Boolean,
   firebase_id: String,
