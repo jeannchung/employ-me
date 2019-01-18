@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 import JobPost from './components/JobPost'
 import Login from './components/Login'
 import Profile from './components/Profile'
+import Axios from 'axios';
 
 firebase.initializeApp({
   apiKey: "AIzaSyAJUEk-d9tisX-ZedhpItxe9n8h7aStyMU",
@@ -62,12 +63,30 @@ class App extends Component {
     this.setState({isLoggedIn:false})
   }
 
+  verifyUser = () => {
+    const pubUrl = process.env.PUBLIC_URL
+
+    Axios.get(`/api/user/${this.state.firebase_id}`)
+      .then(function (r) {
+        console.log(r)
+        if (!r.data[0]) {
+          window.location = pubUrl + '/profile'
+        }
+        else {
+          this.setState({user:r.data[0]})
+        }
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+  }
+
   render() {
     return (
       <>
         <Router>
           <div>
-            <Navbar isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
+            <Navbar verifyUser={this.verifyUser} isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
             <div style={{margin: '1rem'}}>
             <Route exact path='/' component={() => <Home />} />
             <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />

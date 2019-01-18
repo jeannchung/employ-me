@@ -28,6 +28,8 @@ const styles = {
 };
 
 class Profile extends Component {
+  // ternary this.props.user, if user exists, display card, if does not, render modals
+
   state = {
     name: '',
     multiline: 'Controlled',
