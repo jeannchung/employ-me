@@ -97,7 +97,7 @@ class ApplicantModal extends Component {
     open: false,
     selectedEducation: null,
     selectedStates: null,
-    input: { employer: false, },
+    input: { employer: false, firebase_id: this.props.firebaseID},
   }
 
   handleChange = (event) => {

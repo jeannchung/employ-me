@@ -28,7 +28,9 @@ const uiConfig = {
 
 class App extends Component {
   state = {
-    user: null,
+    user: {
+
+    },
     name: '',
     firebase_id: '',
     email: '',
@@ -37,7 +39,7 @@ class App extends Component {
   }
   componentDidMount = () => {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user: !!user })
+      // this.setState({ user: !!user })
     })
     firebase.auth().onAuthStateChanged(user => {
       firebase.database().ref(`/users/${user.uid}`).once('value')
@@ -67,10 +69,12 @@ class App extends Component {
     const pubUrl = process.env.PUBLIC_URL
 
     Axios.get(`/api/user/${this.state.firebase_id}`)
-      .then(function (r) {
-        console.log(r)
+      .then(r => {
+        console.log(r.data[0])
         if (!r.data[0]) {
-          window.location = pubUrl + '/profile'
+          // if (window.location.href !== window.location.origin + '/profile') {
+            // window.location = pubUrl + '/profile'
+          // }
         }
         else {
           this.setState({ user: r.data[0] })
@@ -79,20 +83,20 @@ class App extends Component {
       .catch(function (e) {
         console.log(e)
       })
-  }
+    }
 
   render() {
     return (
       <>
         <Router>
           <div>
-            <Navbar verifyUser={this.verifyUser} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
-            <div style={{ margin: '1rem' }}>
-              <Route exact path='/' component={() => <Home />} />
-              <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
-              <Route path='/profile' component={() => <Profile name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} isUser={this.state.user} />} />
-              <Route path='/jobpost' component={() => <JobPost />} />
-              <Route path='/applied' component={() => <Applied />} />
+            <Navbar verifyUser={this.verifyUser} isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
+            <div style={{margin: '1rem'}}>
+            <Route exact path='/' component={() => <Home />} />
+            <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
+    <Route path='/profile' component={() => <Profile firebaseID={this.state.firebase_id} verifyUser={this.verifyUser} user={this.state.user} name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} />} />
+            <Route path='/jobpost' component={() => <JobPost />} />
+            <Route path='/applied' component={() => <Applied />} />
             </div>
             <Footer />
           </div>
