@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import axios from 'axios';
 import firebase from 'firebase'
-
+import Hidden from '@material-ui/core/Hidden'
 
 const styles = theme => ({
   root: {
@@ -108,9 +108,12 @@ class Navbar extends Component {
         <AppBar position="static" style={{ backgroundColor: '#556B2F' }}>
           <Toolbar>
             <Link to='/' className={classes.link}>
-              <Typography variant="h6" color="inherit" noWrap style={{ color: 'white' }}>
-                <img src="./eme-logo.png" alt='Employ.Me' style={{ width: '60px', height: '60px'}} ></img>
-            </Typography>
+              <Typography variant="h6" color="inherit" noWrap style={{ color: 'black' }}>
+                <img src="./eme-logo.png" alt='Employ.Me' style={{ width: '60px', height: '60px' }} ></img>
+                <Hidden mdDown>
+                  employ.me
+             </Hidden>
+              </Typography>
             </Link>
             <div className={classes.grow} />
             {

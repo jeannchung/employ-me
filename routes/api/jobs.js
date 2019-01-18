@@ -17,5 +17,10 @@ router
 router
   .route("/apply/:id")
   .put(jobsController.apply);
+
+// Matches with "/api/job/search/:id"
+router
+  .route("/search/:id")
+  .get(jobsController.jobSearch);
   
 module.exports = router;

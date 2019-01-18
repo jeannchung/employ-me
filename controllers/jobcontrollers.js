@@ -5,6 +5,7 @@ module.exports = {
   findAll: function (req, res) {
     db.Jobs
       .find(req.query)
+      .sort({createdAt: -1 })
       .populate('users_applied')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -12,6 +13,7 @@ module.exports = {
   findById: function (req, res) {
     db.Jobs
       .findById(req.params.id)
+      .sort({ createdAt: -1 })
       .populate('users_applied')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -42,5 +44,14 @@ module.exports = {
     db.Jobs
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => db.Users.findOneAndUpdate({ _id: dbModel.employer_id }, { $push: { jobs_applied: dbModel._id } }, { new: true }))
+  },
+  jobSearch: function (req, res) {
+    db.Jobs
+      .find({ $text: { $search: req.params.id } }, { score: { $meta: "textScore" } })
+      .sort({ createdAt: -1 })
+      .sort({ score: { $meta: "textScore" } })
+      .populate('users_applied')
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };
