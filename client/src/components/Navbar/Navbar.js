@@ -21,7 +21,7 @@ const styles = theme => ({
     width: '100%',
   },
   link: {
-    textDecoration: 'none'
+    textDecoration: 'none',
   },
   grow: {
     flexGrow: 1,
@@ -29,6 +29,12 @@ const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+  },
+  menuItem: {
+    fontSize: 14,
+     '&:hover': {
+      backgroundColor: '#e6ffff'
+    }
   },
   inputRoot: {
     color: 'inherit',
@@ -76,7 +82,7 @@ class Navbar extends Component {
 
         <div>
           <Link to='/profile' className={classes.link}>
-            <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={this.handleMenuClose} className={classes.menuItem} >Profile</MenuItem>
           </Link>
 
           <Link to='/' className={classes.link}>
@@ -105,10 +111,10 @@ class Navbar extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" style={{ backgroundColor: '#556B2F' }}>
-          <Toolbar>
+        <AppBar position="static" style={{ backgroundColor: '#f9a825' }}>
+          <Toolbar variant="dense">
             <Link to='/' className={classes.link}>
-              <Typography variant="h6" color="inherit" noWrap style={{ color: 'black' }}>
+              <Typography variant="h6" color="inherit" noWrap style={{ color: 'white' }}>
                 <img src="./eme-logo.png" alt='Employ.Me' style={{ width: '60px', height: '60px' }} ></img>
                 <Hidden mdDown>
                   employ.me
