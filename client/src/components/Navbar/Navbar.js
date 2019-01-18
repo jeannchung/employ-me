@@ -109,7 +109,7 @@ class Navbar extends Component {
           <Toolbar>
             <Link to='/' className={classes.link}>
               <Typography variant="h6" color="inherit" noWrap style={{ color: 'white' }}>
-                <img src="./eme-logo.png" alt='Employ.Me' style={{ width: '60px', height: '60px'}} ></img>
+                <img src="./eme-logo.png" alt='Employ.Me' style={{ width: '60px', height: '60px'}} />
             </Typography>
             </Link>
             <div className={classes.grow} />
