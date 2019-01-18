@@ -58,6 +58,13 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: "#556B2F",
+  },
+  button: {
+    // borderColor: "#82b3c9",
+    backgroundColor: "#82b3c9",
+    '&:hover': {
+      backgroundColor: "#b3e5fc",
+    },
   }
 });
 
@@ -118,7 +125,7 @@ class Home extends Component {
             />
           <Grid container className={classes.centerThis}>
             <Grid item>
-              <Button onClick={this.handleClick} variant="outlined" className={classes.button}>Employ.me!</Button>
+              <Button onClick={this.handleClick} className={classes.button}>Employ.me!</Button>
             </Grid>
           </Grid>
           </form>

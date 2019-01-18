@@ -15,7 +15,7 @@ const styles = theme => ({
     position: 'absolute',
     bottom: '0',
     width: '100%',
-    backgroundColor: '#556B2F',
+    backgroundColor: '#f9a825',
     color: 'black'
   },
   paper: {

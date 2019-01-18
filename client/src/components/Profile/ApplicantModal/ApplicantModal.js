@@ -97,7 +97,7 @@ class ApplicantModal extends Component {
     open: false,
     selectedEducation: null,
     selectedStates: null,
-    input: { employer: false, firebase_id: this.props.firebaseID},
+    input: { employer: false, firebase_id: this.props.firebaseID, name: this.props.user},
   }
 
   handleChange = (event) => {
@@ -128,7 +128,7 @@ class ApplicantModal extends Component {
 
 handleDropdown = (selectedEducation) => {
   const tempObj = this.state.input
-  tempObj.highest_ed = 
+  tempObj.higher_ed = 
   selectedEducation.label
   this.setState({ input: tempObj, selectedEducation})
   console.log(`Education selected:`, this.state.input);
@@ -204,7 +204,7 @@ render() {
           />
           <Select
             placeholder='Highest Education'
-            id="highest_ed"
+            id="higher_ed"
             value={selectedEducation}
             onChange={this.handleDropdown}
             options={options}

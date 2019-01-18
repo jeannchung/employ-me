@@ -35,7 +35,7 @@ class App extends Component {
     firebase_id: '',
     email: '',
     isLoggedIn: false,
-    employer: null
+    employer: null,
   }
   componentDidMount = () => {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
@@ -73,7 +73,7 @@ class App extends Component {
         console.log(r.data[0])
         if (!r.data[0]) {
           // if (window.location.href !== window.location.origin + '/profile') {
-            // window.location = pubUrl + '/profile'
+          // window.location = pubUrl + '/profile'
           // }
         }
         else {
@@ -83,7 +83,7 @@ class App extends Component {
       .catch(function (e) {
         console.log(e)
       })
-    }
+  }
 
   render() {
     return (
@@ -91,12 +91,12 @@ class App extends Component {
         <Router>
           <div>
             <Navbar verifyUser={this.verifyUser} isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
-            <div style={{margin: '1rem'}}>
-            <Route exact path='/' component={() => <Home />} />
-            <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
-    <Route path='/profile' component={() => <Profile firebaseID={this.state.firebase_id} verifyUser={this.verifyUser} user={this.state.user} name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} />} />
-            <Route path='/jobpost' component={() => <JobPost />} />
-            <Route path='/applied' component={() => <Applied />} />
+            <div style={{ margin: '1rem' }}>
+              <Route exact path='/' component={() => <Home />} />
+              <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
+              <Route path='/profile' component={() => <Profile firebaseID={this.state.firebase_id} verifyUser={this.verifyUser} user={this.state.user} name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} />} />
+              <Route path='/jobpost' component={() => <JobPost />} />
+              <Route path='/applied' component={() => <Applied />} />
             </div>
             <Footer />
           </div>
