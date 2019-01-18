@@ -98,9 +98,10 @@ class Home extends Component {
     return (
       <div>
         {/* Search Form */}
-        <Paper className={classes.root} elevation={1}>
+        <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }} elevation={1}>
           <Typography variant="h5" component="h3">
-            employ.me for employees
+            <img src="./eme-logo.png" alt='Employ.Me' style={{ width: '60px', height: '60px' }} ></img>
+            employ.me For Employees
           </Typography>
           <Typography component="p">
             Search for jobs, read career advice from Employ.me's job experts, and the best employees to fill your roles.
