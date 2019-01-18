@@ -64,23 +64,33 @@ const styles = theme => ({
 
 class Home extends Component {
   state = {
+    searchWord:"",
     multiline: 'Controlled',
     jobs: []
-  };
-
-  componentDidMount = () => {
-    //gets all jobs
-    axios.get('/api/job/')
-      .then(r => {
-        this.setState({ jobs: r.data} )
-      }).catch(err => { console.log(err) })
   }
 
-  handleChange = name => event => {
+  handleChange = event => {
+    event.preventDefault()
     this.setState({
-      [name]: event.target.value,
-    });
-  };
+      searchWord: event.target.value,
+    })
+  }
+
+  handleEnter = event => {
+    if(event.charCode === 13) {
+      event.preventDefault()
+      setImmediate(() => this.handleClick(event))
+      event.persist()
+    }
+  }
+
+  handleClick = event => {
+    event.preventDefault()
+    axios.get(`/api/job/search/${this.state.searchWord}`)
+      .then(r => {
+        this.setState({ jobs: r.data })
+      }).catch(err => { console.log(err) })
+  }
 
   render() {
     const { classes } = this.props;
@@ -98,26 +108,19 @@ class Home extends Component {
           <form className={classes.container} noValidate autoComplete="off">
             <TextField
               id="standard-name"
-              label="Keyword"
+              label="Title/Industry/City"
               className={classes.textField}
-              value={this.state.keyword}
-              onChange={this.handleChange('keyword')}
+              value={this.state.searchWord}
+              onKeyPress={this.handleEnter}
+              onChange={this.handleChange}
               margin="normal"
             />
-            <TextField
-              id="standard-name"
-              label="Location"
-              className={classes.textField}
-              value={this.state.location}
-              onChange={this.handleChange('location')}
-              margin="normal"
-            />
-          </form>
           <Grid container className={classes.centerThis}>
             <Grid item>
-              <Button variant="outlined" className={classes.button}>Employ.me!</Button>
+              <Button onClick={this.handleClick} variant="outlined" className={classes.button}>Employ.me!</Button>
             </Grid>
           </Grid>
+          </form>
         </Paper>
 
         {/* Jobs Searched */}

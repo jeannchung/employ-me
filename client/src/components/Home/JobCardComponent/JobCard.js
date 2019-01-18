@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton'
 import ApplyIcon from '@material-ui/icons/Send'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import moment from 'moment'
+import Button from '@material-ui/core/Button'
 
 const styles = theme => ({
   container: {
@@ -95,9 +96,9 @@ class JobCard extends Component {
             <Typography>Posted: {moment().to(moment(this.props.createdAt))}</Typography>
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton value={this.props._id} aria-label="Add to favorites">
-              <ApplyIcon style={{ color: "#556B2F" }} />
-            </IconButton>
+            <Button value={this.props._id} variant="outlined" style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}>
+              Apply
+                </Button>
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,
