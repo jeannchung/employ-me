@@ -164,6 +164,7 @@ class EmployerModal extends Component {
   handleClose = () => {
     console.log(this.state.input)
     this.setState({ open: false });
+    this.props.verifyUser();
   };
 
   handleSubmit = () => {
