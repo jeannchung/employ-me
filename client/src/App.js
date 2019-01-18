@@ -86,7 +86,7 @@ class App extends Component {
       <>
         <Router>
           <div>
-            <Navbar verifyUser={this.verifyUser} isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
+            <Navbar verifyUser={this.verifyUser} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
             <div style={{ margin: '1rem' }}>
               <Route exact path='/' component={() => <Home />} />
               <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
