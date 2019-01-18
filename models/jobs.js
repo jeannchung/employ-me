@@ -16,9 +16,11 @@ var JobsSchema = new Schema({
   email: String,
   telephone: String,
   users_applied: [{type: Schema.Types.ObjectId,ref: "users"}],
-  createdAt: String,
-  updatedAt: String
+  createdAt: Date,
+  updatedAt: Date
 })
+
+JobsSchema.index({ title_name: "text", industry: "text", city: "text" })
 
 var Jobs = mongoose.model("jobs", JobsSchema);
 
