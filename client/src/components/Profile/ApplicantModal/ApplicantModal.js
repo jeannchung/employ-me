@@ -79,6 +79,18 @@ const states = [
   { label: 'Wyoming' },
 ]
 
+const styles = theme => ({
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+    height: 1400,
+  },
+  dense: {
+    marginTop: 19,
+  },
+});
+
 class ApplicantModal extends Component {
   state = {
     name: '',
@@ -172,8 +184,10 @@ render() {
             id="work_exp"
             label="Work Experience"
             type="text"
+            multiline
             variant="outlined"
             onChange={this.handleChange}
+            style={styles.textField}
             fullWidth
           />
           <TextField
@@ -181,6 +195,9 @@ render() {
             id="skills"
             label="Skills"
             type="text"
+            multiline
+            variant="outlined"
+            style={styles.textField}
             onChange={this.handleChange}
             fullWidth
           />
