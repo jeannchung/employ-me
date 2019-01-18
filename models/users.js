@@ -16,6 +16,7 @@ var UsersSchema = new Schema({
   address: String,
   company_name: String,
   company_info: String,
+  industry: String,
   jobs_posted: [{ type: Schema.Types.ObjectId, ref: "jobs" }],
   jobs_applied: [{ type: Schema.Types.ObjectId, ref: "jobs" }],
   createdAt: String,

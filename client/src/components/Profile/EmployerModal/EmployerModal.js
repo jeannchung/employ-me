@@ -227,6 +227,14 @@ class EmployerModal extends Component {
               onChange={this.handleChange}
               fullWidth
             />
+            <TextField
+              margin="dense"
+              id="city"
+              label="City"
+              type="text"
+              onChange={this.handleChange}
+              fullWidth
+            />
             <Select
               placeholder='State'
               id="state"
