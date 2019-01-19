@@ -20,7 +20,7 @@ firebase.initializeApp({
 })
 const uiConfig = {
   signInFlow: 'popup',
-  signInSuccessUrl: '/',
+  signInSuccessUrl: '/profile',
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ]
@@ -28,7 +28,7 @@ const uiConfig = {
 
 class App extends Component {
   state = {
-    user: null,  
+    user: null,
     name: '',
     firebase_id: '',
     email: '',
@@ -38,7 +38,7 @@ class App extends Component {
   componentDidMount = () => {
     // think we can delete this if the signout function sets user to null 
     // this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-      // this.setState({ user: !!user })
+    // this.setState({ user: !!user })
     // })
     firebase.auth().onAuthStateChanged(oAuthUser => {
       console.log('oAuthUser:')
@@ -67,10 +67,10 @@ class App extends Component {
 
   verifyUser = () => {
     console.log('verifyUser function')
-    
+
     Axios.get(`/api/user/${this.state.firebase_id}`)
       .then(r => {
-            this.setState({ user: r.data[0] })
+        this.setState({ user: r.data[0] })
       })
       .catch(e => {
         console.error(e)
