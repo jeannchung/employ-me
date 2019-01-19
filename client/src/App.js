@@ -20,7 +20,7 @@ firebase.initializeApp({
 })
 const uiConfig = {
   signInFlow: 'popup',
-  signInSuccessUrl: '/profile',
+  signInSuccessUrl: '/',
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ]
@@ -28,9 +28,7 @@ const uiConfig = {
 
 class App extends Component {
   state = {
-    user: {
-
-    },
+    user: null,  
     name: '',
     firebase_id: '',
     email: '',
@@ -38,50 +36,44 @@ class App extends Component {
     employer: null,
   }
   componentDidMount = () => {
-    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+    // think we can delete this if the signout function sets user to null 
+    // this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       // this.setState({ user: !!user })
-    })
-    firebase.auth().onAuthStateChanged(user => {
-      firebase.database().ref(`/users/${user.uid}`).once('value')
+    // })
+    firebase.auth().onAuthStateChanged(oAuthUser => {
+      console.log('oAuthUser:')
+      console.log(oAuthUser)
+      firebase.database().ref(`/users/${oAuthUser.uid}`).once('value')
         .then(r => r.val())
-        .then(dbUser => {
-          this.setState({ name: user.displayName, firebase_id: user.uid, isLoggedIn: true, email: user.email })
-          if (!dbUser) {
-            firebase.database().ref(`/users/${user.fbuid}`).push({
-              name: user.displayName,
-              email: user.email
+        .then(fbUser => {
+          console.log('firebase collection user')
+          console.log(fbUser)
+          this.setState({ name: oAuthUser.displayName, firebase_id: oAuthUser.uid, isLoggedIn: true, email: oAuthUser.email })
+          if (!fbUser) {
+            firebase.database().ref(`/users/${oAuthUser.uid}`).push({
+              name: oAuthUser.displayName,
+              email: oAuthUser.email
             })
           }
         })
     })
-    console.log(this.state.isLoggedIn)
-  }
-  componentWillUnmount() {
-    this.unregisterAuthObserver()
+    console.log('state.isloggedin: ' + this.state.isLoggedIn)
   }
 
   signOut = () => {
     firebase.auth().signOut()
-    this.setState({ isLoggedIn: false })
+    this.setState({ isLoggedIn: false, user: null })
   }
 
   verifyUser = () => {
-    const pubUrl = process.env.PUBLIC_URL
-
+    console.log('verifyUser function')
+    
     Axios.get(`/api/user/${this.state.firebase_id}`)
       .then(r => {
-        console.log(r.data[0])
-        if (!r.data[0]) {
-          // if (window.location.href !== window.location.origin + '/profile') {
-          // window.location = pubUrl + '/profile'
-          // }
-        }
-        else {
-          this.setState({ user: r.data[0] })
-        }
+            this.setState({ user: r.data[0] })
       })
-      .catch(function (e) {
-        console.log(e)
+      .catch(e => {
+        console.error(e)
       })
   }
 
