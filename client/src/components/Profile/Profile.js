@@ -7,7 +7,6 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import firebase from 'firebase'
 
 const styles = {
   card: {
@@ -28,20 +27,19 @@ const styles = {
 };
 
 class Profile extends Component {
-  componentWillMount() {
-    this.props.verifyUser()
-    console.log(this.props.user)
+  componentDidMount() {
+    if (this.props.user === null) {
+      this.props.verifyUser()
+      console.log(this.props.user)
+    }
   }
-  // ternary this.props.user, if user exists, display card, if does not, render modals
 
-  state = {
-
-  }
 
   render() {
     const { classes } = this.props;
     const bull = <span className={classes.bullet}>•</span>;
 
+    console.log(this.props.user)
 
     return (
 
@@ -123,7 +121,7 @@ class Profile extends Component {
               </CardContent>
             </Card>
         }
-    </>
+      </>
     )
   }
 }
