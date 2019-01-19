@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from 'react-select';
 import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom'
 
 const options = [
   { label: 'Not Specified' },
@@ -98,6 +99,7 @@ class ApplicantModal extends Component {
     selectedEducation: null,
     selectedStates: null,
     input: { employer: false, firebase_id: this.props.firebaseID, name: this.props.name},
+    isGreat: true
   }
 
   handleChange = (event) => {
@@ -229,9 +231,11 @@ render() {
           <Button onClick={this.handleClose}>
             Cancel
             </Button>
-          <Button onClick={this.handleSubmit}>
+          <Link to="/">
+            <Button onClick={this.handleSubmit}>
             Submit
             </Button>
+          </Link>
         </DialogActions>
       </Dialog>
     </div>
