@@ -97,7 +97,7 @@ class ApplicantModal extends Component {
     open: false,
     selectedEducation: null,
     selectedStates: null,
-    input: { employer: false, firebase_id: this.props.firebaseID, name: this.props.user},
+    input: { employer: false, firebase_id: this.props.firebaseID, name: this.props.name},
   }
 
   handleChange = (event) => {
@@ -166,7 +166,7 @@ render() {
             </DialogContentText>
           <TextField
             margin="dense"
-            id="email "
+            id="email"
             label="Email"
             type="text"
             onChange={this.handleChange}

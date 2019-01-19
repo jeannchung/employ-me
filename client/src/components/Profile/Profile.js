@@ -51,7 +51,7 @@ class Profile extends Component {
             <Card className={classes.card}>
               <CardContent>
                 <Typography variant="h5" component="h2">
-                  {this.props.user.username}'s Profile
+                  {this.props.name}'s Profile
                 </Typography>
                 <Typography component="p">
                   Email: {this.props.user.email}
@@ -69,13 +69,10 @@ class Profile extends Component {
                   Skills: {this.props.user.skills}
                 </Typography>
                 <Typography component="p">
-                  State: {this.props.user.state}
-                </Typography>
-                <Typography component="p">
                   City: {this.props.user.city}
                 </Typography>
                 <Typography component="p">
-                  Address: {this.props.user.address}
+                  State: {this.props.user.state}
                 </Typography>
                 <CardActions>
                 </CardActions>

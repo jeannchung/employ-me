@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var UsersSchema = new Schema({
-  username: String,
+  name: String,
   email: String,
   employer: Boolean,
   firebase_id: String,
@@ -16,6 +16,7 @@ var UsersSchema = new Schema({
   address: String,
   company_name: String,
   company_info: String,
+  industry: String,
   jobs_posted: [{ type: Schema.Types.ObjectId, ref: "jobs" }],
   jobs_applied: [{ type: Schema.Types.ObjectId, ref: "jobs" }],
   createdAt: String,
