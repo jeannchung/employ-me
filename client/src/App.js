@@ -58,11 +58,12 @@ class App extends Component {
         })
     })
     console.log('state.isloggedin: ' + this.state.isLoggedIn)
+    this.verifyUser()
   }
-
+  
   signOut = () => {
     firebase.auth().signOut()
-    this.setState({ isLoggedIn: false, user: null })
+    this.setState({ isLoggedIn: false, user: null , firebase_id: "" })
   }
 
   verifyUser = () => {
@@ -76,16 +77,20 @@ class App extends Component {
         console.error(e)
       })
   }
+  
 
   render() {
+    
+    console.log(this.state.user)
+    
     return (
       <>
         <Router>
           <div>
-            <Navbar verifyUser={this.verifyUser} isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
+            <Navbar verifyUser={this.verifyUser} fbid={this.state.firebase_id} isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
             <div style={{ margin: '1rem' }}>
               <Route exact path='/' component={() => <Home />} />
-              <Route path='/login' component={() => <Login isUser={this.state.user} uiConfig={uiConfig} />} />
+              <Route path='/login' component={() => <Login fbid={this.state.firebase_id} isUser={this.state.user} uiConfig={uiConfig} />} />
               <Route path='/profile' component={() => <Profile firebaseID={this.state.firebase_id} verifyUser={this.verifyUser} user={this.state.user} name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} />} />
               <Route path='/jobpost' component={() => <JobPost />} />
               <Route path='/applied' component={() => <Applied />} />
