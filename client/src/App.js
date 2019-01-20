@@ -34,8 +34,7 @@ class App extends Component {
     email: '',
     isLoggedIn: false,
     employer: false,
-    userid: "",
-    jobsApplied: []
+    userid: ""
   }
   componentDidMount = () => {
     // think we can delete this if the signout function sets user to null 
@@ -73,8 +72,7 @@ class App extends Component {
     Axios.get(`/api/user/${this.state.firebase_id}`)
       .then(r => {
         this.setState({ user: r.data[0],
-        userid : r.data[0]._id,
-        jobsApplied: r.data[0].jobs_applied })
+        userid : r.data[0]._id })
       })
       .catch(e => {
         console.error(e)
@@ -91,7 +89,7 @@ class App extends Component {
           <div>
             <Navbar verifyUser={this.verifyUser} fbid={this.state.firebase_id} isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
             <div style={{ margin: '1rem' }}>
-              <Route exact path='/' component={() => <Home userid={this.state.userid} employer={this.state.employer} jobsApplied={this.state.jobsApplied} verifyUser={this.verifyUser}/>} />
+              <Route exact path='/' component={() => <Home userid={this.state.userid} firebaseID={this.state.firebase_id} />} />
               <Route path='/login' component={() => <Login fbid={this.state.firebase_id} isUser={this.state.user} uiConfig={uiConfig} />} />
               <Route path='/profile' component={() => <Profile firebaseID={this.state.firebase_id} verifyUser={this.verifyUser} user={this.state.user} name={this.state.name} email={this.state.email} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer} />} />
               <Route path='/jobpost' component={() => <JobPost />} />

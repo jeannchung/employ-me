@@ -80,8 +80,6 @@ class JobCard extends Component {
 
 
   handleClick = event => {
-    console.log(this.props.jobkey)
-    console.log(this.props.userid)
     axios.put(`/api/job/apply/${this.props.jobkey}&${this.props.userid}`, {
       $push: {
         users_applied: this.props.userid
@@ -93,8 +91,6 @@ class JobCard extends Component {
 
   render() {
     const { classes } = this.props;
-
-    console.log(this.props.appliedStatus)
 
     return (
       <>

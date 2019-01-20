@@ -75,7 +75,10 @@ class Home extends Component {
     multiline: 'Controlled',
     jobs: [],
     isjobs: true,
-    AppliedJobArr : []
+    AppliedJobArr: [],
+    userid: "",
+    jobsApplied: [],
+    employer: false
   }
 
   handleChange = event => {
@@ -98,25 +101,40 @@ class Home extends Component {
     Axios.get(`/api/job/search/${this.state.searchWord}`)
       .then(r => {
 
-        if(r.data[0].title_name){
-        this.setState({
-          jobs: r.data,
-          isjobs: true
-        })}
-      
-      let temp =[]
-      this.props.jobsApplied.map(job => {
-        temp.push(job._id)
-        this.setState({AppliedJobArr : temp})
-      })
-
+        if (r.data[0].title_name) {
+          this.setState({
+            jobs: r.data,
+            isjobs: true
+          })
+        }
       }).catch(err => { this.setState({ isjobs: false }) })
+
+    if (this.props.userid !== "") {
+      Axios.get(`/api/user/${this.props.firebaseID}`)
+        .then(r => {
+          this.setState({
+            userid: r.data[0]._id,
+            jobsApplied: r.data[0].jobs_applied,
+            employer : r.data[0].employer
+          })
+        })
+        .then(r => {
+          let temp = []
+          this.state.jobsApplied.map(job => {
+            temp.push(job._id)
+            this.setState({ AppliedJobArr: temp })
+          })
+        })
+        .catch(e => {
+          console.error(e)
+        })
+    }
   }
 
   render() {
     const { classes } = this.props;
 
-    
+
     return (
       <div>
         {/* Search Form */}
@@ -161,8 +179,8 @@ class Home extends Component {
                 <JobCard
                   appliedStatus={this.state.AppliedJobArr.includes(job._id)}
                   userid={this.props.userid}
-                  employer={this.props.employer}
-                  jobsApplied={this.props.jobsApplied}
+                  employer={this.state.employer}
+                  jobsApplied={this.state.jobsApplied}
                   jobkey={job._id}
                   title_name={job.title_name}
                   company_name={job.company_name}
