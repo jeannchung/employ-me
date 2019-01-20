@@ -14,6 +14,7 @@ import ApplyIcon from '@material-ui/icons/Send'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import moment from 'moment'
 import Button from '@material-ui/core/Button'
+import axios from 'axios'
 
 const styles = theme => ({
   container: {
@@ -67,20 +68,37 @@ const styles = theme => ({
   }
 });
 
-
 class JobCard extends Component {
-  state = { expanded: false};
+  state = {
+    expanded: false,
+    isClicked: false
+  };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
-  };
+  }
+
+
+  handleClick = event => {
+    console.log(this.props.jobkey)
+    console.log(this.props.userid)
+    axios.put(`/api/job/apply/${this.props.jobkey}&${this.props.userid}`, {
+      $push: {
+        users_applied: this.props.userid
+      }
+    })
+      .catch(err => { console.log(err) })
+    this.setState({ isClicked: true })
+  }
 
   render() {
     const { classes } = this.props;
-   
+
+    console.log(this.props.appliedStatus)
+
     return (
       <>
-        <Card className={classes.card}>
+        <Card key={this.props.jobkey} className={classes.card}>
           <CardHeader
             avatar={
               <Avatar aria-label="Recipe" className={classes.avatar}>
@@ -96,9 +114,34 @@ class JobCard extends Component {
             <Typography>Posted: {moment().to(moment(this.props.createdAt))}</Typography>
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
-            <Button value={this.props._id} variant="outlined" style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}>
-              Apply
-                </Button>
+
+            {(() => {
+              if (this.props.userid === '' && this.props.employer === false) {
+                return ("")
+              } else if (this.props.userid !== '' && this.props.employer === true) {
+                return ("")
+              } else {
+                return (
+                  <>
+                    {
+                      (() => {
+                        if (this.state.isClicked === true) {
+                          return (
+                            <Button value={this.props.jobkey} variant="contained" disabled style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}> Applied </Button>
+                          )
+                        } else {
+                          return (
+                            this.props.appliedStatus === true ? <Button value={this.props.jobkey} variant="contained" disabled style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}> Applied </Button> :
+                              <Button onClick={this.handleClick} value={this.props.jobkey} variant="outlined" style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}> Apply </Button>
+                          )
+                        }
+                      })()}
+
+                  </>
+                )
+              }
+            })()}
+
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,
