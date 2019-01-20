@@ -43,7 +43,8 @@ module.exports = {
   apply: function(req,res){
     db.Jobs
       .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => db.Users.findOneAndUpdate({ _id: dbModel.employer_id }, { $push: { jobs_applied: dbModel._id } }, { new: true }))
+      .then(dbModel => db.Users.findOneAndUpdate({ _id: req.params.id1 }, { $push: { jobs_applied: dbModel._id } }))
+      .catch(err => res.status(422).json(err))
   },
   jobSearch: function (req, res) {
     db.Jobs

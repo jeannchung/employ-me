@@ -6,8 +6,8 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import { Grid } from '@material-ui/core'
-import axios from 'axios'
 import JobCard from './JobCardComponent/JobCard'
+import Axios from 'axios'
 
 const styles = theme => ({
   container: {
@@ -71,9 +71,11 @@ const styles = theme => ({
 
 class Home extends Component {
   state = {
-    searchWord:"",
+    searchWord: "",
     multiline: 'Controlled',
-    jobs: []
+    jobs: [],
+    isjobs: true,
+    AppliedJobArr : []
   }
 
   handleChange = event => {
@@ -84,7 +86,7 @@ class Home extends Component {
   }
 
   handleEnter = event => {
-    if(event.charCode === 13) {
+    if (event.charCode === 13) {
       event.preventDefault()
       setImmediate(() => this.handleClick(event))
       event.persist()
@@ -93,15 +95,28 @@ class Home extends Component {
 
   handleClick = event => {
     event.preventDefault()
-    axios.get(`/api/job/search/${this.state.searchWord}`)
+    Axios.get(`/api/job/search/${this.state.searchWord}`)
       .then(r => {
-        this.setState({ jobs: r.data })
-      }).catch(err => { console.log(err) })
+
+        if(r.data[0].title_name){
+        this.setState({
+          jobs: r.data,
+          isjobs: true
+        })}
+      
+      let temp =[]
+      this.props.jobsApplied.map(job => {
+        temp.push(job._id)
+        this.setState({AppliedJobArr : temp})
+      })
+
+      }).catch(err => { this.setState({ isjobs: false }) })
   }
 
   render() {
     const { classes } = this.props;
 
+    
     return (
       <div>
         {/* Search Form */}
@@ -123,35 +138,47 @@ class Home extends Component {
               onChange={this.handleChange}
               margin="normal"
             />
-          <Grid container className={classes.centerThis}>
-            <Grid item>
-              <Button onClick={this.handleClick} className={classes.button}>Employ.me!</Button>
+            <Grid container className={classes.centerThis}>
+              <Grid item>
+                <Button onClick={this.handleClick} className={classes.button}>Employ.me!</Button>
+              </Grid>
             </Grid>
-          </Grid>
           </form>
         </Paper>
 
         {/* Jobs Searched */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
           {
-            this.state.jobs.map(job => (
-              <JobCard
-                title_name={job.title_name}
-                company_name={job.company_name}
-                city={job.city}
-                industry={job.industry}
-                description={job.description}
-                _id={job._id}
-                createdAt={job.createdAt}
-                requirements={job.requirements}
-                qualifications={job.qualifications}
-                salary={job.salary}
-              />
-            ))
+            this.state.isjobs === false ?
+
+              <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto', marginTop: "10px" }} elevation={1}>
+                <Typography> Your search did not match any jobs.</Typography>
+              </Paper>
+
+
+              :
+              this.state.jobs.map(job => (
+                <JobCard
+                  appliedStatus={this.state.AppliedJobArr.includes(job._id)}
+                  userid={this.props.userid}
+                  employer={this.props.employer}
+                  jobsApplied={this.props.jobsApplied}
+                  jobkey={job._id}
+                  title_name={job.title_name}
+                  company_name={job.company_name}
+                  city={job.city}
+                  industry={job.industry}
+                  description={job.description}
+                  createdAt={job.createdAt}
+                  requirements={job.requirements}
+                  qualifications={job.qualifications}
+                  salary={job.salary}
+                />
+              ))
           }
         </div>
 
-        
+
       </div>
     );
   }
