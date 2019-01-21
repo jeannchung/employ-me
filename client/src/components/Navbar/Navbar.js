@@ -133,7 +133,7 @@ class Navbar extends Component {
                 </Link>
               ) : ''
             }
-            {this.props.isLoggedIn === false ?
+            {this.props.user === false ?
               <Link to='/login' style={{ color: 'white' }}>
                 <Button variant="outlined" style={{ color: 'white', border: '1px solid white' }} className={classes.button}>
                   Login/Sign Up
