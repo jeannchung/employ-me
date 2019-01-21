@@ -134,6 +134,8 @@ class Home extends Component {
   render() {
     const { classes } = this.props;
 
+    console.log(this.props.userid)
+
 
     return (
       <div>
@@ -172,7 +174,6 @@ class Home extends Component {
               <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto', marginTop: "10px" }} elevation={1}>
                 <Typography> Your search did not match any jobs.</Typography>
               </Paper>
-
 
               :
               this.state.jobs.map(job => (

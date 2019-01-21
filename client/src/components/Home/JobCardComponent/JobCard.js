@@ -92,6 +92,8 @@ class JobCard extends Component {
   render() {
     const { classes } = this.props;
 
+    console.log(this.props.userid)
+
     return (
       <>
         <Card key={this.props.jobkey} className={classes.card}>

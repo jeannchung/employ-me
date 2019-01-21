@@ -11,12 +11,12 @@ import Profile from './components/Profile'
 import Axios from 'axios';
 
 firebase.initializeApp({
-  apiKey: "AIzaSyAJUEk-d9tisX-ZedhpItxe9n8h7aStyMU",
-  authDomain: "employ-me-42819.firebaseapp.com",
-  databaseURL: "https://employ-me-42819.firebaseio.com",
-  projectId: "employ-me-42819",
-  storageBucket: "employ-me-42819.appspot.com",
-  messagingSenderId: "118031344911"
+  apiKey: "AIzaSyCduj200TnPkn1GH9LbuPj3CrRPMwGpq4Q",
+  authDomain: "employme2-94283.firebaseapp.com",
+  databaseURL: "https://employme2-94283.firebaseio.com",
+  projectId: "employme2-94283",
+  storageBucket: "employme2-94283.appspot.com",
+  messagingSenderId: "233537031765"
 })
 const uiConfig = {
   signInFlow: 'popup',
@@ -28,42 +28,58 @@ const uiConfig = {
 
 class App extends Component {
   state = {
-    user: null,
+    user: false,
     name: '',
     firebase_id: '',
     email: '',
     isLoggedIn: false,
     employer: false,
-    userid: ""
+    mongo_id:''
   }
+
+
   componentDidMount = () => {
-    // think we can delete this if the signout function sets user to null 
-    // this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-    // this.setState({ user: !!user })
-    // })
-    firebase.auth().onAuthStateChanged(oAuthUser => {
-      console.log('oAuthUser:')
-      console.log(oAuthUser)
-      firebase.database().ref(`/users/${oAuthUser.uid}`).once('value')
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => this.setState({ user: !!user }))
+
+    firebase.auth().onAuthStateChanged(user => {
+      console.log(user)
+      firebase.database().ref(`/users/${user.uid}`).once('value')
         .then(r => r.val())
-        .then(fbUser => {
-          console.log('firebase collection user')
-          console.log(fbUser)
-          this.setState({ name: oAuthUser.displayName, firebase_id: oAuthUser.uid, isLoggedIn: true, email: oAuthUser.email })
-          if (!fbUser) {
-            firebase.database().ref(`/users/${oAuthUser.uid}`).push({
-              name: oAuthUser.displayName,
-              email: oAuthUser.email
+        .then(dbUser => {
+          for (const key in dbUser) {
+            if (dbUser.hasOwnProperty(key)) {
+              this.setState({ name: user.displayName, firebase_id: user.uid })
+            }
+          }
+          if (!dbUser) {
+            firebase.database().ref(`/users/${user.uid}`).push({
+              name: user.displayName,
+              email: user.email
             })
           }
         })
+        .then(() => {
+          Axios.get(`/api/user/${user.uid}`)
+            .then(r => {
+              if(r.data[0]){
+             console.log(r.data[0]._id)
+             this.setState({mongo_id:r.data[0]._id})
+              }
+            })
+            .catch(e => {
+              console.error(e)
+            })
+        })
     })
-    console.log('state.isloggedin: ' + this.state.isLoggedIn)
+  }
+
+  componentWillUnmount() {
+    this.unregisterAuthObserver()
   }
   
   signOut = () => {
     firebase.auth().signOut()
-    this.setState({ isLoggedIn: false, user: null , firebase_id: "", userid:'', employer: false, jobsApplied:[] })
+    this.setState({ isLoggedIn: false, user: false , firebase_id: "", employer: false, jobsApplied:[] })
   }
 
   verifyUser = () => {
@@ -71,8 +87,9 @@ class App extends Component {
 
     Axios.get(`/api/user/${this.state.firebase_id}`)
       .then(r => {
-        this.setState({ user: r.data[0],
-        userid : r.data[0]._id })
+        // console.log(r.data[0])
+        // this.setState({ m: r.data[0],
+        // userid : r.data[0]._id })
       })
       .catch(e => {
         console.error(e)
@@ -82,12 +99,14 @@ class App extends Component {
   render() {
     
     console.log(this.state.user)
-    
+    console.log(this.state.firebase_id)
+    console.log(this.state.name)
+    console.log(this.state.mongo_id)
     return (
       <>
         <Router>
           <div>
-            <Navbar verifyUser={this.verifyUser} fbid={this.state.firebase_id} isUser={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
+            <Navbar fbid={this.state.firebase_id} user={this.state.user} isLoggedIn={this.state.isLoggedIn} signOut={this.signOut} employer={this.state.employer} />
             <div style={{ margin: '1rem' }}>
               <Route exact path='/' component={() => <Home userid={this.state.userid} firebaseID={this.state.firebase_id} />} />
               <Route path='/login' component={() => <Login fbid={this.state.firebase_id} isUser={this.state.user} uiConfig={uiConfig} />} />
