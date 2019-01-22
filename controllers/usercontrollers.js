@@ -32,12 +32,11 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  remove: function (req, res) {
+  removeApplied: function (req, res) {
     db.Users
-      .find({ firebase_id: req.params.id })
+      .findOneAndUpdate({ firebase_id: req.params.id },{$pull:{jobs_applied: req.params.id1}})
       .populate('jobs_applied')
       .populate('jobs_posted')
-      .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
