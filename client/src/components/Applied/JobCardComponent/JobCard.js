@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import moment from 'moment'
 import Button from '@material-ui/core/Button'
-import axios from 'axios'
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
   container: {
@@ -78,20 +78,13 @@ class JobCard extends Component {
   }
 
 
-  handleClick = event => {
-    axios.put(`/api/job/apply/${this.props.jobkey}&${this.props.mongo_id}`, {
-      $push: {
-        users_applied: this.props.mongo_id
-      }
-    })
-      .catch(err => { console.log(err) })
-    this.setState({ isClicked: true })
-  }
+
+
 
   render() {
     const { classes } = this.props;
 
-    
+
     return (
       <>
         <Card key={this.props.jobkey} className={classes.card}>
@@ -109,35 +102,11 @@ class JobCard extends Component {
             <Typography component="p"> Description: {this.props.description}</Typography>
             <Typography>Posted: {moment().to(moment(this.props.createdAt))}</Typography>
           </CardContent>
-          <CardActions className={classes.actions} disableActionSpacing>
-
-            {(() => {
-              if (this.props.mongo_id === '' && this.props.employer === false) {
-                return ("")
-              } else if (this.props.mongo_id !== '' && this.props.employer === true) {
-                return ("")
-              } else {
-                return (
-                  <>
-                    {
-                      (() => {
-                        if (this.state.isClicked === true) {
-                          return (
-                            <Button value={this.props.jobkey} variant="contained" disabled style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}> Applied </Button>
-                          )
-                        } else {
-                          return (
-                            this.props.appliedStatus === true ? <Button value={this.props.jobkey} variant="contained" disabled style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}> Applied </Button> :
-                              <Button onClick={this.handleClick} value={this.props.jobkey} variant="outlined" style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}> Apply </Button>
-                          )
-                        }
-                      })()}
-
-                  </>
-                )
-              }
-            })()}
-
+          <CardActions className={classes.actions}>
+            <Button onClick={this.props.handleClick} value={this.props.jobkey} variant="contained" style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}>
+              <DeleteIcon onClick={this.props.handleClick} value={this.props.jobkey}/>
+            </Button>
+           
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,

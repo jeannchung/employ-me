@@ -4,16 +4,12 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import Badge from '@material-ui/core/Badge'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import { withStyles } from '@material-ui/core/styles'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import NotificationsIcon from '@material-ui/icons/Notifications'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
-import axios from 'axios';
-import firebase from 'firebase'
 import Hidden from '@material-ui/core/Hidden'
 
 const styles = theme => ({
@@ -65,6 +61,10 @@ class Navbar extends Component {
     this.setState({ anchorEl: null })
   };
 
+  handleSignOut = () => {
+    this.props.signOut()
+    this.setState({ anchorEl: null })
+  }
 
   render() {
     const { anchorEl } = this.state
@@ -103,7 +103,7 @@ class Navbar extends Component {
               )
           }
           <Link to='/' className={classes.link}>
-            <MenuItem onClick={this.props.signOut}>Log Out</MenuItem>
+            <MenuItem onClick={this.handleSignOut}>Log Out</MenuItem>
           </Link>
         </div>
       </Menu>
@@ -124,16 +124,12 @@ class Navbar extends Component {
             <div className={classes.grow} />
             {
               this.props.employer ? (
-                <Link to='/jobpost' style={{ color: 'white' }}>
-                  <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                      <NotificationsIcon />
-                    </Badge>
-                  </IconButton>
+                <Link to='/jobpost' style={{ color: 'white',textDecoration:'none' }}>
+                  Employer
                 </Link>
               ) : ''
             }
-            {this.props.isLoggedIn === false ?
+            {this.props.user === false ?
               <Link to='/login' style={{ color: 'white' }}>
                 <Button variant="outlined" style={{ color: 'white', border: '1px solid white' }} className={classes.button}>
                   Login/Sign Up

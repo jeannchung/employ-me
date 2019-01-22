@@ -27,50 +27,42 @@ const styles = {
 };
 
 class Profile extends Component {
-  componentDidMount() {
-    if (this.props.user === null) {
-      this.props.verifyUser()
-      console.log(this.props.user)
-    }
-  }
 
 
   render() {
     const { classes } = this.props;
     const bull = <span className={classes.bullet}>•</span>;
 
-    console.log(this.props.user)
-
     return (
 
       <>
         {
-          this.props.user ? (
+          this.props.mongo_id !== "" ? (
             <Card className={classes.card}>
               <CardContent>
                 <Typography variant="h5" component="h2">
                   {this.props.name}'s Profile
                 </Typography>
                 <Typography component="p">
-                  Email: {this.props.user.email}
+                  Email: {this.props.email}
                 </Typography>
                 <Typography component="p">
-                  Phone Number: {this.props.user.phone_number}
+                  Phone Number: {this.props.phone_number}
                 </Typography>
                 <Typography component="p">
-                  Experience: {this.props.user.work_exp}
+                  Experience: {this.props.work_exp}
                 </Typography>
                 <Typography component="p">
-                  Education: {this.props.user.higher_ed}
+                  Education: {this.props.higher_ed}
                 </Typography>
                 <Typography component="p">
-                  Skills: {this.props.user.skills}
+                  Skills: {this.props.skills}
                 </Typography>
                 <Typography component="p">
-                  City: {this.props.user.city}
+                  City: {this.props.city}
                 </Typography>
                 <Typography component="p">
-                  State: {this.props.user.state}
+                  State: {this.props.state}
                 </Typography>
                 <CardActions>
                 </CardActions>
@@ -96,7 +88,7 @@ class Profile extends Component {
                   {bull} Find the perfect position today
                 </Typography>
                 <CardActions>
-                  <ApplicantModal firebaseID={this.props.firebaseID} user={this.props.user} name={this.props.name} email={this.props.email} />
+                  <ApplicantModal firebase_id={this.props.firebase_id} name={this.props.name} pullMongoUserData={this.props.pullMongoUserData} />
                 </CardActions>
               </CardContent>
               <CardContent>
@@ -116,7 +108,7 @@ class Profile extends Component {
                   {bull} Exposure across the the employ.me network
                 </Typography>
                 <CardActions>
-                  <EmployerModal />
+                  <EmployerModal firebase_id={this.props.firebase_id} name={this.props.name} pullMongoUserData={this.props.pullMongoUserData} />
                 </CardActions>
               </CardContent>
             </Card>

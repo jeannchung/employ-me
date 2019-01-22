@@ -15,7 +15,7 @@ router
 
 // Matches with "/api/job/apply/:id"
 router
-  .route("/apply/:id")
+  .route("/apply/:id&:id1")
   .put(jobsController.apply);
 
 // Matches with "/api/job/search/:id"
