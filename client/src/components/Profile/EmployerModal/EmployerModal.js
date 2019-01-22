@@ -147,8 +147,23 @@ class EmployerModal extends Component {
     open: false,
     selectedIndustry: null,
     selectedStates: null,
-    input: { employer: true, },
-  };
+    input: {
+      employer: true,
+      firebase_id: this.props.firebase_id,
+      name: this.props.name,
+      email: "",
+      phone_number: "",
+      work_exp: "",
+      higher_ed: "",
+      skills: "",
+      state: "",
+      city: "",
+      address: "",
+      company_name: "",
+      company_info: "",
+      industry: ""
+    }
+  }
 
   handleChange = (event) => {
     const tempObj = this.state.input
@@ -162,15 +177,13 @@ class EmployerModal extends Component {
   };
 
   handleClose = () => {
-    console.log(this.state.input)
     this.setState({ open: false });
-    this.props.verifyUser();
   };
 
   handleSubmit = () => {
     axios.post("/api/user/", this.state.input)
       .then(r => {
-        console.log(r.data)
+        this.props.pullMongoUserData()
       })
       .catch(err => { console.log(err) })
     this.setState({ open: false });
@@ -181,14 +194,12 @@ class EmployerModal extends Component {
     tempObj.industry =
       selectedIndustry.label
     this.setState({ input: tempObj, selectedIndustry })
-    console.log(`Industry selected:`, this.state.input);
   }
   handleDropdownState = (selectedStates) => {
     const tempObj = this.state.input
     tempObj.state =
       selectedStates.label
     this.setState({ input: tempObj, selectedStates })
-    console.log(`State selected:`, this.state.input);
   }
 
   render() {

@@ -98,7 +98,22 @@ class ApplicantModal extends Component {
     open: false,
     selectedEducation: null,
     selectedStates: null,
-    input: { employer: false, firebase_id: this.props.firebaseID, name: this.props.name},
+    input: {
+      employer: false,
+      firebase_id: this.props.firebase_id,
+      name: this.props.name,
+      email: "",
+      phone_number: "",
+      work_exp: "",
+      higher_ed: "",
+      skills: "",
+      state: "",
+      city: "",
+      address: "",
+      company_name: "",
+      company_info: "",
+      industry: ""
+    },
     isGreat: true
   }
 
@@ -113,134 +128,133 @@ class ApplicantModal extends Component {
     this.setState({ open: true });
   };
 
-  handleClose = () => { 
-    console.log(this.state.input)
+  handleClose = () => {
+
     this.setState({ open: false });
-    this.props.verifyUser();
   };
 
   handleSubmit = () => {
     axios.post("/api/user/", this.state.input)
       .then(r => {
         console.log(r.data)
+        this.props.pullMongoUserData()
       })
       .catch(err => { console.log(err) })
     this.setState({ open: false });
   };
 
-handleDropdown = (selectedEducation) => {
-  const tempObj = this.state.input
-  tempObj.higher_ed = 
-  selectedEducation.label
-  this.setState({ input: tempObj, selectedEducation})
-  console.log(`Education selected:`, this.state.input);
-}
-handleDropdownState = (selectedStates) => {
-  const tempObj = this.state.input
-  tempObj.state = 
-  selectedStates.label
-  this.setState({ input: tempObj, selectedStates })
-  console.log(`State selected:`, this.state.input);
-}
+  handleDropdown = (selectedEducation) => {
+    const tempObj = this.state.input
+    tempObj.higher_ed =
+      selectedEducation.label
+    this.setState({ input: tempObj, selectedEducation })
+    console.log(`Education selected:`, this.state.input);
+  }
+  handleDropdownState = (selectedStates) => {
+    const tempObj = this.state.input
+    tempObj.state =
+      selectedStates.label
+    this.setState({ input: tempObj, selectedStates })
+    console.log(`State selected:`, this.state.input);
+  }
 
-render() {
-  const { selectedEducation } = this.state;
-  const { selectedStates } = this.state;
-  const { classes } = this.props;
+  render() {
+    const { selectedEducation } = this.state;
+    const { selectedStates } = this.state;
 
-  return (
-    <div>
-      <Button variant="outlined" onClick={this.handleClickOpen}>
-        Get Started
+    return (
+      <div>
+        <Button variant="outlined" onClick={this.handleClickOpen}>
+          Get Started
         </Button>
-      <Dialog
-        open={this.state.open}
-        onClose={this.handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Applicant Profile</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <Typography variant="h5">
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Applicant Profile</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <Typography variant="h5">
                 {this.props.name}'s Profile
         </Typography>
-            Enter Information to create profile then click submit
+              Enter Information to create profile then click submit
             </DialogContentText>
-          <TextField
-            margin="dense"
-            id="email"
-            label="Email"
-            type="text"
-            onChange={this.handleChange}
-            fullWidth
-          />
-          <TextField
-            margin="dense"
-            id="phone_number"
-            label="Phone Number"
-            type="tel"
-            onChange={this.handleChange}
-            fullWidth
-          />
-          <TextField
-            margin="dense"
-            id="work_exp"
-            label="Work Experience"
-            type="text"
-            multiline
-            variant="outlined"
-            onChange={this.handleChange}
-            style={styles.textField}
-            fullWidth
-          />
-          <TextField
-            margin="dense"
-            id="skills"
-            label="Skills"
-            type="text"
-            multiline
-            variant="outlined"
-            style={styles.textField}
-            onChange={this.handleChange}
-            fullWidth
-          />
-          <Select
-            placeholder='Highest Education'
-            id="higher_ed"
-            value={selectedEducation}
-            onChange={this.handleDropdown}
-            options={options}
-          />
-          <TextField
-            margin="dense"
-            id="city"
-            label="City"
-            type="text"
-            onChange={this.handleChange}
-            fullWidth
-          />
-          <Select
-            placeholder='State'
-            id="state"
-            value={selectedStates}
-            onChange={this.handleDropdownState}
-            options={states}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleClose}>
-            Cancel
+            <TextField
+              margin="dense"
+              id="email"
+              label="Email"
+              type="text"
+              onChange={this.handleChange}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              id="phone_number"
+              label="Phone Number"
+              type="tel"
+              onChange={this.handleChange}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              id="work_exp"
+              label="Work Experience"
+              type="text"
+              multiline
+              variant="outlined"
+              onChange={this.handleChange}
+              style={styles.textField}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              id="skills"
+              label="Skills"
+              type="text"
+              multiline
+              variant="outlined"
+              style={styles.textField}
+              onChange={this.handleChange}
+              fullWidth
+            />
+            <Select
+              placeholder='Highest Education'
+              id="higher_ed"
+              value={selectedEducation}
+              onChange={this.handleDropdown}
+              options={options}
+            />
+            <TextField
+              margin="dense"
+              id="city"
+              label="City"
+              type="text"
+              onChange={this.handleChange}
+              fullWidth
+            />
+            <Select
+              placeholder='State'
+              id="state"
+              value={selectedStates}
+              onChange={this.handleDropdownState}
+              options={states}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose}>
+              Cancel
             </Button>
-          <Link to="/">
-            <Button onClick={this.handleSubmit}>
-            Submit
+            <Link to="/">
+              <Button onClick={this.handleSubmit}>
+                Submit
             </Button>
-          </Link>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
-}
+            </Link>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
 }
 
 export default ApplicantModal

@@ -76,16 +76,28 @@ class Home extends Component {
     jobs: [],
     isjobs: true,
     AppliedJobArr: [],
-    userid: "",
-    jobsApplied: [],
-    employer: false
+    jobs_applied: []
   }
+
+
 
   handleChange = event => {
     event.preventDefault()
     this.setState({
       searchWord: event.target.value,
     })
+
+    if (this.props.mongo_id) {
+      Axios.get(`/api/user/${this.props.firebase_id}`)
+        .then(r => {
+          this.setState({
+            jobs_applied: r.data[0].jobs_applied
+          })
+        })
+        .catch(e => {
+          console.error(e)
+        })
+    }
   }
 
   handleEnter = event => {
@@ -100,42 +112,25 @@ class Home extends Component {
     event.preventDefault()
     Axios.get(`/api/job/search/${this.state.searchWord}`)
       .then(r => {
-
         if (r.data[0].title_name) {
           this.setState({
             jobs: r.data,
             isjobs: true
           })
         }
-      }).catch(err => { this.setState({ isjobs: false }) })
-
-    if (this.props.userid !== "") {
-      Axios.get(`/api/user/${this.props.firebaseID}`)
-        .then(r => {
-          this.setState({
-            userid: r.data[0]._id,
-            jobsApplied: r.data[0].jobs_applied,
-            employer : r.data[0].employer
-          })
+      })
+     .then(r => {
+        let temp = []
+        this.state.jobs_applied.forEach(job => {
+          temp.push(job._id)
+          this.setState({ AppliedJobArr: temp })
         })
-        .then(r => {
-          let temp = []
-          this.state.jobsApplied.map(job => {
-            temp.push(job._id)
-            this.setState({ AppliedJobArr: temp })
-          })
-        })
-        .catch(e => {
-          console.error(e)
-        })
-    }
+      })
+      .catch(err => { this.setState({ isjobs: false }) })
   }
 
   render() {
     const { classes } = this.props;
-
-    console.log(this.props.userid)
-
 
     return (
       <div>
@@ -179,9 +174,10 @@ class Home extends Component {
               this.state.jobs.map(job => (
                 <JobCard
                   appliedStatus={this.state.AppliedJobArr.includes(job._id)}
-                  userid={this.props.userid}
-                  employer={this.state.employer}
-                  jobsApplied={this.state.jobsApplied}
+                  pullMongoUserData={this.props.pullMongoUserData}
+                  user={this.props.user}
+                  mongo_id={this.props.mongo_id}
+                  employer={this.props.employer}
                   jobkey={job._id}
                   title_name={job.title_name}
                   company_name={job.company_name}

@@ -8,8 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { Link } from 'react-router-dom';
-import { Typography } from '@material-ui/system';
+
 
 
 const styles = {
@@ -77,7 +76,7 @@ class Login extends Component {
               </Grid>
               <Grid container spacing={24}>
                 <Grid item xs={6}>
-                  <Button variant="outlined" className={[classes.button, classes.btnleft]}>Register</Button>
+                  <Button variant="outlined" className={classes.btnleft}>Register</Button>
                 </Grid>
                 <Grid item xs={6}>
                   <Button variant="outlined" className={classes.button}>Login</Button>

@@ -12,8 +12,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
-import axios from 'axios';
-import firebase from 'firebase'
 import Hidden from '@material-ui/core/Hidden'
 
 const styles = theme => ({
@@ -65,6 +63,10 @@ class Navbar extends Component {
     this.setState({ anchorEl: null })
   };
 
+  handleSignOut = () => {
+    this.props.signOut()
+    this.setState({ anchorEl: null })
+  }
 
   render() {
     const { anchorEl } = this.state
@@ -103,7 +105,7 @@ class Navbar extends Component {
               )
           }
           <Link to='/' className={classes.link}>
-            <MenuItem onClick={this.props.signOut}>Log Out</MenuItem>
+            <MenuItem onClick={this.handleSignOut}>Log Out</MenuItem>
           </Link>
         </div>
       </Menu>
