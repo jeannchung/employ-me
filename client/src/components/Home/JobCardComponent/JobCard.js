@@ -10,7 +10,6 @@ import CardActions from '@material-ui/core/CardActions'
 import Collapse from '@material-ui/core/Collapse'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
-import ApplyIcon from '@material-ui/icons/Send'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import moment from 'moment'
 import Button from '@material-ui/core/Button'
@@ -80,9 +79,9 @@ class JobCard extends Component {
 
 
   handleClick = event => {
-    axios.put(`/api/job/apply/${this.props.jobkey}&${this.props.userid}`, {
+    axios.put(`/api/job/apply/${this.props.jobkey}&${this.props.mongo_id}`, {
       $push: {
-        users_applied: this.props.userid
+        users_applied: this.props.mongo_id
       }
     })
       .catch(err => { console.log(err) })
@@ -92,8 +91,7 @@ class JobCard extends Component {
   render() {
     const { classes } = this.props;
 
-    console.log(this.props.userid)
-
+    
     return (
       <>
         <Card key={this.props.jobkey} className={classes.card}>
@@ -114,9 +112,9 @@ class JobCard extends Component {
           <CardActions className={classes.actions} disableActionSpacing>
 
             {(() => {
-              if (this.props.userid === '' && this.props.employer === false) {
+              if (this.props.mongo_id === '' && this.props.employer === false) {
                 return ("")
-              } else if (this.props.userid !== '' && this.props.employer === true) {
+              } else if (this.props.mongo_id !== '' && this.props.employer === true) {
                 return ("")
               } else {
                 return (
