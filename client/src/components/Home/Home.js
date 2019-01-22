@@ -119,7 +119,7 @@ class Home extends Component {
           })
         }
       })
-     .then(r => {
+      .then(r => {
         let temp = []
         this.state.jobs_applied.forEach(job => {
           temp.push(job._id)
@@ -174,7 +174,6 @@ class Home extends Component {
               this.state.jobs.map(job => (
                 <JobCard
                   appliedStatus={this.state.AppliedJobArr.includes(job._id)}
-                  pullMongoUserData={this.props.pullMongoUserData}
                   user={this.props.user}
                   mongo_id={this.props.mongo_id}
                   employer={this.props.employer}

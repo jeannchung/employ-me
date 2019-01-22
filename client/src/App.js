@@ -155,7 +155,6 @@ class App extends Component {
 
   render() {
 
-
     return (
       <>
         <Router>
@@ -167,7 +166,6 @@ class App extends Component {
                 firebase_id={this.state.firebase_id}
                 mongo_id={this.state.mongo_id}
                 employer={this.state.employer}
-                pullMongoUserData={this.pullMongoUserData}
               />} />
               <Route path='/login' component={() => <Login uiConfig={uiConfig} />} />
               <Route path='/profile' component={() => <Profile
