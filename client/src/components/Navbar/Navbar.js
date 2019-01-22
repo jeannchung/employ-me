@@ -4,12 +4,10 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import Badge from '@material-ui/core/Badge'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import { withStyles } from '@material-ui/core/styles'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import NotificationsIcon from '@material-ui/icons/Notifications'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import Hidden from '@material-ui/core/Hidden'
@@ -126,12 +124,8 @@ class Navbar extends Component {
             <div className={classes.grow} />
             {
               this.props.employer ? (
-                <Link to='/jobpost' style={{ color: 'white' }}>
-                  <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                      <NotificationsIcon />
-                    </Badge>
-                  </IconButton>
+                <Link to='/jobpost' style={{ color: 'white',textDecoration:'none' }}>
+                  Employer
                 </Link>
               ) : ''
             }

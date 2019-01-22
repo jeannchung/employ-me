@@ -33,8 +33,6 @@ class Profile extends Component {
     const { classes } = this.props;
     const bull = <span className={classes.bullet}>•</span>;
 
-    console.log(this.props.mongo_id)
-
     return (
 
       <>
