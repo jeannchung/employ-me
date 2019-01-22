@@ -11,6 +11,10 @@ router
   .route('/:id')
   .get(usersController.findById)
   .put(usersController.update)
-  .delete(usersController.remove);
+
+//Matches with "/api/user/unapply/:id&:id1"
+router
+  .route('/unapply/:id&:id1')
+  .delete(usersController.removeApplied)
 
 module.exports = router;
