@@ -47,6 +47,7 @@ class JobPost extends Component {
 
   render() {
     const { classes } = this.props;
+    const bull = <span className={classes.bullet}>•</span>;
 
     return (
       <>
@@ -54,7 +55,22 @@ class JobPost extends Component {
         <div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
             <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto', marginTop: "10px" }} elevation={1}>
-            <Typography variant='h4'>Job Posts</Typography>
+              <Typography variant="h5" component="h2">
+                Job Posts
+                </Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                Start the search for your next employee
+                </Typography>
+                <br />
+              <Typography component="p">
+                {bull} Reach millions of job seekers today
+                    <br />
+                {bull} Post jobs for free
+                    <br />
+                {bull} Mobile optimized job view
+                    <br />
+                {bull} Exposure across the the employ.me network
+                </Typography>
             <br />
             <CreatePostModal pullMongoUserData={this.props.pullMongoUserData} mongo_id={this.props.mongo_id} />
             </Paper>
