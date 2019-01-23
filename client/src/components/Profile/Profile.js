@@ -36,6 +36,7 @@ class Profile extends Component {
     return (
 
       <>
+      
         {
           this.props.mongo_id !== "" ? (
             <Card className={classes.card}>

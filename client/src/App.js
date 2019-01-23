@@ -8,7 +8,9 @@ import Footer from './components/Footer'
 import JobPost from './components/JobPost'
 import Login from './components/Login'
 import Profile from './components/Profile'
-import Axios from 'axios';
+import Axios from 'axios'
+import { withStyles } from '@material-ui/core/styles'
+import Proptypes from 'prop-types'
 
 firebase.initializeApp({
   apiKey: "AIzaSyCduj200TnPkn1GH9LbuPj3CrRPMwGpq4Q",
@@ -18,6 +20,7 @@ firebase.initializeApp({
   storageBucket: "employme2-94283.appspot.com",
   messagingSenderId: "233537031765"
 })
+
 const uiConfig = {
   signInFlow: 'popup',
   signInSuccessUrl: '/profile',
@@ -153,6 +156,7 @@ class App extends Component {
       })
   }
 
+
   render() {
 
     return (
@@ -183,9 +187,9 @@ class App extends Component {
                 state={this.state.state}
               />} />
               <Route path='/jobpost' component={() => <JobPost jobs_posted={this.state.jobs_posted} mongo_id={this.state.mongo_id} pullMongoUserData={this.pullMongoUserData} />} />
-              <Route path='/applied' component={() => <Applied 
-              mongo_id={this.state.mongo_id}
-              firebase_id={this.state.firebase_id}
+              <Route path='/applied' component={() => <Applied
+                mongo_id={this.state.mongo_id}
+                firebase_id={this.state.firebase_id}
               />} />
             </div>
             <Footer />
