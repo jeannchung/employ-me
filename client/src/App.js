@@ -182,7 +182,7 @@ class App extends Component {
                 city={this.state.city}
                 state={this.state.state}
               />} />
-              <Route path='/jobpost' component={() => <JobPost />} />
+              <Route path='/jobpost' component={() => <JobPost jobs_posted={this.state.jobs_posted} mongo_id={this.state.mongo_id} pullMongoUserData={this.pullMongoUserData} />} />
               <Route path='/applied' component={() => <Applied 
               mongo_id={this.state.mongo_id}
               firebase_id={this.state.firebase_id}
