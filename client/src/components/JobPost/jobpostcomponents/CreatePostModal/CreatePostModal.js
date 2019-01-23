@@ -132,14 +132,6 @@ class CreatePostModal extends Component {
               onChange={this.handleDropdown}
               options={salary}
             />
-            {/* <TextField
-              margin="dense"
-              id="salary"
-              label="Salary"
-              type="text"
-              onChange={this.handleChange}
-              fullWidth
-            /> */}
             <TextField
               margin="dense"
               id="description"
