@@ -11,9 +11,8 @@ import Axios from 'axios'
 
 const styles = theme => ({
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    margin: '0px',
+    padding: '0px',
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -60,8 +59,8 @@ const styles = theme => ({
     backgroundColor: "#556B2F",
   },
   button: {
-    // borderColor: "#82b3c9",
     backgroundColor: "#82b3c9",
+    opacity: .7,
     '&:hover': {
       backgroundColor: "#b3e5fc",
     },
@@ -133,13 +132,15 @@ class Home extends Component {
     const { classes } = this.props;
 
     return (
+      <>
       <div>
+        <img src="./home-pic-horizontal.png" alt="home-pic" style={{ maxWidth: '110%', margin: '-1rem', overflow: 'hidden', marginBottom: '10px' }} />
         {/* Search Form */}
         <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }} elevation={1}>
-          <Typography variant="h5" component="h3">
-            <img src="./eme-logo.png" alt='Employ.Me' style={{ width: '60px', height: '60px' }} ></img>
+          {/* <Typography variant="h5" component="h3">
+            <img src="./eme-logo-thick.png" alt='Employ.Me' style={{ width: '60px', height: '60px' }} ></img>
             employ.me For Employees
-          </Typography>
+          </Typography> */}
           <Typography component="p">
             Search for jobs, read career advice from Employ.me's job experts, and the best employees to fill your roles.
           </Typography>
@@ -194,6 +195,7 @@ class Home extends Component {
 
 
       </div>
+      </>
     );
   }
 }

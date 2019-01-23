@@ -31,6 +31,9 @@ const styles = {
   btnleft: {
     marginLeft: 80,
   },
+  btnright: {
+    marginLeft: 25,
+  }
 };
 
 
@@ -51,6 +54,7 @@ class Login extends Component {
 
     return (
       <>
+        <img src="./connection-desk-horizontal.png" alt="home-pic" style={{ maxWidth: '109%', maxHeight: '50%', padding: 0, margin: '-1rem', overflow: 'visible', marginBottom: '10px' }} />
         <Card className={classes.card}>
           <CardContent>
             <form className={classes.container} noValidate autoComplete="off">
@@ -79,7 +83,7 @@ class Login extends Component {
                   <Button variant="outlined" className={classes.btnleft}>Register</Button>
                 </Grid>
                 <Grid item xs={6}>
-                  <Button variant="outlined" className={classes.button}>Login</Button>
+                  <Button variant="outlined" className={classes.btnright}>Login</Button>
                 </Grid>
               </Grid>
             </form>

@@ -57,7 +57,6 @@ const styles = theme => ({
     backgroundColor: "#556B2F",
   },
   button: {
-    // borderColor: "#82b3c9",
     backgroundColor: "#82b3c9",
     '&:hover': {
       backgroundColor: "#b3e5fc",
@@ -119,6 +118,8 @@ class Home extends Component {
     console.log(this.state.isJobsApplied)
 
     return (
+      <>
+      <img src="./connection-desk.png" alt="home-pic" style={{ maxWidth: '100%' }} />
       <div>
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
@@ -150,6 +151,7 @@ class Home extends Component {
           }
         </div>
       </div>
+      </>
     );
   }
 }

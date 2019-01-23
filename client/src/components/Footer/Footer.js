@@ -13,9 +13,19 @@ const styles = theme => ({
   root: {
     position: 'absolute',
     bottom: '0',
-    width: '100%',
+    width: '102%',
+    overflow: 'visible',
     backgroundColor: '#f9a825',
-    color: 'black'
+    color: 'black',
+    opacity: .8,
+  },
+  footerLink: {
+    '&:hover': {
+      backgroundColor: "#82b3c9",
+      opacity: 0.8,
+      borderRadius: 10,
+      width: '50%',
+    }
   },
   paper: {
     position: 'absolute',
@@ -53,10 +63,10 @@ class Footer extends React.Component {
     return (
       <>
         <BottomNavigation value={value} onChange={this.handleChange} showLabels className={classes.root}>
-          <BottomNavigationAction style={{ color: 'white' }} label="About Us" value="About Us" onClick={this.handleClickOpen('paper')} />
-          <BottomNavigationAction style={{ color: 'white' }} label="Contact Us" value="Contact Us" onClick={this.handleClickOpen('paper')} />
-          <BottomNavigationAction style={{ color: 'white' }} label="Terms of Use" value="Terms of Use" onClick={this.handleClickOpen('paper')} />
-          <BottomNavigationAction style={{ color: 'white' }} label="Privacy Policy" value="Privacy Policy" onClick={this.handleClickOpen('paper')} />
+          <BottomNavigationAction style={{ color: 'white' }} className={classes.footerLink} label="About Us" value="About Us" onClick={this.handleClickOpen('paper')} />
+          <BottomNavigationAction style={{ color: 'white' }} className={classes.footerLink} label="Contact Us" value="Contact Us" onClick={this.handleClickOpen('paper')} />
+          <BottomNavigationAction style={{ color: 'white' }} className={classes.footerLink} label="Terms of Use" value="Terms of Use" onClick={this.handleClickOpen('paper')} />
+          <BottomNavigationAction style={{ color: 'white' }} className={classes.footerLink} label="Privacy Policy" value="Privacy Policy" onClick={this.handleClickOpen('paper')} />
         </BottomNavigation>
 
         <Dialog
