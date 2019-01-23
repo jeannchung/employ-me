@@ -15,37 +15,48 @@ import Hidden from '@material-ui/core/Hidden'
 const styles = theme => ({
   root: {
     width: '100%',
+    height: '0px'
   },
   link: {
     textDecoration: 'none',
   },
-  grow: {
-    flexGrow: 1,
+grow: {
+  flexGrow: 1,
   },
-  menuButton: {
-    marginLeft: -12,
+menuButton: {
+  marginLeft: -12,
     marginRight: 20,
   },
-  menuItem: {
-    fontSize: 14,
-     '&:hover': {
-      backgroundColor: '#e6ffff'
-    }
+menuItem: {
+  fontSize: 14,
+    '&:hover': {
+    backgroundColor: '#e6ffff'
+  }
+},
+  button: {
+    '&:hover': {
+      backgroundColor: "#82b3c9",
+      opacity: '0.5', 
+    },
   },
-  inputRoot: {
-    color: 'inherit',
+inputRoot: {
+  color: 'inherit',
     width: '100%',
   },
-  sectionDesktop: {
-    display: 'none',
+sectionDesktop: {
+  display: 'none',
     [theme.breakpoints.up('md')]: {
-      display: 'flex',
+    display: 'flex',
     },
-    logoSize: {
-      width: '100px',
-      height: '100px'
+  },
+  avatar: {
+    backgroundColor: 'black',
+    opacity: 0.7,
+    '&:hover': {
+      backgroundColor: "#82b3c9",
+      opacity: 0.8,
     },
-  }
+}
 })
 
 class Navbar extends Component {
@@ -86,24 +97,24 @@ class Navbar extends Component {
           </Link>
 
           <Link to='/' className={classes.link}>
-            <MenuItem onClick={this.handleMenuClose}>Home</MenuItem>
+            <MenuItem onClick={this.handleMenuClose} className={classes.menuItem}>Home</MenuItem>
           </Link>
           {
             this.props.employer ? (
 
               <Link to='/jobpost' className={classes.link}>
-                <MenuItem onClick={this.handleMenuClose}>Jobs Posted</MenuItem>
+                <MenuItem onClick={this.handleMenuClose} className={classes.menuItem}>Jobs Posted</MenuItem>
               </Link>
             )
               :
               (
                 <Link to='/applied' className={classes.link}>
-                  <MenuItem onClick={this.handleMenuClose}>Jobs Applied</MenuItem>
+                  <MenuItem onClick={this.handleMenuClose} className={classes.menuItem}>Jobs Applied</MenuItem>
                 </Link>
               )
           }
           <Link to='/' className={classes.link}>
-            <MenuItem onClick={this.handleSignOut}>Log Out</MenuItem>
+            <MenuItem onClick={this.handleSignOut} className={classes.menuItem}>Log Out</MenuItem>
           </Link>
         </div>
       </Menu>
@@ -111,11 +122,11 @@ class Navbar extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" style={{ backgroundColor: '#f9a825' }}>
+        <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none' }}>
           <Toolbar variant="dense">
             <Link to='/' className={classes.link}>
-              <Typography variant="h6" color="inherit" noWrap style={{ color: 'white' }}>
-                <img src="./eme-logo.png" alt='Employ.Me' style={{ width: '60px', height: '60px' }} ></img>
+              <Typography variant="h6" color="inherit" noWrap style={{ color: 'black' }}>
+                <img src="./eme-logo-thick.png" alt='Employ.Me' style={{ width: '60px', height: '60px' }} ></img>
                 <Hidden mdDown>
                   employ.me
              </Hidden>
@@ -124,14 +135,14 @@ class Navbar extends Component {
             <div className={classes.grow} />
             {
               this.props.employer ? (
-                <Link to='/jobpost' style={{ color: 'white',textDecoration:'none' }}>
-                  Employer
+                <Link to='/jobpost' style={{ color: 'black', textDecoration: 'none', marginLeft: '10px', marginRight: '10px' }}>
+                  Employer 
                 </Link>
               ) : ''
             }
             {this.props.user === false ?
-              <Link to='/login' style={{ color: 'white' }}>
-                <Button variant="outlined" style={{ color: 'white', border: '1px solid white' }} className={classes.button}>
+              <Link to='/login' style={{ color: 'black' }}>
+                <Button variant="outlined" style={{ color: 'black', border: '1px solid black', backgroundColor: '#82b3c9', opacity: .6 }} className={classes.button}>
                   Login/Sign Up
                 </Button>
               </Link>
@@ -142,6 +153,7 @@ class Navbar extends Component {
                   aria-haspopup="true"
                   onClick={this.handleProfileMenuOpen}
                   color="inherit"
+                  className={classes.avatar}
                 >
                   <AccountCircle />
                 </IconButton>
