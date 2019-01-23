@@ -6,11 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import axios from 'axios'
 
 class CreatePostModal extends Component {
   state = {
     open: false,
-    input: {}
+    input: {
+      employer_id: this.props.mongo_id
+    }
   }
 
   handleChange = (event) => {
@@ -20,14 +23,28 @@ class CreatePostModal extends Component {
     this.setState({input: tempObj})
   }
 
+  
   handleClickOpen = () => {
     this.setState({ open: true });
   };
-
+  
   handleClose = () => {
     console.log(this.state.input)
     this.setState({ open: false });
   };
+  
+  handleSubmit = () => {
+    console.log('handlesubmit')
+    console.log(this.state.input)
+    axios.post("/api/job/", this.state.input)
+      .then(r => {
+        console.log(r.data)
+      }).catch(err => { console.log(err) })
+
+    this.handleClose()
+    this.props.pullMongoUserData()
+  
+  }
 
   render() {
     return (
@@ -56,7 +73,7 @@ class CreatePostModal extends Component {
             />
             <TextField
               margin="dense"
-              id="jobSalary"
+              id="salary"
               label="Salary"
               type="text"
               onChange={this.handleChange}
@@ -64,7 +81,7 @@ class CreatePostModal extends Component {
             />
             <TextField
               margin="dense"
-              id="jobDescription"
+              id="description"
               label="Description"
               type="text"
               onChange={this.handleChange}
@@ -72,7 +89,7 @@ class CreatePostModal extends Component {
             />
             <TextField
               margin="dense"
-              id="jobRequirements"
+              id="requirements"
               label="Requirements"
               type="text"
               onChange={this.handleChange}
@@ -80,7 +97,7 @@ class CreatePostModal extends Component {
             />
             <TextField
               margin="dense"
-              id="jobQualifications"
+              id="qualifications"
               label="Qualifications"
               type="text"
               onChange={this.handleChange}
@@ -88,15 +105,7 @@ class CreatePostModal extends Component {
             />
             <TextField
               margin="dense"
-              id="jobEmployerName"
-              label="Employer"
-              type="text"
-              onChange={this.handleChange}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              id="jobCity"
+              id="city"
               label="City"
               type="text"
               onChange={this.handleChange}
@@ -104,7 +113,7 @@ class CreatePostModal extends Component {
             />
             <TextField
               margin="dense"
-              id="jobContactName"
+              id="contact"
               label="Contact Name"
               type="text"
               onChange={this.handleChange}
@@ -112,7 +121,7 @@ class CreatePostModal extends Component {
             />
             <TextField
               margin="dense"
-              id="jobContactEmail"
+              id="email"
               label="Contact Email"
               type="email"
               onChange={this.handleChange}
@@ -120,7 +129,7 @@ class CreatePostModal extends Component {
             />
             <TextField
               margin="dense"
-              id="jobContactNumber"
+              id="telephone"
               label="Contact Number"
               type="tel"
               onChange={this.handleChange}
@@ -131,7 +140,7 @@ class CreatePostModal extends Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleSubmit} color="primary">
               Submit
             </Button>
           </DialogActions>
