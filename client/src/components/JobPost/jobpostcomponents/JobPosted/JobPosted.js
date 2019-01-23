@@ -17,14 +17,13 @@ const styles = {
 function JobPosted(props) {
     const { classes } = props;
     return (
-        <Card className={classes.card}>
+        <Card key={props.key} className={classes.card}>
             <CardContent>  
                 <h4 className={classes.noMargin}>{props.jobTitle}</h4>
                 <h5 className={classes.noMargin}>Salary</h5> {props.jobSalary}<br />
                 <h5 className={classes.noMargin}>Description</h5> {props.jobDescription}<br />
                 <h5 className={classes.noMargin}>Requirements</h5> {props.jobRequirements}<br />
                 <h5 className={classes.noMargin}>Qualifications</h5> {props.jobQualifications}<br />
-                <h5 className={classes.noMargin}>Employer</h5> {props.jobEmployerName}<br />
                 <h5 className={classes.noMargin}>City</h5> {props.jobCity}<br />
                 <h5 className={classes.noMargin}>Contact</h5>{props.jobContactName}<br />
                 <h5 className={classes.noMargin}>Email</h5>{props.jobContactEmail}<br />
