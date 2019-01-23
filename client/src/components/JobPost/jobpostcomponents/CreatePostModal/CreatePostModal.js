@@ -7,10 +7,54 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios'
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom'
+import Select from 'react-select';
+
+
+
+const styles = theme => ({
+  startButton: {
+    borderColor: "#82b3c9",
+    color: '#82b3c9',
+    '&:hover': {
+      backgroundColor: "#82b3c9",
+      color: 'black',
+    },
+  },
+  link: {
+    textDecoration: 'none',
+  },
+  button: {
+    backgroundColor: "#82b3c9",
+    '&:hover': {
+      backgroundColor: "#b3e5fc",
+    },
+  },
+})
+const salary = [
+  { label: '$40,000-$45,000' },
+  { label: '$45,000-$50,000' },
+  { label: '$50,000-$55,000' },
+  { label: '$55,000-$60,000' },
+  { label: '$60,000-$65,000' },
+  { label: '$65,000-$70,000' },
+  { label: '$70,000-$75,000' },
+  { label: '$75,000-$80,000' },
+  { label: '$80,000-$85,000' },
+  { label: '$85,000-$90,000' },
+  { label: '$90,000-$95,000' },
+  { label: '$95,000-$100,000' },
+  { label: '$100,000-$110,000' },
+  { label: '$110,000-$120,000' },
+  { label: '$120,000++' },
+]
 
 class CreatePostModal extends Component {
   state = {
     open: false,
+    salaryRange: null,
     input: {
       employer_id: this.props.mongo_id
     }
@@ -32,6 +76,12 @@ class CreatePostModal extends Component {
     console.log(this.state.input)
     this.setState({ open: false });
   };
+  handleDropdown = (salaryRange) => {
+    const tempObj = this.state.input
+    tempObj.salary =
+      salaryRange.label
+    this.setState({ input: tempObj, salaryRange })
+  }
   
   handleSubmit = () => {
     console.log('handlesubmit')
@@ -47,9 +97,12 @@ class CreatePostModal extends Component {
   }
 
   render() {
+    const { salaryRange } = this.state;
+    const { classes } = this.props;
+
     return (
       <div>
-        <Button style={{marginBottom: '1em'}} variant="outlined" color="primary" onClick={this.handleClickOpen}>
+        <Button style={{ marginBottom: '1em' }} variant="outlined" onClick={this.handleClickOpen} className={classes.startButton}>
           Create New Post
         </Button>
         <Dialog
@@ -71,13 +124,13 @@ class CreatePostModal extends Component {
               onChange={this.handleChange}
               fullWidth
             />
-            <TextField
-              margin="dense"
+            <Select
+              placeholder='Salary'
               id="salary"
               label="Salary"
-              type="text"
-              onChange={this.handleChange}
-              fullWidth
+              value={salaryRange}
+              onChange={this.handleDropdown}
+              options={salary}
             />
             <TextField
               margin="dense"
@@ -137,17 +190,23 @@ class CreatePostModal extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose} className={classes.button}>
               Cancel
             </Button>
-            <Button onClick={this.handleSubmit} color="primary">
+            <Link to="/jobpost" className={classes.link} >
+            <Button onClick={this.handleSubmit} className={classes.button}>
               Submit
             </Button>
+            </Link>
           </DialogActions>
         </Dialog>
       </div>
     );
   }
 }
+CreatePostModal.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
-export default CreatePostModal
+export default withStyles(styles)(CreatePostModal);
+

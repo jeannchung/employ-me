@@ -9,8 +9,6 @@ import JobPost from './components/JobPost'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import Axios from 'axios'
-import { withStyles } from '@material-ui/core/styles'
-import Proptypes from 'prop-types'
 
 firebase.initializeApp({
   apiKey: "AIzaSyCduj200TnPkn1GH9LbuPj3CrRPMwGpq4Q",
