@@ -5,6 +5,8 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import JobCard from './JobCardComponent/JobCard'
 import axios from 'axios'
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   container: {
@@ -56,12 +58,23 @@ const styles = theme => ({
   avatar: {
     backgroundColor: "#556B2F",
   },
+   link: {
+    textDecoration: 'none',
+  },
   button: {
     backgroundColor: "#82b3c9",
     '&:hover': {
       backgroundColor: "#b3e5fc",
     },
-  }
+  },
+  startButton: {
+    borderColor: "#82b3c9",
+    color: '#82b3c9',
+    '&:hover': {
+      backgroundColor: "#82b3c9",
+      color: 'black',
+    },
+  },
 })
 
 
@@ -119,38 +132,43 @@ class Home extends Component {
 
     return (
       <>
-      <img src="./connection-desk.png" alt="home-pic" style={{ maxWidth: '100%' }} />
-      <div>
+        <img src="./connection-desk-horizontal.png" alt="home-pic" style={{ maxWidth: '109%', maxHeight: '50%', padding: 0, margin: '-1rem', overflow: 'visible', marginBottom: '10px' }} />
+        <div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
-          {
-            this.state.isJobsApplied === false ?
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
+            {
+              this.state.isJobsApplied === false ?
 
-              <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto', marginTop: "10px" }} elevation={1}>
-                <Typography> You have not Applied to Any Jobs.</Typography>
-              </Paper>
+                <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto', marginTop: "10px" }} elevation={1}>
+                  <Typography> You have not applied to any jobs.</Typography>
+                  <Link to="/" className={classes.link}>
+                    <Button variant="outlined" className={classes.startButton} >
+                      Get Started
+                   </Button>
+                  </Link>
+                </Paper>
 
-              :
-              this.state.jobs_applied.map(job => (
-                <JobCard
-                  handleClick={this.handleClick}
-                  mongo_id={this.props.mongo_id}
-                  firebase_id={this.props.firebase_id}
-                  jobkey={job._id}
-                  title_name={job.title_name}
-                  company_name={job.company_name}
-                  city={job.city}
-                  industry={job.industry}
-                  description={job.description}
-                  createdAt={job.createdAt}
-                  requirements={job.requirements}
-                  qualifications={job.qualifications}
-                  salary={job.salary}
-                />
-              ))
-          }
+                :
+                this.state.jobs_applied.map(job => (
+                  <JobCard
+                    handleClick={this.handleClick}
+                    mongo_id={this.props.mongo_id}
+                    firebase_id={this.props.firebase_id}
+                    jobkey={job._id}
+                    title_name={job.title_name}
+                    company_name={job.company_name}
+                    city={job.city}
+                    industry={job.industry}
+                    description={job.description}
+                    createdAt={job.createdAt}
+                    requirements={job.requirements}
+                    qualifications={job.qualifications}
+                    salary={job.salary}
+                  />
+                ))
+            }
+          </div>
         </div>
-      </div>
       </>
     );
   }

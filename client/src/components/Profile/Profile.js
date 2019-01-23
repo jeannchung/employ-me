@@ -36,7 +36,8 @@ class Profile extends Component {
     return (
 
       <>
-      
+          <img src="./connection-desk-horizontal.png" alt="home-pic" style={{ maxWidth: '109%', maxHeight: '50%', padding: 0, margin: '-1rem', overflow: 'visible', marginBottom: '10px' }} />
+
         {
           this.props.mongo_id !== "" ? (
             <Card className={classes.card}>
