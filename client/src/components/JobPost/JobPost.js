@@ -72,7 +72,7 @@ class JobPost extends Component {
                 {bull} Exposure across the the employ.me network
                 </Typography>
             <br />
-            <CreatePostModal pullMongoUserData={this.props.pullMongoUserData} mongo_id={this.props.mongo_id} />
+            <CreatePostModal pullMongoUserData={this.props.pullMongoUserData} mongo_id={this.props.mongo_id} company_name={this.props.company_name} />
             </Paper>
             </div>
             {this.props.jobs_posted.map(post => <JobPosted

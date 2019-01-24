@@ -123,7 +123,7 @@ class JobCard extends Component {
               <Typography paragraph>More Information</Typography>
               <Typography paragraph>Requirements: {this.props.requirements}</Typography>
               <Typography paragraph>Qualifications: {this.props.qualifications}</Typography>
-              <Typography paragraph>Salary Range: ${this.props.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
+              <Typography paragraph>Salary Range: {this.props.salary}</Typography>
             </CardContent>
           </Collapse>
         </Card>
