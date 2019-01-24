@@ -173,6 +173,7 @@ class App extends Component {
               <Route path='/profile' component={() => <Profile
                 pullMongoUserData={this.pullMongoUserData}
                 user={this.state.user}
+                employer={this.state.employer}
                 mongo_id={this.state.mongo_id}
                 firebase_id={this.state.firebase_id}
                 name={this.state.name}
@@ -183,6 +184,10 @@ class App extends Component {
                 skills={this.state.skills}
                 city={this.state.city}
                 state={this.state.state}
+                company_name={this.state.company_name}
+                company_info={this.state.company_info}
+                industry={this.state.industry}
+                address={this.state.address}
               />} />
               <Route path='/jobpost' component={() => <JobPost company_name={this.state.company_name} jobs_posted={this.state.jobs_posted} mongo_id={this.state.mongo_id} pullMongoUserData={this.pullMongoUserData} />} />
               <Route path='/applied' component={() => <Applied
