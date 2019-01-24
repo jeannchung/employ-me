@@ -56,7 +56,9 @@ class CreatePostModal extends Component {
     open: false,
     salaryRange: null,
     input: {
-      employer_id: this.props.mongo_id
+      employer_id: this.props.mongo_id,
+      createdAt: Date(),
+      company_name:this.props.company_name
     }
   }
 
@@ -131,6 +133,14 @@ class CreatePostModal extends Component {
               value={salaryRange}
               onChange={this.handleDropdown}
               options={salary}
+            />
+            <TextField
+              margin="dense"
+              id="industry"
+              label="Industry"
+              type="text"
+              onChange={this.handleChange}
+              fullWidth
             />
             <TextField
               margin="dense"
