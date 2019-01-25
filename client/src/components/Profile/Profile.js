@@ -11,7 +11,8 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
   card: {
     minWidth: 275,
-    display: "flex"
+    display: "flex",
+    margin: '1rem'
   },
   bullet: {
     display: 'inline-block',
@@ -37,7 +38,7 @@ class Profile extends Component {
     return (
 
       <>
-        <img src="./connection-desk-horizontal.png" alt="home-pic" style={{ maxWidth: '109%', maxHeight: '50%', padding: 0, margin: '-1rem', overflow: 'visible', marginBottom: '10px' }} />
+        <img src="./connection-desk-horizontal.png" alt="home-pic" style={{ maxWidth: '100vw', overflow: 'visible', marginBottom: '10px' }} />
 
         {
           this.props.mongo_id !== "" ? (

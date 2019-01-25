@@ -134,11 +134,11 @@ class Home extends Component {
     return (
       <>
       <div>
-        <img src="./home-pic-horizontal.png" alt="home-pic" style={{ maxWidth: '110%', margin: '-1rem', overflow: 'hidden', marginBottom: '10px' }} />
+        <img src="./home-pic-1.png" alt="home-pic" style={{ maxWidth: '100vw', overflow: 'visible', marginBottom: '10px' }} />
         {/* Search Form */}
-        <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }} elevation={1}>
+        <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto', margin:'1rem' }} elevation={1}>
           <Typography component="p">
-            Search for jobs, read career advice from Employ.me's job experts, and the best employees to fill your roles.
+            Search for jobs, read career advice from Employ.me's job experts, and find the best employees to fill your roles.
           </Typography>
           <form className={classes.container} noValidate autoComplete="off">
             <TextField

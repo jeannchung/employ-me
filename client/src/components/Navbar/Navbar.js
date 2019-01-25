@@ -56,7 +56,16 @@ sectionDesktop: {
       backgroundColor: "#82b3c9",
       opacity: 0.8,
     },
-}
+},
+  navEmployer: {
+    color: 'black',
+    textDecoration: 'none', 
+    marginLeft: '10px',
+    marginRight: '10px',
+    '&:hover': {
+      color: "#82b3c9",
+  },
+},
 })
 
 class Navbar extends Component {
@@ -124,18 +133,10 @@ class Navbar extends Component {
       <div className={classes.root}>
         <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none' }}>
           <Toolbar variant="dense">
-            <Link to='/' className={classes.link}>
-              <Typography variant="h6" color="inherit" noWrap style={{ color: 'black' }}>
-                <img src="./eme-logo-thick.png" alt='Employ.Me' style={{ width: '60px', height: '60px' }} ></img>
-                <Hidden mdDown>
-                  employ.me
-             </Hidden>
-              </Typography>
-            </Link>
             <div className={classes.grow} />
             {
               this.props.employer ? (
-                <Link to='/jobpost' style={{ color: 'black', textDecoration: 'none', marginLeft: '10px', marginRight: '10px' }}>
+                <Link to='/jobpost' className={classes.navEmployer}>
                   Employer 
                 </Link>
               ) : ''
