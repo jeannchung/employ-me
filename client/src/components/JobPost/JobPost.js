@@ -74,6 +74,7 @@ class JobPost extends Component {
                 <CreatePostModal pullMongoUserData={this.props.pullMongoUserData} mongo_id={this.props.mongo_id} company_name={this.props.company_name} />
               </Paper>
             </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
             {this.props.jobs_posted.map(job => (
               <JobCard
                 user={this.props.user}
@@ -92,6 +93,7 @@ class JobPost extends Component {
                 users_applied={job.users_applied}
               />
             ))}
+          </div>
           </div>
         </>
           )}

@@ -149,6 +149,7 @@ const styles = theme => ({
   },
   button: {
     backgroundColor: "#82b3c9",
+    color: 'white',
     opacity: .7,
     '&:hover': {
       backgroundColor: "#b3e5fc",

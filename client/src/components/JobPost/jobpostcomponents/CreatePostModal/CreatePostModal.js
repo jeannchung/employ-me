@@ -28,6 +28,7 @@ const styles = theme => ({
   },
   button: {
     backgroundColor: "#82b3c9",
+    color: 'white',
     '&:hover': {
       backgroundColor: "#b3e5fc",
     },
@@ -91,6 +92,7 @@ class CreatePostModal extends Component {
     axios.post("/api/job/", this.state.input)
       .then(r => {
         console.log(r.data)
+        this.props.pullMongoUserData()
       }).catch(err => { console.log(err) })
 
     this.handleClose()

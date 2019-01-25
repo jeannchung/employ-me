@@ -30,7 +30,7 @@ const styles = {
     marginBottom: 12,
   },
   btnleft: {
-    marginLeft: 80,
+    marginLeft: 50,
   },
   btnright: {
     marginLeft: 25,
@@ -81,10 +81,10 @@ class Login extends Component {
               </Grid>
               <Grid container spacing={24}>
                 <Grid item xs={6}>
-                  <Button variant="outlined" className={classes.btnleft}>Register</Button>
+                  <Button variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9' }} className={classes.btnleft}>Register</Button>
                 </Grid>
                 <Grid item xs={6}>
-                  <Button variant="outlined" className={classes.btnright}>Login</Button>
+                  <Button variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9' }} className={classes.btnright}>Login</Button>
                 </Grid>
               </Grid>
             </form>

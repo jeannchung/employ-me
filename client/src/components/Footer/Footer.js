@@ -15,13 +15,13 @@ const styles = theme => ({
     bottom: '0',
     width: '100%',
     overflow: 'visible',
-    backgroundColor: '#f9a825',
+    backgroundColor: '#82b3c9',
     color: 'black',
     opacity: .8,
   },
   footerLink: {
     '&:hover': {
-      backgroundColor: "#82b3c9",
+      backgroundColor: "#b3e5fc",
       opacity: 0.8,
       borderRadius: 10,
       width: '50%',

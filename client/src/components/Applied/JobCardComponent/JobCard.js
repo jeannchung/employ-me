@@ -42,9 +42,9 @@ const styles = theme => ({
     justifyContent: 'center',
   },
   card: {
-    maxWidth: '100%',
-    minWidth: '100%',
-    marginTop: '10px',
+    maxWidth: '80%',
+    minWidth: '80%',
+    margin: '5px',
   },
   media: {
     height: 0,
@@ -107,7 +107,7 @@ class JobCard extends Component {
             <Typography>Posted: {moment().to(moment(this.props.createdAt))}</Typography>
           </CardContent>
           <CardActions className={classes.actions}>
-            <Button onClick={this.props.handleClick} value={this.props.jobkey} variant="contained" style={{ color: '#82b3c9', border: '1px solid #82b3c9' }} className={classes.button}>
+            <Button onClick={this.props.handleClick} value={this.props.jobkey} variant="outlined" style={{ color: '#82b3c9', border: '1px solid #82b3c9' }} className={classes.button}>
               <DeleteIcon onClick={this.props.handleClick} value={this.props.jobkey}/>
             </Button>
            
@@ -124,10 +124,10 @@ class JobCard extends Component {
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph>More Information</Typography>
-              <Typography paragraph>Requirements: {this.props.requirements}</Typography>
-              <Typography paragraph>Qualifications: {this.props.qualifications}</Typography>
-              <Typography paragraph>Salary Range: {this.props.salary}</Typography>
+              <Typography variant='h6'>More Information</Typography>
+              <Typography component='body2'>Requirements: {this.props.requirements}</Typography>
+              <Typography component='body2'>Qualifications: {this.props.qualifications}</Typography>
+              <Typography component='body2'>Salary Range: {this.props.salary}</Typography>
             </CardContent>
           </Collapse>
         </Card>
