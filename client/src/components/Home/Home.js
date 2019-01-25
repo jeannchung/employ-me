@@ -134,7 +134,7 @@ class Home extends Component {
     return (
       <>
       <div>
-        <img src="./home-pic-1.png" alt="home-pic" style={{ maxWidth: '100vw', overflow: 'visible', marginBottom: '10px' }} />
+        <img src="./home-pic.png" alt="home-pic" style={{ maxWidth: '100vw', overflow: 'visible', marginBottom: '10px' }} />
         {/* Search Form */}
         <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto', margin:'1rem' }} elevation={1}>
           <Typography component="p">
