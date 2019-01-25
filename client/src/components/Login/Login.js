@@ -16,6 +16,7 @@ const styles = {
     minWidth: 275,
     display: "flex",
     justifyContent: "center",
+    margin: '1rem'
   },
   bullet: {
     display: 'inline-block',
@@ -54,7 +55,7 @@ class Login extends Component {
 
     return (
       <>
-        <img src="./connection-desk-horizontal.png" alt="home-pic" style={{ maxWidth: '109%', maxHeight: '50%', padding: 0, margin: '-1rem', overflow: 'visible', marginBottom: '10px' }} />
+        <img src="./connection-desk-horizontal.png" alt="home-pic" style={{ maxWidth: '100vw', overflow: 'visible', marginBottom: '10px' }} />
         <Card className={classes.card}>
           <CardContent>
             <form className={classes.container} noValidate autoComplete="off">

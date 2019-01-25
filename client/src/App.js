@@ -162,7 +162,7 @@ class App extends Component {
         <Router>
           <div>
             <Navbar user={this.state.user} signOut={this.signOut} employer={this.state.employer} />
-            <div style={{ margin: '1rem' }}>
+            <div>
               <Route exact path='/' component={() => <Home
                 user={this.state.user}
                 firebase_id={this.state.firebase_id}
