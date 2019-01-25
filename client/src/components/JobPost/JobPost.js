@@ -50,7 +50,7 @@ class JobPost extends Component {
     if (this.props.mongo_id && this.props.employer) {
       return (
         <>
-          <img src="./connection-desk-horizontal.png" alt="home-pic" style={{ maxWidth: '109%', maxHeight: '50%', padding: 0, margin: '-1rem', overflow: 'visible', marginBottom: '10px' }} />
+          <img src="./connection-desk-horizontal.png" alt="home-pic" style={{ maxWidth: '100vw', overflow: 'visible', marginBottom: '10px' }} />
           <div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
               <Paper className={classes.root} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto', marginTop: "10px" }} elevation={1}>
@@ -74,6 +74,7 @@ class JobPost extends Component {
                 <CreatePostModal pullMongoUserData={this.props.pullMongoUserData} mongo_id={this.props.mongo_id} company_name={this.props.company_name} />
               </Paper>
             </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'auto' }}>
             {this.props.jobs_posted.map(job => (
               <JobCard
                 user={this.props.user}
@@ -92,6 +93,7 @@ class JobPost extends Component {
                 users_applied={job.users_applied}
               />
             ))}
+          </div>
           </div>
         </>
           )}

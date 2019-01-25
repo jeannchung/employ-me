@@ -15,11 +15,14 @@ import moment from 'moment'
 import Button from '@material-ui/core/Button'
 import ApplicantsModal from '../ApplicantsModal'
 import axios from 'axios'
+import CardTravelIcon from '@material-ui/icons/CardTravel'
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const styles = theme => ({
   card: {
-    width: '100%',
-    marginBottom: '1rem',
+    width: '80%',
+    margin: '5px',
   },
   actions: {
     display: 'flex',
@@ -35,7 +38,7 @@ const styles = theme => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: "#556B2F",
+    backgroundColor: "#82b3c9",
   }
 });
 
@@ -67,7 +70,7 @@ class JobCard extends Component {
           <CardHeader
             avatar={
               <Avatar aria-label="Recipe" className={classes.avatar}>
-                {this.props.title_name.match(/\b(\w)/g)}
+                <CardTravelIcon />
               </Avatar>
             }
             title={this.props.title_name}
@@ -79,9 +82,10 @@ class JobCard extends Component {
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
             <ApplicantsModal jobId={this.props._id} />
-            <Button onClick={() => this.handleEdit(this.props._id)} variant="outlined" style={{ color: '#556B2F', border: '1px solid #556B2F', marginRight: '0.5em' }} className={classes.button}> Edit </Button>
-            <Button onClick={() =>this.handleDelete(this.props._id)} variant="outlined" style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}> Delete </Button>
-
+            <Button onClick={() => this.handleEdit(this.props._id)}  variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9', marginRight: '0.5em' }}> Edit </Button>
+            <Button onClick={() => this.handleDelete(this.props._id)}  variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9' }}>
+            <DeleteIcon />
+             </Button>
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,
@@ -94,8 +98,8 @@ class JobCard extends Component {
             </IconButton>
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-            <CardContent style={{paddingTop: 0}}>
-              <Typography component='p' style={{marginBottom: '.75em'}}>More Information</Typography>
+            <CardContent style={{ paddingTop: 0 }}>
+              <Typography variant='subtitle2' style={{ fontSize: '14px'}}>More Information</Typography>
               <Typography component="p">Description: {this.props.description}</Typography>
               <Typography component="p">Requirements: {this.props.requirements}</Typography>
               <Typography component="p">Qualifications: {this.props.qualifications}</Typography>

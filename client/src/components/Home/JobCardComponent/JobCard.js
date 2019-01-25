@@ -42,9 +42,9 @@ const styles = theme => ({
     justifyContent: 'center',
   },
   card: {
-    maxWidth: '100%',
-    minWidth: '100%',
-    marginTop: '10px',
+    maxWidth: '80%',
+    minWidth: '80%',
+    margin: '5px',
   },
   media: {
     height: 0,
@@ -109,9 +109,9 @@ class JobCard extends Component {
             subheader={this.props.company_name + " - " + this.props.city}
           />
           <CardContent>
-            <Typography>Industry: {this.props.industry}</Typography>
-            <Typography component="p"> Description: {this.props.description}</Typography>
-            <Typography>Posted: {moment().to(moment(this.props.createdAt))}</Typography>
+            <Typography component='body2'>Industry: {this.props.industry}</Typography>
+            <Typography component="body2"> Description: {this.props.description}</Typography>
+            <Typography component='body2'>Posted: {moment().to(moment(this.props.createdAt))}</Typography>
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
 
@@ -127,11 +127,11 @@ class JobCard extends Component {
                       (() => {
                         if (this.state.isClicked === true) {
                           return (
-                            <Button value={this.props.jobkey} variant="contained" disabled style={{ color: '#82b3c9', border: '1px solid #82b3c9' }} className={classes.button}> Applied </Button>
+                            <Button value={this.props.jobkey} variant="contained" disabled style={{ color: '#82b3c9' }} className={classes.button}> Applied </Button>
                           )
                         } else {
                           return (
-                            this.props.appliedStatus === true ? <Button value={this.props.jobkey} variant="contained" disabled style={{ color: '#82b3c9', border: '1px solid black' }} className={classes.button}> Applied </Button> :
+                            this.props.appliedStatus === true ? <Button value={this.props.jobkey} variant="contained" disabled style={{ color: '#82b3c9' }} className={classes.button}> Applied </Button> :
                               <Button onClick={this.handleClick} value={this.props.jobkey} variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9'}} className={classes.button}> Apply </Button>
                           )
                         }
@@ -155,10 +155,10 @@ class JobCard extends Component {
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph>More Information</Typography>
-              <Typography paragraph>Requirements: {this.props.requirements}</Typography>
-              <Typography paragraph>Qualifications: {this.props.qualifications}</Typography>
-              <Typography paragraph>Salary Range: {this.props.salary}</Typography>
+              <Typography variant='body2'>More Information</Typography>
+              <Typography component='p'>Requirements: {this.props.requirements}</Typography>
+              <Typography component='p'>Qualifications: {this.props.qualifications}</Typography>
+              <Typography component='p'>Salary Range: {this.props.salary}</Typography>
             </CardContent>
           </Collapse>
         </Card>
