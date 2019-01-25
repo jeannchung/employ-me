@@ -9,8 +9,6 @@ import JobPost from './components/JobPost'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import Axios from 'axios'
-import { withStyles } from '@material-ui/core/styles'
-import Proptypes from 'prop-types'
 
 firebase.initializeApp({
   apiKey: "AIzaSyCduj200TnPkn1GH9LbuPj3CrRPMwGpq4Q",
@@ -164,7 +162,7 @@ console.log(this.state.jobs_posted)
         <Router>
           <div>
             <Navbar user={this.state.user} signOut={this.signOut} employer={this.state.employer} />
-            <div style={{ margin: '1rem' }}>
+            <div>
               <Route exact path='/' component={() => <Home
                 user={this.state.user}
                 firebase_id={this.state.firebase_id}
@@ -175,6 +173,7 @@ console.log(this.state.jobs_posted)
               <Route path='/profile' component={() => <Profile
                 pullMongoUserData={this.pullMongoUserData}
                 user={this.state.user}
+                employer={this.state.employer}
                 mongo_id={this.state.mongo_id}
                 firebase_id={this.state.firebase_id}
                 name={this.state.name}
@@ -185,6 +184,10 @@ console.log(this.state.jobs_posted)
                 skills={this.state.skills}
                 city={this.state.city}
                 state={this.state.state}
+                company_name={this.state.company_name}
+                company_info={this.state.company_info}
+                industry={this.state.industry}
+                address={this.state.address}
               />} />
               <Route path='/jobpost' component={() => <JobPost company_name={this.state.company_name} industry={this.state.industry} jobs_posted={this.state.jobs_posted} mongo_id={this.state.mongo_id} employer={this.state.employer} pullMongoUserData={this.pullMongoUserData} />} />
               <Route path='/applied' component={() => <Applied

@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var JobsSchema = new Schema({
   title_name: String,
-  salary: Number,
+  salary: String,
   description: String,
   requirements: String,
   qualifications: String,

@@ -11,6 +11,7 @@ import Collapse from '@material-ui/core/Collapse'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import CardTravelIcon from '@material-ui/icons/CardTravel'
 import moment from 'moment'
 import Button from '@material-ui/core/Button'
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -64,6 +65,9 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: "#556B2F",
+  },
+  avatarJob: {
+    backgroundColor: "#82b3c9",
   }
 });
 
@@ -90,8 +94,8 @@ class JobCard extends Component {
         <Card key={this.props.jobkey} className={classes.card}>
           <CardHeader
             avatar={
-              <Avatar aria-label="Recipe" className={classes.avatar}>
-                {this.props.title_name.match(/\b(\w)/g)}
+              <Avatar aria-label="Recipe" className={classes.avatarJob}>
+                <CardTravelIcon />
               </Avatar>
             }
             title={this.props.title_name}
@@ -103,7 +107,7 @@ class JobCard extends Component {
             <Typography>Posted: {moment().to(moment(this.props.createdAt))}</Typography>
           </CardContent>
           <CardActions className={classes.actions}>
-            <Button onClick={this.props.handleClick} value={this.props.jobkey} variant="contained" style={{ color: '#556B2F', border: '1px solid #556B2F' }} className={classes.button}>
+            <Button onClick={this.props.handleClick} value={this.props.jobkey} variant="contained" style={{ color: '#82b3c9', border: '1px solid #82b3c9' }} className={classes.button}>
               <DeleteIcon onClick={this.props.handleClick} value={this.props.jobkey}/>
             </Button>
            
@@ -123,7 +127,7 @@ class JobCard extends Component {
               <Typography paragraph>More Information</Typography>
               <Typography paragraph>Requirements: {this.props.requirements}</Typography>
               <Typography paragraph>Qualifications: {this.props.qualifications}</Typography>
-              <Typography paragraph>Salary Range: ${this.props.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
+              <Typography paragraph>Salary Range: {this.props.salary}</Typography>
             </CardContent>
           </Collapse>
         </Card>

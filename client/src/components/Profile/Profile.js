@@ -11,7 +11,8 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
   card: {
     minWidth: 275,
-    display: "flex"
+    display: "flex",
+    margin: '1rem'
   },
   bullet: {
     display: 'inline-block',
@@ -33,42 +34,75 @@ class Profile extends Component {
     const { classes } = this.props;
     const bull = <span className={classes.bullet}>•</span>;
 
+
     return (
 
       <>
-      
+        <img src="./connection-desk-horizontal.png" alt="home-pic" style={{ maxWidth: '100vw', overflow: 'visible', marginBottom: '10px' }} />
+
         {
           this.props.mongo_id !== "" ? (
-            <Card className={classes.card}>
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  {this.props.name}'s Profile
+
+            this.props.employer === false ? (
+              <Card className={classes.card}>
+                <CardContent>
+                  <Typography variant="h5" component="h2">
+                    {this.props.name}'s Profile
                 </Typography>
-                <Typography component="p">
-                  Email: {this.props.email}
-                </Typography>
-                <Typography component="p">
-                  Phone Number: {this.props.phone_number}
-                </Typography>
-                <Typography component="p">
-                  Experience: {this.props.work_exp}
-                </Typography>
-                <Typography component="p">
-                  Education: {this.props.higher_ed}
-                </Typography>
-                <Typography component="p">
-                  Skills: {this.props.skills}
-                </Typography>
-                <Typography component="p">
-                  City: {this.props.city}
-                </Typography>
-                <Typography component="p">
-                  State: {this.props.state}
-                </Typography>
-                <CardActions>
-                </CardActions>
-              </CardContent>
-            </Card>
+                  <Typography component="p">
+                    Email: {this.props.email}
+                  </Typography>
+                  <Typography component="p">
+                    Phone Number: {this.props.phone_number}
+                  </Typography>
+                  <Typography component="p">
+                    Experience: {this.props.work_exp}
+                  </Typography>
+                  <Typography component="p">
+                    Education: {this.props.higher_ed}
+                  </Typography>
+                  <Typography component="p">
+                    Skills: {this.props.skills}
+                  </Typography>
+                  <Typography component="p">
+                    City: {this.props.city}
+                  </Typography>
+                  <Typography component="p">
+                    State: {this.props.state}
+                  </Typography>
+                  <CardActions>
+                  </CardActions>
+                </CardContent>
+              </Card>
+            ) : (
+                <Card className={classes.card}>
+                  <CardContent>
+                    <Typography variant="h5" component="h2">
+                      {this.props.company_name}'s Profile
+                    </Typography>
+                    <Typography component="p">
+                      Industry: {this.props.industry}
+                    </Typography>
+                    <Typography component="p">
+                      Company Info: {this.props.company_info}
+                    </Typography>
+                    <Typography component="p">
+                      Contact: {this.props.name}
+                    </Typography>
+                    <Typography component="p">
+                      Address: {this.props.address}
+                    </Typography>
+                    <Typography component="p">
+                      City: {this.props.city}
+                    </Typography>
+                    <Typography component="p">
+                      State: {this.props.state}
+                    </Typography>
+                    <CardActions>
+                    </CardActions>
+                  </CardContent>
+                </Card>
+              )
           )
             :
             <Card className={classes.card}>
@@ -104,7 +138,7 @@ class Profile extends Component {
                     <br />
                   {bull} Post jobs for free
                     <br />
-                  {bull} Mobile Optimized Job View
+                  {bull} Mobile optimized job view
                     <br />
                   {bull} Exposure across the the employ.me network
                 </Typography>

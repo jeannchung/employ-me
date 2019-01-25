@@ -8,6 +8,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from 'react-select';
 import axios from 'axios'
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom'
+
 
 const options = [
   { label: 'Not Specified' },
@@ -140,6 +144,24 @@ const styles = theme => ({
   dense: {
     marginTop: 19,
   },
+  link: {
+    textDecoration: 'none',
+  },
+  button: {
+    backgroundColor: "#82b3c9",
+    opacity: .7,
+    '&:hover': {
+      backgroundColor: "#b3e5fc",
+    },
+  },
+  startButton: {
+    borderColor: "#82b3c9",
+    color: '#82b3c9',
+    '&:hover': {
+      backgroundColor: "#82b3c9",
+      color: 'black',
+    },
+  },
 });
 
 class EmployerModal extends Component {
@@ -205,10 +227,12 @@ class EmployerModal extends Component {
   render() {
     const { selectedIndustry } = this.state;
     const { selectedStates } = this.state;
+    const { classes } = this.props;
+
 
     return (
       <div>
-        <Button variant="outlined" onClick={this.handleClickOpen}>
+        <Button variant="outlined" onClick={this.handleClickOpen} className={classes.startButton} >
           Get Started
         </Button>
         <Dialog
@@ -259,7 +283,6 @@ class EmployerModal extends Component {
               label="Company Information"
               type="text"
               multiline
-              variant="outlined"
               style={styles.textField}
               onChange={this.handleChange}
               fullWidth
@@ -273,12 +296,14 @@ class EmployerModal extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose}>
+            <Button onClick={this.handleClose} className={classes.button} >
               Cancel
             </Button>
-            <Button onClick={this.handleSubmit}>
+            <Link to="/profile" className={classes.link} >
+            <Button onClick={this.handleSubmit} className={classes.button} >
               Submit
             </Button>
+            </Link>
           </DialogActions>
         </Dialog>
       </div>
@@ -286,4 +311,8 @@ class EmployerModal extends Component {
   }
 }
 
-export default EmployerModal
+EmployerModal.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(EmployerModal);

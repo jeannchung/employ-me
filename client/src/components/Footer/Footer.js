@@ -13,7 +13,7 @@ const styles = theme => ({
   root: {
     position: 'absolute',
     bottom: '0',
-    width: '102%',
+    width: '100%',
     overflow: 'visible',
     backgroundColor: '#f9a825',
     color: 'black',
