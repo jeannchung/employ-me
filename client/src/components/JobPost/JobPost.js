@@ -1,36 +1,42 @@
 import React, { Component } from 'react'
 import CreatePostModal from './jobpostcomponents/CreatePostModal'
-import JobPosted from './jobpostcomponents/JobPosted'
-import firebase from 'firebase'
-import axios from 'axios';
+import JobCard from './jobpostcomponents/JobCard'
 
 
 
 class JobPost extends Component {
   
-
-
   render() {
+    if (this.props.mongo_id && this.props.employer) {
+
     return (
       <>
         <h1>Job Post Page</h1>
         <CreatePostModal pullMongoUserData={this.props.pullMongoUserData} mongo_id={this.props.mongo_id} />
-        {this.props.jobs_posted.map( post => <JobPosted
-          key={post._id}  
-          jobTitle={post.title_name}
-          jobSalary={post.salary}
-          jobDescription={post.description}
-          jobRequirements={post.requirements}
-          jobQualifications={post.qualifications}
-          jobCity={post.city}
-          jobContactName={post.contact}
-          jobContactEmail={post.email}
-          jobContactNumber={post.telephone}
-          jobIsPosted={post.isPosted}
+        {this.props.jobs_posted.map(job => (
+                <JobCard
+          user={this.props.user}
+          mongo_id={this.props.mongo_id}
+          employer={this.props.employer}
+          _id={job._id}
+          key={job._id}
+          title_name={job.title_name}
+          company_name={this.props.company_name}
+          city={job.city}
+          industry={this.props.industry}
+          description={job.description}
+          requirements={job.requirements}
+          qualifications={job.qualifications}
+          salary={job.salary}
+          users_applied={job.users_applied}
         />
-        )}
+              ))}
       </>
     )
+      }
+      else{
+        return null
+      }
   }
 
 }
