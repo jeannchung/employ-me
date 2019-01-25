@@ -41,8 +41,6 @@ const styles = theme => ({
 
 class JobPost extends Component {
 
-
-
   render() {
     const { classes } = this.props;
     const bull = <span className={classes.bullet}>•</span>;
@@ -91,6 +89,7 @@ class JobPost extends Component {
                 qualifications={job.qualifications}
                 salary={job.salary}
                 users_applied={job.users_applied}
+                pullMongoUserData={this.props.pullMongoUserData}
               />
             ))}
           </div>
@@ -104,7 +103,7 @@ class JobPost extends Component {
       }
 
 JobPost.propTypes = {
-            classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(JobPost);

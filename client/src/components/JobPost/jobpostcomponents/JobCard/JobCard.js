@@ -56,9 +56,9 @@ class JobCard extends Component {
     // axios.put(`/api/job/:id`)
   }
 
-  handleDelete = id => {
-    console.log(id)
-    // axios.delete(`/api/job/:id`)
+  handleDelete = () => {
+    axios.delete(`/api/job/${this.props._id}`)
+    this.props.pullMongoUserData()
   }
 
   render() {
