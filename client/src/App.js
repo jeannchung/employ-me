@@ -156,7 +156,7 @@ class App extends Component {
 
 
   render() {
-
+console.log(this.state.jobs_posted)
     return (
       <>
         <Router>
@@ -189,7 +189,7 @@ class App extends Component {
                 industry={this.state.industry}
                 address={this.state.address}
               />} />
-              <Route path='/jobpost' component={() => <JobPost company_name={this.state.company_name} jobs_posted={this.state.jobs_posted} mongo_id={this.state.mongo_id} pullMongoUserData={this.pullMongoUserData} />} />
+              <Route path='/jobpost' component={() => <JobPost company_name={this.state.company_name} industry={this.state.industry} jobs_posted={this.state.jobs_posted} mongo_id={this.state.mongo_id} employer={this.state.employer} pullMongoUserData={this.pullMongoUserData} />} />
               <Route path='/applied' component={() => <Applied
                 mongo_id={this.state.mongo_id}
                 firebase_id={this.state.firebase_id}
