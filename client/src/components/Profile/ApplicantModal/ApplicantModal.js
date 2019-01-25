@@ -17,13 +17,13 @@ import { withStyles } from '@material-ui/core/styles';
 const options = [
   { label: 'Not Specified' },
   { label: 'None' },
-  { label: 'Some Highschool' },
+  { label: 'Some High School' },
+  { label: 'High School Diploma' },
   { label: 'GED' },
   { label: `Associate's Degree` },
   { label: `Bachelor's Degree` },
   { label: `Master's Degree` },
   { label: `Doctorate's Degree` },
-  { label: `Higher Degree` },
   { label: 'Other' },
 ]
 const states = [
