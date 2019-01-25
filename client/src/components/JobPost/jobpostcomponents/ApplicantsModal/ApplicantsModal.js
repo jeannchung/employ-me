@@ -11,6 +11,7 @@ const styles = theme => ({
     paper: {
         margin: '1rem',
         minWidth: '50%',
+        maxWidth: '80%',
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
@@ -45,7 +46,7 @@ class ApplicantModal extends Component {
         const { classes } = this.props;
 
         return <>
-        <Button onClick={this.handleOpen} variant="outlined" style={{ color: '#556B2F', border: '1px solid #556B2F', marginRight: '0.5em' }}>Applicants</Button>
+            <Button onClick={this.handleOpen} variant="outlined" style={{ color: '#82b3c9', border: '1px solid #82b3c9', marginRight: '0.5em' }}>Applicants</Button>
             <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
@@ -59,7 +60,7 @@ class ApplicantModal extends Component {
                     <Typography variant="subtitle1" id="simple-modal-description">
                         {this.state.applicants.map(applicant => (<ApplicantCard applicant={applicant} />))}
                     </Typography>
-                <Button onClick={this.handleClose} variant="outlined" style={{ color: '#556B2F', border: '1px solid #556B2F', marginRight: '0.5em' }}>Close</Button>
+                    <Button onClick={this.handleClose} variant="outlined" style={{ color: '#82b3c9', border: '1px solid #82b3c9', marginRight: '0.5em' }}>Close</Button>
                 </div>
             </Modal>
             </>
