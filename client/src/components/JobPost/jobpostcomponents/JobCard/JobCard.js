@@ -58,6 +58,8 @@ class JobCard extends Component {
 
   handleDelete = () => {
     axios.delete(`/api/job/${this.props._id}`)
+    .then(r => console.log(r))
+    .catch(e => console.log(e))
     this.props.pullMongoUserData()
   }
 
