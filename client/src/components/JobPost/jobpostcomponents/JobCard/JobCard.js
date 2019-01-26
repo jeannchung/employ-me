@@ -17,6 +17,7 @@ import ApplicantsModal from '../ApplicantsModal'
 import axios from 'axios'
 import CardTravelIcon from '@material-ui/icons/CardTravel'
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditPostModal from '../EditPostModal';
 
 
 const styles = theme => ({
@@ -56,9 +57,11 @@ class JobCard extends Component {
     // axios.put(`/api/job/:id`)
   }
 
-  handleDelete = id => {
-    console.log(id)
-    // axios.delete(`/api/job/:id`)
+  handleDelete = () => {
+    axios.delete(`/api/job/${this.props._id}`)
+      .then(r => console.log(r))
+      .catch(e => console.log(e))
+    this.props.pullMongoUserData()
   }
 
   render() {
@@ -82,10 +85,10 @@ class JobCard extends Component {
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
             <ApplicantsModal jobId={this.props._id} />
-            <Button onClick={() => this.handleEdit(this.props._id)}  variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9', marginRight: '0.5em' }}> Edit </Button>
-            <Button onClick={() => this.handleDelete(this.props._id)}  variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9' }}>
-            <DeleteIcon />
-             </Button>
+            <EditPostModal jobId={this.props._id} />
+            <Button onClick={this.handleDelete} variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9' }}>
+              <DeleteIcon />
+            </Button>
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,
@@ -99,7 +102,7 @@ class JobCard extends Component {
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent style={{ paddingTop: 0 }}>
-              <Typography variant='subtitle2' style={{ fontSize: '14px'}}>More Information</Typography>
+              <Typography variant='subtitle2' style={{ fontSize: '14px' }}>More Information</Typography>
               <Typography component="p">Description: {this.props.description}</Typography>
               <Typography component="p">Requirements: {this.props.requirements}</Typography>
               <Typography component="p">Qualifications: {this.props.qualifications}</Typography>
