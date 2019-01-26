@@ -17,6 +17,7 @@ import ApplicantsModal from '../ApplicantsModal'
 import axios from 'axios'
 import CardTravelIcon from '@material-ui/icons/CardTravel'
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditPostModal from '../EditPostModal';
 
 
 const styles = theme => ({
@@ -84,7 +85,7 @@ class JobCard extends Component {
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
             <ApplicantsModal jobId={this.props._id} />
-            <Button onClick={this.handleEdit} variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9', marginRight: '0.5em' }}> Edit </Button>
+            <EditPostModal jobId={this.props._id} />
             <Button onClick={this.handleDelete} variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9' }}>
               <DeleteIcon />
             </Button>
