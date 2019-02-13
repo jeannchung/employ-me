@@ -85,7 +85,7 @@ class JobCard extends Component {
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
             <ApplicantsModal jobId={this.props._id} />
-            <EditPostModal jobId={this.props._id} />
+            <EditPostModal jobId={this.props._id} pullMongoUserData={this.props.pullMongoUserData} />
             <Button onClick={this.handleDelete} variant="outlined" style={{ borderColor: '#82b3c9', color: '#82b3c9' }}>
               <DeleteIcon />
             </Button>
@@ -106,7 +106,7 @@ class JobCard extends Component {
               <Typography component="p">Description: {this.props.description}</Typography>
               <Typography component="p">Requirements: {this.props.requirements}</Typography>
               <Typography component="p">Qualifications: {this.props.qualifications}</Typography>
-              <Typography component="p">Salary: ${this.props.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
+              <Typography component="p">Salary: {this.props.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
             </CardContent>
           </Collapse>
         </Card>
