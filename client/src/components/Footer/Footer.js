@@ -8,6 +8,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import EmailIcon from '@material-ui/icons/Email'
+import WebIcon from '@material-ui/icons/Web'
 
 const styles = theme => ({
   root: {
@@ -89,11 +91,35 @@ class Footer extends React.Component {
                 } else if (this.state.value === 'Contact Us') {
                   return (
                     <div>
-                      <p>Adam Openbrier : <br /><a href="mailto:aopenbrier@gmail.com">aopenbrier@gmail.com</a></p>
-                      <p>Garrett Fermo : <br /><a href="mailto:garrettcfermo@gmail.com">garrettcfermo@gmail.com</a></p>
-                      <p>Jean Chung : <br /><a href="mailto:jeannchung@gmail.com">jeannchung@gmail.com</a></p>
-                      <p>Joleen J. Tsai : <br /><a href="mailto:joleenjtsai@gmail.com">joleenjtsai@gmail.com</a></p>
-                      <p>Radley Eakle : <br /><a href="mailto:radley.eakle@gmail.com ">radley.eakle@gmail.com </a></p>
+                      <p>
+                        Adam Openbrier : <br />
+                        <EmailIcon style={{ verticalAlign: 'middle' }} />
+                        <a href="mailto:aopenbrier@gmail.com">Email</a> 
+                        &nbsp;<WebIcon style={{ verticalAlign: 'middle' }} />
+                        <a href="https://aopenbrier.github.io/">Website</a>
+                      </p>
+                      <p>
+                        Garrett Fermo : <br />
+                        <EmailIcon style={{ verticalAlign: 'middle' }} />
+                        <a href="mailto:garrettcfermo@gmail.com">Email</a>
+                      </p>
+                      <p>
+                        Jean Chung : <br />
+                        <EmailIcon style={{ verticalAlign: 'middle' }} />
+                        <a href="mailto:jeannchung@gmail.com">Email</a>
+                      </p>
+                      <p>
+                        Joleen J. Tsai : <br />
+                        <EmailIcon style={{ verticalAlign: 'middle' }} />
+                        <a href="mailto:joleenjtsai@gmail.com">Email</a> 
+                        &nbsp;<WebIcon style={{ verticalAlign: 'middle' }} />
+                        <a href="https://joleentsai.github.io/">Website</a>
+                      </p>
+                      <p>
+                        Radley Eakle : <br />
+                        <EmailIcon style={{ verticalAlign: 'middle' }} />
+                        <a href="mailto:radley.eakle@gmail.com">Email</a>
+                      </p>
                     </div>
                   )
                 } else if (this.state.value === 'Terms of Use') {

@@ -52,7 +52,7 @@ const salary = [
   { label: '$120,000++' },
 ]
 
-class CreatePostModal extends Component {
+class EditPostModal extends Component {
   state = {
     open: false,
     salaryRange: null,
@@ -80,7 +80,6 @@ class CreatePostModal extends Component {
     this.setState({input: tempObj})
   }
 
-  
   handleClickOpen = () => {
     axios.get(`/api/job/${this.props.jobId}`)
       .then(r => {
@@ -101,12 +100,11 @@ class CreatePostModal extends Component {
         } })
       }).catch(e => console.log(e))
 
-    this.setState({ open: true });
-  };
+    this.setState({ open: true })
+  }
   
   handleClose = () => {
-    console.log(this.state.input)
-    this.setState({ open: false });
+    this.setState({ open: false })
   };
   handleDropdown = (salaryRange) => {
     const tempObj = this.state.input
@@ -116,13 +114,10 @@ class CreatePostModal extends Component {
   }
   
   handleSubmit = () => {
-    console.log('handlesubmit')
-    console.log(this.state.input)
-    axios.put(`/api/job/${this.props._id}`, this.state.input)
+    axios.put(`/api/job/${this.props.jobId}`, this.state.input)
       .then(r => {
-        console.log(r.data)
         this.props.pullMongoUserData()
-      }).catch(err => { console.log(err) })
+      }).catch(e => { console.log(e) })
 
     this.handleClose()
     this.props.pullMongoUserData()
@@ -130,8 +125,8 @@ class CreatePostModal extends Component {
   }
 
   render() {
-    const { salaryRange } = this.state;
-    const { classes } = this.props;
+    const { salaryRange } = this.state
+    const { classes } = this.props
 
     return (
       <div>
@@ -161,7 +156,6 @@ class CreatePostModal extends Component {
             <Select
               placeholder='Salary'
               id="salary"
-              value={this.state.input.salary}
               label="Salary"
               value={salaryRange}
               onChange={this.handleDropdown}
@@ -252,12 +246,12 @@ class CreatePostModal extends Component {
           </DialogActions>
         </Dialog>
       </div>
-    );
+    )
   }
 }
-CreatePostModal.propTypes = {
+EditPostModal.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(CreatePostModal);
+export default withStyles(styles)(EditPostModal)
 
