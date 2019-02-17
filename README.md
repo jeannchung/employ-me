@@ -48,7 +48,8 @@ npm start
 * 2019/01/26 - Launch
 
 ## Contributors 
-Jean Chung - [GitHub](https://github.com/jeannchung/)  
+Jean Chung - [GitHub](https://github.com/jeannchung/)
+Radley Eakle -   [GitHub](https://github.com/radsauce/)  
 Garrett Fermo - [GitHub](https://github.com/garrettcfermo)  
 Adam Openbrier - [GitHub](https://github.com/aOpenbrier)  
 Joleen Tsai - [GitHub](https://github.com/JoleenTsai)
